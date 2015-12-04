@@ -14,8 +14,9 @@ public class MotorModule extends PIDSubsystem implements PIDOutput {
     	super(p, i, d);
     
     	talons = new CANTalon[ports.length];
-    	for(int port = 0; port < ports.length; port++) {
-    		talons[port] = new CANTalon(ports[port]);
+    	for(int i = 0; i < ports.length; i++) {
+    		talons[i] = new CANTalon(ports[i]);
+    		talons[i].setSafetyEnabled(false); //stops robot from randomly stopping
     	}
     }
     
