@@ -1,22 +1,17 @@
 package org.team1515.robama.subsystems;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
-public class MotorModule extends PIDSubsystem implements PIDOutput {
+public class MotorModule  implements PIDOutput {
 	
     private CANTalon[] talons;
-    private Encoder encoder;
     
-    public MotorModule(double p, double i, double d, int... ports) {
-    	super(p, i, d);
-    
+    public MotorModule(int encoderPortA, int encoderPortB, int... ports) {  
     	talons = new CANTalon[ports.length];
-    	for(int i = 0; i < ports.length; i++) {
-    		talons[i] = new CANTalon(ports[i]);
-    		talons[i].setSafetyEnabled(false); //stops robot from randomly stopping
+    	for(int j = 0; j < ports.length; j++) {
+    		talons[j] = new CANTalon(ports[j]);
+    		talons[j].setSafetyEnabled(false); //stops robot from randomly stopping
     	}
     }
     
@@ -36,24 +31,11 @@ public class MotorModule extends PIDSubsystem implements PIDOutput {
         setSpeed(0.0);
     }
     
-    public Encoder getEncoder() {
-    	return encoder;
-    }
-    
     public void pidWrite(double value) {
     	for(int i = 0; i < talons.length; i++) {
     		talons[i].pidWrite(value);
     	}
     }
-
-	protected double returnPIDInput() {
-		return encoder.get();
-	}
-
-	protected void usePIDOutput(double output) {
-		
-		
-	}
 
 	protected void initDefaultCommand() {
 		

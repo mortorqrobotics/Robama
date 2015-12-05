@@ -1,7 +1,10 @@
 
 package org.team1515.robama;
 
+import org.team1515.robama.subsystems.ArnoldDrive;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -16,6 +19,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
+	
+	public static final Joystick stick1 = new Joystick(0);
+	
+	public static final ArnoldDrive driveTrain = new ArnoldDrive(stick1);
 
     Command autonomousCommand;
 
