@@ -3,15 +3,15 @@ package org.team1515.robama.subsystems;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDOutput;
 
-public class MotorModule  implements PIDOutput {
+public class MotorModule implements PIDOutput {
 	
     private CANTalon[] talons;
     
     public MotorModule(int encoderPortA, int encoderPortB, int... ports) {  
     	talons = new CANTalon[ports.length];
-    	for(int j = 0; j < ports.length; j++) {
-    		talons[j] = new CANTalon(ports[j]);
-    		talons[j].setSafetyEnabled(false); //stops robot from randomly stopping
+    	for(int i = 0; i < ports.length; i++) {
+    		talons[i] = new CANTalon(ports[i]);
+    		talons[i].setSafetyEnabled(false); //stops robot from randomly stopping
     	}
     }
     
@@ -36,9 +36,4 @@ public class MotorModule  implements PIDOutput {
     		talons[i].pidWrite(value);
     	}
     }
-
-	protected void initDefaultCommand() {
-		
-		
-	}
 }
