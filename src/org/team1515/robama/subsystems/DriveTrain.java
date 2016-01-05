@@ -63,6 +63,46 @@ public abstract class DriveTrain extends Subsystem {
 		setSpeed(-y + x, y + x);
  	}
 	
+	public void forward(double speed) {
+		leftMotors.setSpeed(-speed);
+		rightMotors.setSpeed(speed);
+	}
+	
+	public void backward(double speed) {
+		leftMotors.setSpeed(speed);
+		rightMotors.setSpeed(-speed);
+	}
+	
+	public boolean turnLeft(int position, double speed) {
+		if(Math.abs(leftEncoder.get() - rightEncoder.get()) < position) {
+			leftMotors.setSpeed(-speed);
+			rightMotors.setSpeed(-speed);
+			return false;
+		} else {
+			leftMotors.stop();
+			rightMotors.stop();
+			return true;
+		}
+	}
+	
+	public boolean turnRight(int position, double speed) {
+		if(Math.abs(leftEncoder.get() - rightEncoder.get()) < position) {
+			leftMotors.setSpeed(speed);
+			rightMotors.setSpeed(speed);
+			return false;
+		} else {
+			leftMotors.stop();
+			rightMotors.stop();
+			return true;
+		}
+	}
+
+	
+	public void stop() {
+		leftMotors.stop();
+		rightMotors.stop();
+	}
+	
 	protected double getThrottle() {
 		return (-joystick.getRawAxis(2) + 1) / 2;
 	}
