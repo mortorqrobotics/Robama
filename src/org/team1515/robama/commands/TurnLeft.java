@@ -1,15 +1,23 @@
 package org.team1515.robama.commands;
 
+import org.team1515.robama.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class TurnLeft extends Command {
+	
+	int position;
+	double speed;
+	boolean isDone;
 
-    public TurnLeft() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public TurnLeft(int position, double speed) {
+        requires(Robot.driveTrain);
+        this.position = position;
+        this.speed = speed;
+        isDone = false;
     }
 
     // Called just before this Command runs the first time
@@ -18,19 +26,22 @@ public class TurnLeft extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	isDone = Robot.driveTrain.turnLeft(position, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isDone;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
