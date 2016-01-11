@@ -1,10 +1,8 @@
 package org.team1515.robama.subsystems;
 
-import org.team1515.robama.commands.JoystickDrive;
-
 import edu.wpi.first.wpilibj.Joystick;
 
-public class ArnoldDrive extends DriveTrain {
+public class ArnoldDrive extends WestCoastDrive {
 	
 	public ArnoldDrive(Joystick joystick) {
 		super(joystick);
@@ -23,9 +21,12 @@ public class ArnoldDrive extends DriveTrain {
 		x *= getThrottle();
 		return new Pair<Double>(x, y);
 	}
-
-	@Override
-	protected void initDefaultCommand() {
-		setDefaultCommand(new JoystickDrive());	
-	}
+	
+	public void drive() {
+		Pair<Double> pair = getXY();
+		double x = pair.first * TURNING_SCALE;
+		double y = pair.last * DRIVING_SCALE; // * reverseFactor;
+		setSpeed(-y + x, y + x);
+ 	}
+	
 }

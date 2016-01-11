@@ -1,11 +1,13 @@
 package org.team1515.robama.subsystems;
 
+import org.team1515.robama.commands.JoystickDrive;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public abstract class DriveTrain extends Subsystem {
+public abstract class WestCoastDrive extends Subsystem {
 	
 	protected static final double DEAD_BAND = 0.15;
 	protected static final double DRIVING_SCALE = 1.0;
@@ -21,23 +23,21 @@ public abstract class DriveTrain extends Subsystem {
 	PIDController leftPID;
 	PIDController rightPID;
 	
-	public DriveTrain(Joystick joystick) {
-		leftMotors = new MotorModule(1, 2, 3);
+	public WestCoastDrive(Joystick joystick) {
+		leftMotors = new MotorModule(0, 1, 2);
 		rightMotors = new MotorModule(3, 4, 5);
 		
 		leftEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
 		leftEncoder.setMaxPeriod(.05);
 		leftEncoder.setMinRate(10);
 		leftEncoder.setDistancePerPulse(1);
-		leftEncoder.setReverseDirection(true);
 		leftEncoder.setSamplesToAverage(10);
 		leftEncoder.reset();
 		
-		rightEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
+		rightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
 		rightEncoder.setMaxPeriod(.05);
 		rightEncoder.setMinRate(10);
 		rightEncoder.setDistancePerPulse(1);
-		rightEncoder.setReverseDirection(true);
 		rightEncoder.setSamplesToAverage(10);
 		rightEncoder.reset();
 		
@@ -55,13 +55,7 @@ public abstract class DriveTrain extends Subsystem {
 	}
 	
 	protected abstract Pair<Double> getXY();
-	
-	public void drive() {
-		Pair<Double> pair = getXY();
-		double y = pair.last * DRIVING_SCALE; // * reverseFactor;
-		double x = pair.first * TURNING_SCALE;
-		setSpeed(-y + x, y + x);
- 	}
+	public abstract void drive();
 	
 	public void forward(double speed) {
 		leftMotors.setSpeed(-speed);
@@ -112,4 +106,7 @@ public abstract class DriveTrain extends Subsystem {
 		rightEncoder.reset();
 	}
 
+	protected void initDefaultCommand() {
+		setDefaultCommand(new JoystickDrive());	
+	}
 }
