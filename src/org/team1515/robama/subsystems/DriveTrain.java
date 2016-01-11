@@ -1,5 +1,7 @@
 package org.team1515.robama.subsystems;
 
+import org.team1515.robama.commands.JoystickDrive;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class DriveTrain extends Subsystem {
@@ -11,4 +13,8 @@ public abstract class DriveTrain extends Subsystem {
 	public abstract void resetEncoders();
 	public abstract boolean turnLeft(int position, double speed);
 	public abstract boolean turnRight(int position, double speed);
+	
+	protected void initDefaultCommand() {
+		setDefaultCommand(new JoystickDrive());	
+	}
 }

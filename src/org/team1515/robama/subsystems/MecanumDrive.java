@@ -111,8 +111,4 @@ public abstract class MecanumDrive extends DriveTrain {
 		rightEncoder.reset();
 	}
 
-	protected void initDefaultCommand() {
-		setDefaultCommand(new JoystickDrive());	
-	}
-
 }

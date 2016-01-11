@@ -104,7 +104,4 @@ public abstract class WestCoastDrive extends DriveTrain {
 		rightEncoder.reset();
 	}
 
-	protected void initDefaultCommand() {
-		setDefaultCommand(new JoystickDrive());	
-	}
 }
