@@ -6,9 +6,8 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-public abstract class MecanumDrive extends Subsystem {
+public abstract class MecanumDrive extends DriveTrain {
 	
 	protected static final double DEAD_BAND = 0.15;
 	protected static final double DRIVING_SCALE = 1.0;
@@ -67,14 +66,33 @@ public abstract class MecanumDrive extends Subsystem {
 	}
 	
 	protected abstract Triple<Double> getXYZ();
-	public abstract void drive();
 	
 	public void forward(double speed) {
-		setSpeed(speed, speed, speed, speed);
+		setSpeed(-speed, speed, -speed, speed);
 	}
 	
 	public void backward(double speed) {
-		setSpeed(-speed, -speed, -speed, -speed);
+		setSpeed(speed, -speed, speed, -speed);
+	}
+	
+	public boolean turnLeft(int position, double speed) {
+		if(Math.abs(leftEncoder.get() - rightEncoder.get()) < position) {
+			setSpeed(-speed, -speed, -speed, -speed);
+			return false;
+		} else {
+			setSpeed(0,0,0,0);
+			return true;
+		}
+	}
+	
+	public boolean turnRight(int position, double speed) {
+		if(Math.abs(leftEncoder.get() - rightEncoder.get()) < position) {
+			setSpeed(speed, speed, speed, speed);
+			return false;
+		} else {
+			setSpeed(0,0,0,0);
+			return true;
+		}
 	}
 	
 	public void stop() {

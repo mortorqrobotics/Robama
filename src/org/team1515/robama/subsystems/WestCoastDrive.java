@@ -5,9 +5,8 @@ import org.team1515.robama.commands.JoystickDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-public abstract class WestCoastDrive extends Subsystem {
+public abstract class WestCoastDrive extends DriveTrain {
 	
 	protected static final double DEAD_BAND = 0.15;
 	protected static final double DRIVING_SCALE = 1.0;
@@ -55,7 +54,6 @@ public abstract class WestCoastDrive extends Subsystem {
 	}
 	
 	protected abstract Pair<Double> getXY();
-	public abstract void drive();
 	
 	public void forward(double speed) {
 		leftMotors.setSpeed(-speed);
