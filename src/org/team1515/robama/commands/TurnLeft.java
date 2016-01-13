@@ -2,8 +2,6 @@ package org.team1515.robama.commands;
 
 import org.team1515.robama.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  *
  */

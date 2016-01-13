@@ -56,8 +56,8 @@ public abstract class WestCoastDrive extends Subsystem {
 	
 	private boolean setSpeed(int ticks, double leftSpeed, double rightSpeed) {
 		setSpeed(leftSpeed, rightSpeed);
-		int distance = Math.abs(leftEncoder.get());
-		return distance >= ticks;
+		int distance = Math.abs(leftEncoder.get()) + Math.abs(rightEncoder.get());
+		return distance >= ticks * 2;
 	}
 	
 	public boolean driveForward(int ticks, double speed) {
