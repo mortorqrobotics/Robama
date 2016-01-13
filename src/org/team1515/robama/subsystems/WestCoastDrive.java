@@ -5,8 +5,9 @@ import org.team1515.robama.commands.JoystickDrive;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
-public abstract class WestCoastDrive extends DriveTrain {
+public abstract class WestCoastDrive extends Subsystem {
 	
 	protected static final double DEAD_BAND = 0.15;
 	protected static final double DRIVING_SCALE = 1.0;
@@ -23,22 +24,13 @@ public abstract class WestCoastDrive extends DriveTrain {
 	PIDController rightPID;
 	
 	public WestCoastDrive(Joystick joystick) {
-		leftMotors = new MotorModule(0, 1, 2);
-		rightMotors = new MotorModule(3, 4, 5);
+		leftMotors = new MotorModule(0, 1, 0, 1, 2);
+		rightMotors = new MotorModule(2, 3, 3, 4, 5);
 		
 		leftEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-		leftEncoder.setMaxPeriod(.05);
-		leftEncoder.setMinRate(10);
-		leftEncoder.setDistancePerPulse(1);
-		leftEncoder.setSamplesToAverage(10);
-		leftEncoder.reset();
-		
+		initEncoder(leftEncoder);
 		rightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
-		rightEncoder.setMaxPeriod(.05);
-		rightEncoder.setMinRate(10);
-		rightEncoder.setDistancePerPulse(1);
-		rightEncoder.setSamplesToAverage(10);
-		rightEncoder.reset();
+		initEncoder(rightEncoder);
 		
 		leftPID = new PIDController(1, 0.1, 0.01, leftEncoder, leftMotors);
 		leftPID.enable();
@@ -47,61 +39,64 @@ public abstract class WestCoastDrive extends DriveTrain {
 		
 		this.joystick = joystick;	
 	}
+	
+	private void initEncoder(Encoder encoder) {
+		encoder.setMaxPeriod(.05);
+		encoder.setMinRate(10);
+		encoder.setDistancePerPulse(1);
+		encoder.setSamplesToAverage(10);
+		encoder.reset();
+	}
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
-		leftMotors.setSpeed(leftSpeed);
-		rightMotors.setSpeed(rightSpeed);
+		double factor = 1; //change to -1 to reverse motors
+		leftMotors.setSpeed(-leftSpeed * factor);
+		rightMotors.setSpeed(rightSpeed * factor);
 	}
 	
-	protected abstract Pair<Double> getXY();
-	
-	public void forward(double speed) {
-		leftMotors.setSpeed(-speed);
-		rightMotors.setSpeed(speed);
+	private boolean setSpeed(int ticks, double leftSpeed, double rightSpeed) {
+		setSpeed(leftSpeed, rightSpeed);
+		int distance = Math.abs(leftEncoder.get());
+		return distance >= ticks;
 	}
 	
-	public void backward(double speed) {
-		leftMotors.setSpeed(speed);
-		rightMotors.setSpeed(-speed);
+	public boolean driveForward(int ticks, double speed) {
+		return setSpeed(ticks, speed, speed);
 	}
 	
-	public boolean turnLeft(int position, double speed) {
-		if(Math.abs(leftEncoder.get() - rightEncoder.get()) < position) {
-			leftMotors.setSpeed(-speed);
-			rightMotors.setSpeed(-speed);
-			return false;
-		} else {
-			leftMotors.stop();
-			rightMotors.stop();
-			return true;
-		}
+	public boolean driveBackward(int ticks, double speed) {
+		return setSpeed(ticks, -speed, -speed);
 	}
 	
-	public boolean turnRight(int position, double speed) {
-		if(Math.abs(leftEncoder.get() - rightEncoder.get()) < position) {
-			leftMotors.setSpeed(speed);
-			rightMotors.setSpeed(speed);
-			return false;
-		} else {
-			leftMotors.stop();
-			rightMotors.stop();
-			return true;
-		}
+	public boolean turnLeft(int ticks, double speed) {
+		return setSpeed(ticks, -speed, speed);
+	}
+	
+	public boolean turnRight(int ticks, double speed) {
+		return setSpeed(ticks, speed, -speed);
 	}
 
-	
 	public void stop() {
-		leftMotors.stop();
-		rightMotors.stop();
+		setSpeed(0, 0);
 	}
 	
-	protected double getThrottle() {
-		return (-joystick.getRawAxis(2) + 1) / 2;
+	protected abstract Pair<Double> getJoystickXY();
+
+	public void setXY(double x, double y) {
+		setSpeed(y - x, y + x);
 	}
+	
+	public void drive() {
+		Pair<Double> pair = getJoystickXY();
+		setXY(pair.first, pair.last);
+ 	}
 	
 	public void resetEncoders() {
 		leftEncoder.reset();
 		rightEncoder.reset();
 	}
-
+	
+	protected void initDefaultCommand() {
+		setDefaultCommand(new JoystickDrive());	
+	}
 }

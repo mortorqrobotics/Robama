@@ -8,7 +8,7 @@ public class ArnoldDrive extends WestCoastDrive {
 		super(joystick);
 	}
 
-	protected Pair<Double> getXY() {
+	protected Pair<Double> getJoystickXY() {
 		double y = -joystick.getRawAxis(1);
 		double x = joystick.getRawAxis(5);
 		if (Math.abs(y) <= DEAD_BAND) {
@@ -22,11 +22,8 @@ public class ArnoldDrive extends WestCoastDrive {
 		return new Pair<Double>(x, y);
 	}
 	
-	public void drive() {
-		Pair<Double> pair = getXY();
-		double x = pair.first * TURNING_SCALE;
-		double y = pair.last * DRIVING_SCALE; // * reverseFactor;
-		setSpeed(-y + x, y + x);
- 	}
+	protected double getThrottle() {
+		return (-joystick.getRawAxis(2) + 1) / 2;
+	}
 	
 }

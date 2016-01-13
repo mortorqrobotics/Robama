@@ -2,6 +2,7 @@
 package org.team1515.robama;
 
 import org.team1515.robama.subsystems.ArnoldDrive;
+import org.team1515.robama.subsystems.WestCoastDrive;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
@@ -22,7 +23,7 @@ public class Robot extends IterativeRobot {
 	
 	public static final Joystick stick1 = new Joystick(0);
 	
-	public static final ArnoldDrive driveTrain = new ArnoldDrive(stick1);
+	public static final WestCoastDrive driveTrain = new ArnoldDrive(stick1);
 
     Command autonomousCommand;
 
