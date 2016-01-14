@@ -1,6 +1,11 @@
 
 package org.team1515.robama;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.team1515.robama.config.Config;
+import org.team1515.robama.config.Configurable;
 import org.team1515.robama.subsystems.ArnoldDrive;
 import org.team1515.robama.subsystems.WestCoastDrive;
 
@@ -26,6 +31,8 @@ public class Robot extends IterativeRobot {
 	public static final WestCoastDrive driveTrain = new ArnoldDrive(stick1);
 
     Command autonomousCommand;
+    
+    Config config;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -34,6 +41,10 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
+		List<Configurable> configurables = new ArrayList<Configurable>();
+		configurables.add(driveTrain);
+		config = new Config(configurables);
+		config.reload();
     }
 	
 	public void disabledPeriodic() {

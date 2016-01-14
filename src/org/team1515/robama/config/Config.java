@@ -17,6 +17,7 @@ public class Config {
 	}
 	
 	public void reload() {
+		//update vars
 		for(Configurable configurable : configurables) {
 			configurable.reloadConfig(this);
 		}

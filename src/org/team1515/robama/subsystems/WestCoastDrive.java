@@ -1,17 +1,19 @@
 package org.team1515.robama.subsystems;
 
 import org.team1515.robama.commands.JoystickDrive;
+import org.team1515.robama.config.Config;
+import org.team1515.robama.config.Configurable;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public abstract class WestCoastDrive extends Subsystem {
+public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	
-	protected static final double DEAD_BAND = 0.15;
-	protected static final double DRIVING_SCALE = 1.0;
-	protected static final double TURNING_SCALE = 1.0;
+	protected double deadBand = 0.15;
+	protected double drivingScale = 1.0;
+	protected double turningScale = 1.0;
 	
 	protected MotorModule leftMotors;
 	protected MotorModule rightMotors;
@@ -88,7 +90,7 @@ public abstract class WestCoastDrive extends Subsystem {
 	
 	public void drive() {
 		Pair<Double> pair = getJoystickXY();
-		setXY(pair.first, pair.last);
+		setXY(pair.first * turningScale, pair.last * drivingScale);
  	}
 	
 	public void resetEncoders() {
@@ -98,5 +100,11 @@ public abstract class WestCoastDrive extends Subsystem {
 	
 	protected void initDefaultCommand() {
 		setDefaultCommand(new JoystickDrive());	
+	}
+	
+	public void reloadConfig(Config config) {
+		deadBand = config.getDouble("deadBand", 0.15);
+		drivingScale = config.getDouble("drivingScale", 1.0);
+		turningScale = config.getDouble("turningScale", 1.0);
 	}
 }
