@@ -25,6 +25,8 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	PIDController leftPID;
 	PIDController rightPID;
 	
+	public boolean isReversed;
+	
 	public WestCoastDrive(Joystick joystick) {
 		leftMotors = new MotorModule(0, 1, 0, 1, 2);
 		rightMotors = new MotorModule(2, 3, 3, 4, 5);
@@ -38,6 +40,8 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 		leftPID.enable();
 		rightPID = new PIDController(1, 0.1, 0.01, rightEncoder, rightMotors);
 		rightPID.enable();
+		
+		isReversed = false;
 		
 		this.joystick = joystick;	
 	}
@@ -90,7 +94,12 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	
 	public void drive() {
 		Pair<Double> pair = getJoystickXY();
-		setXY(pair.first * turningScale, pair.last * drivingScale);
+		if(isReversed){
+			setXY(-1 * pair.first * turningScale, -1 * pair.last * drivingScale);
+		}else{
+			setXY(pair.first * turningScale, pair.last * drivingScale);
+		}
+		
  	}
 	
 	public void resetEncoders() {
