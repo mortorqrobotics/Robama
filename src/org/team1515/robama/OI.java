@@ -1,6 +1,7 @@
 package org.team1515.robama;
 
 import org.team1515.robama.commands.Shoot;
+import org.team1515.robama.commands.ReverseDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -17,7 +18,8 @@ public class OI {
 	
 	private Button 
 		fastShoot,
-		slowShoot;
+		slowShoot,
+		reverseDriveTrain;
 	
 	public OI() {		
 		fastShoot = new JoystickButton(stick1, RobotMap.BUTTON_FAST_SHOOT);
@@ -25,7 +27,9 @@ public class OI {
 	
 		slowShoot = new JoystickButton(stick1, RobotMap.BUTTON_SLOW_SHOOT);
 		slowShoot.whileHeld(new Shoot(0.5));
+		
+		reverseDriveTrain = new JoystickButton(stick1, 12);
+		reverseDriveTrain.whenPressed(new ReverseDrive());
 	}
-
 }
 

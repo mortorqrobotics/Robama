@@ -18,9 +18,13 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	protected MotorModule rightMotors;
 	protected Joystick joystick;
 	
+	public boolean isReversed;
+	
 	public WestCoastDrive(Joystick joystick) {
 		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_ENCODER, RobotMap.LEFT_DRIVE_MOTORS, true);
 		rightMotors = new MotorModule(RobotMap.RIGHT_DRIVE_ENCODER, RobotMap.RIGHT_DRIVE_MOTORS, true);
+		
+		isReversed = false;
 		
 		this.joystick = joystick;	
 	}
@@ -66,7 +70,12 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	
 	public void drive() {
 		Pair<Double> pair = getJoystickXY();
-		setXY(pair.first * turningScale, pair.last * drivingScale);
+		if(isReversed){
+			setXY(-1 * pair.first * turningScale, -1 * pair.last * drivingScale);
+		} else {
+			setXY(pair.first * turningScale, pair.last * drivingScale);
+		}
+		
  	}
 	
 	public void resetEncoders() {
