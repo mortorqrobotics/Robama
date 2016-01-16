@@ -1,7 +1,7 @@
 package org.team1515.robama;
 
-import org.team1515.robama.commands.Shoot;
 import org.team1515.robama.commands.ReverseDrive;
+import org.team1515.robama.commands.Shoot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;

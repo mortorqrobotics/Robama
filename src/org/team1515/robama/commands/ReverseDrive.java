@@ -4,7 +4,11 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ReverseDrive extends Command {
+public class ReverseDrive extends Command {	
+	public ReverseDrive() {
+		requires(Robot.driveTrain);
+	}
+	
 	@Override
 	protected void initialize() {
 		requires(Robot.driveTrain);

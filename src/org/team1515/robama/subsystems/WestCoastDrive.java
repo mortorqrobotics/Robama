@@ -19,10 +19,13 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	protected Joystick joystick;
 	
 	public boolean isReversed;
+
 	
 	public WestCoastDrive(Joystick joystick) {
 		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_ENCODER, RobotMap.LEFT_DRIVE_MOTORS, true);
 		rightMotors = new MotorModule(RobotMap.RIGHT_DRIVE_ENCODER, RobotMap.RIGHT_DRIVE_MOTORS, true);
+		
+		isReversed = false;
 		
 		isReversed = false;
 		
