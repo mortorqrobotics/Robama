@@ -1,18 +1,33 @@
 package org.team1515.robama.subsystems;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 
 public class MotorModule implements PIDOutput {
 	
     private CANTalon[] talons;
+	private PIDController pid;
+	private Encoder encoder;
     
-    public MotorModule(int encoderPortA, int encoderPortB, int... ports) {  
-    	talons = new CANTalon[ports.length];
-    	for(int i = 0; i < ports.length; i++) {
-    		talons[i] = new CANTalon(ports[i]);
-    		talons[i].setSafetyEnabled(false); //stops robot from randomly stopping
+    public MotorModule(Pair<Integer> encoderPorts, int[] motorPorts, boolean usePid) {
+    	talons = new CANTalon[motorPorts.length];
+    	for(int i = 0; i < motorPorts.length; i++) {
+    		talons[i] = new CANTalon(motorPorts[i]);
+    		talons[i].setSafetyEnabled(false);
     	}
+    	
+    	encoder = new Encoder(encoderPorts.first, encoderPorts.last);
+		encoder.setMaxPeriod(.05);
+		encoder.setMinRate(10);
+		encoder.setDistancePerPulse(1);
+		encoder.setSamplesToAverage(10);
+		encoder.reset();
+		
+		if(usePid) {
+			pid = new PIDController(1, 0.1, 0.01, encoder, this);
+		}
     }
     
     public void setSpeed(double speed){
@@ -31,9 +46,17 @@ public class MotorModule implements PIDOutput {
         setSpeed(0.0);
     }
     
+    public void resetEncoder() {
+    	encoder.reset();
+    }
+    
+    public int getEncoder() {
+    	return encoder.get();
+    }
+    
     public void pidWrite(double value) {
-    	for(int i = 0; i < talons.length; i++) {
-    		talons[i].pidWrite(value);
+    	for(CANTalon talon : talons) {
+    		talon.pidWrite(value);
     	}
     }
 }

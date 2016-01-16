@@ -7,6 +7,7 @@ import java.util.List;
 import org.team1515.robama.config.Config;
 import org.team1515.robama.config.Configurable;
 import org.team1515.robama.subsystems.ArnoldDrive;
+import org.team1515.robama.subsystems.Shooter;
 import org.team1515.robama.subsystems.WestCoastDrive;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -29,6 +30,7 @@ public class Robot extends IterativeRobot {
 	public static final Joystick stick1 = new Joystick(0);
 	
 	public static final WestCoastDrive driveTrain = new ArnoldDrive(stick1);
+	public static final Shooter shooter = new Shooter();
 
     Command autonomousCommand;
     

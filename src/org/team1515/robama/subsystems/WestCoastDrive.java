@@ -1,12 +1,11 @@
 package org.team1515.robama.subsystems;
 
+import org.team1515.robama.RobotMap;
 import org.team1515.robama.commands.JoystickDrive;
 import org.team1515.robama.config.Config;
 import org.team1515.robama.config.Configurable;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class WestCoastDrive extends Subsystem implements Configurable {
@@ -19,36 +18,13 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	protected MotorModule rightMotors;
 	protected Joystick joystick;
 	
-	Encoder leftEncoder;
-	Encoder rightEncoder;
-	
-	PIDController leftPID;
-	PIDController rightPID;
-	
 	public WestCoastDrive(Joystick joystick) {
-		leftMotors = new MotorModule(0, 1, 0, 1, 2);
-		rightMotors = new MotorModule(2, 3, 3, 4, 5);
-		
-		leftEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-		initEncoder(leftEncoder);
-		rightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
-		initEncoder(rightEncoder);
-		
-		leftPID = new PIDController(1, 0.1, 0.01, leftEncoder, leftMotors);
-		leftPID.enable();
-		rightPID = new PIDController(1, 0.1, 0.01, rightEncoder, rightMotors);
-		rightPID.enable();
+		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_ENCODER, RobotMap.LEFT_DRIVE_MOTORS, true);
+		rightMotors = new MotorModule(RobotMap.RIGHT_DRIVE_ENCODER, RobotMap.RIGHT_DRIVE_MOTORS, true);
 		
 		this.joystick = joystick;	
 	}
-	
-	private void initEncoder(Encoder encoder) {
-		encoder.setMaxPeriod(.05);
-		encoder.setMinRate(10);
-		encoder.setDistancePerPulse(1);
-		encoder.setSamplesToAverage(10);
-		encoder.reset();
-	}
+
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
 		double factor = 1; //change to -1 to reverse motors
@@ -58,7 +34,7 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	
 	private boolean setSpeed(int ticks, double leftSpeed, double rightSpeed) {
 		setSpeed(leftSpeed, rightSpeed);
-		int distance = Math.abs(leftEncoder.get()) + Math.abs(rightEncoder.get());
+		int distance = Math.abs(leftMotors.getEncoder()) + Math.abs(rightMotors.getEncoder());
 		return distance >= ticks * 2;
 	}
 	
@@ -94,8 +70,8 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
  	}
 	
 	public void resetEncoders() {
-		leftEncoder.reset();
-		rightEncoder.reset();
+		leftMotors.resetEncoder();
+		rightMotors.resetEncoder();
 	}
 	
 	protected void initDefaultCommand() {
