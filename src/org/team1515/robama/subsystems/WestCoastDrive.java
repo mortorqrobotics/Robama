@@ -3,6 +3,8 @@ package org.team1515.robama.subsystems;
 import org.team1515.robama.commands.JoystickDrive;
 import org.team1515.robama.config.Config;
 import org.team1515.robama.config.Configurable;
+import org.team1515.robama.config.ConfigurableType;
+import org.team1515.robama.config.ConfigurableVariable;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
@@ -88,7 +90,7 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 		setSpeed(y - x, y + x);
 	}
 	
-	public void drive() {
+	public void joystickDrive() {
 		Pair<Double> pair = getJoystickXY();
 		setXY(pair.first * turningScale, pair.last * drivingScale);
  	}
@@ -103,8 +105,16 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	}
 	
 	public void reloadConfig(Config config) {
-		deadBand = config.getDouble("deadBand", 0.15);
-		drivingScale = config.getDouble("drivingScale", 1.0);
-		turningScale = config.getDouble("turningScale", 1.0);
+		deadBand = config.getDouble("deadBand");
+		drivingScale = config.getDouble("drivingScale");
+		turningScale = config.getDouble("turningScale");
+	}
+	
+	public ConfigurableVariable[] registerVariables() {
+		return new ConfigurableVariable[] {
+				new ConfigurableVariable("deadBand", ConfigurableType.DOUBLE, 0.15),
+				new ConfigurableVariable("drivingScale", ConfigurableType.DOUBLE, 1.0),
+				new ConfigurableVariable("turningScale", ConfigurableType.DOUBLE, 1.0),
+		};
 	}
 }
