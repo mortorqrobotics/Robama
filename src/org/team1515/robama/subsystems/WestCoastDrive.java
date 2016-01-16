@@ -27,8 +27,6 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 		
 		isReversed = false;
 		
-		isReversed = false;
-		
 		this.joystick = joystick;	
 	}
 
