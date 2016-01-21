@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DropRamp extends Command {
 	
 	//temporary values
-	final double SPEED = 0.5;
 	final int TIME = 500; //in milliseconds
 	
 	public DropRamp() {
@@ -17,7 +16,7 @@ public class DropRamp extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.ramp.drop(SPEED);
+		Robot.ramp.drop();
 	}
 
 	@Override

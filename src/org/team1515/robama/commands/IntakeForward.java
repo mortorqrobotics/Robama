@@ -4,18 +4,15 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SetIntake extends Command {
+public class IntakeForward extends Command {
 	
-	double speed;
-	
-	public SetIntake(double speed) {
+	public IntakeForward() {
 		requires(Robot.intake);
-		this.speed = speed;
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.intake.setSpeed(speed);
+		Robot.intake.start();
 	}
 
 	@Override

@@ -8,26 +8,25 @@ public class BoulderRamp extends Subsystem {
 	
 	private MotorModule rampMotor;
 	
+	private static final double DROP_SPEED = 1;
+	private static final double RAISE_SPEED = 1;
+	
 	private final int MAX_RAMP_DROP = 100; //temp
 	
 	public BoulderRamp() {
 		rampMotor = new MotorModule(RobotMap.RAMP_ENCODER, RobotMap.RAMP_MOTORS);
 	}
 	
-	private void setSpeed(double speed) {
-		rampMotor.setSpeed(speed);
+	public void drop() {
+		rampMotor.setSpeed(DROP_SPEED);
 	}
 	
-	public void drop(double speed) {
-		setSpeed(speed);
-	}
-	
-	public void raise(double speed) {
-		setSpeed(-speed);
+	public void raise() {
+		rampMotor.setSpeed(-RAISE_SPEED);
 	}
 	
 	public void stop() {
-		setSpeed(0);
+		rampMotor.setSpeed(0);
 	}
 	
 	protected void initDefaultCommand() {

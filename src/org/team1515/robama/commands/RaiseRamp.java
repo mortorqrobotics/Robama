@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RaiseRamp extends Command {
 	
 	//temporary values
-	final double SPEED = 0.5;
 	final int TIME = 500; //in milliseconds
 	
 	public RaiseRamp() {
@@ -17,7 +16,7 @@ public class RaiseRamp extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.ramp.raise(SPEED);
+		Robot.ramp.raise();
 	}
 
 	@Override
