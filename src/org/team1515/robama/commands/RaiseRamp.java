@@ -4,21 +4,20 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DropBoulderRamp extends Command {
+public class RaiseRamp extends Command {
 	
-	double dropSpeed;
-	int dropTime; //in milliseconds
+	//temporary values
+	final double SPEED = 0.5;
+	final int TIME = 500; //in milliseconds
 	
-	public DropBoulderRamp(double dropSpeed, int dropTime) {
-		requires(Robot.shooter);
-		this.dropSpeed = dropSpeed;
-		this.dropTime = dropTime;
-		setTimeout(dropTime);
+	public RaiseRamp() {
+		requires(Robot.ramp);
+		setTimeout(TIME);
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.shooter.setDropSpeed(dropSpeed);
+		Robot.ramp.raise(SPEED);
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class DropBoulderRamp extends Command {
 
 	@Override
 	protected void end() {
-		Robot.shooter.stopDrop();
+		Robot.ramp.stop();
 	}
 
 	@Override

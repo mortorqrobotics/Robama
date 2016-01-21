@@ -18,8 +18,8 @@ public class RobotMap {
 	public static final Pair TOP_SHOOTER_ENCODER = new Pair<Integer>(4, 5);
 	public static final int[] BOTTOM_SHOOTER_MOTORS = {7};
 	public static final Pair BOTTOM_SHOOTER_ENCODER = new Pair<Integer>(6, 7);
-	public static final int[] INTAKE_SHOOTER_MOTORS = {8};
-	public static final Pair INTAKE_SHOOTER_ENCODER = new Pair<Integer>(8, 9);
-	public static final int[] BOULDER_RAMP_MOTORS = {9};
-	public static final Pair BOULDER_RAMP_ENCODER = new Pair<Integer>(10, 11);
+	public static final int[] INTAKE_MOTORS = {8};
+	public static final Pair INTAKE_ENCODER = new Pair<Integer>(8, 9);
+	public static final int[] RAMP_MOTORS = {9};
+	public static final Pair RAMP_ENCODER = new Pair<Integer>(10, 11);
 }

@@ -4,18 +4,18 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class StartIntake extends Command {
+public class SetIntake extends Command {
 	
-	double intakeSpeed;
+	double speed;
 	
-	public StartIntake(double intakeSpeed) {
-		requires(Robot.shooter);
-		this.intakeSpeed = intakeSpeed;
+	public SetIntake(double speed) {
+		requires(Robot.intake);
+		this.speed = speed;
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.shooter.setIntakeSpeed(intakeSpeed);
+		Robot.intake.setSpeed(speed);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class StartIntake extends Command {
 
 	@Override
 	protected void end() {
-		Robot.shooter.stopIntake();
+		Robot.intake.stop();
 	}
 
 	@Override

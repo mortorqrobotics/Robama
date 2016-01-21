@@ -20,7 +20,7 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	protected MotorModule rightMotors;
 	protected Joystick joystick;
 	
-	public boolean isReversed;
+	protected boolean isReversed;
 
 	
 	public WestCoastDrive(Joystick joystick) {
@@ -53,16 +53,20 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 		return setSpeed(ticks, -speed, -speed);
 	}
 	
-	public boolean turnLeft(int ticks, double speed) {
+	public boolean rotateLeft(int ticks, double speed) {
 		return setSpeed(ticks, -speed, speed);
 	}
 	
-	public boolean turnRight(int ticks, double speed) {
+	public boolean rotateRight(int ticks, double speed) {
 		return setSpeed(ticks, speed, -speed);
 	}
 
 	public void stop() {
 		setSpeed(0, 0);
+	}
+	
+	public void reverse() {
+		this.isReversed = !this.isReversed;
 	}
 	
 	protected abstract Pair<Double> getJoystickXY();

@@ -5,17 +5,17 @@ import org.team1515.robama.Robot;
 /**
  *
  */
-public class TurnRight extends MovementCommand {
+public class RotateRight extends MovementCommand {
 	
 	double speed;
 
-    public TurnRight(int ticks, double speed) {
+    public RotateRight(int ticks, double speed) {
     	super(ticks);
         requires(Robot.driveTrain);
         this.speed = speed;
     }
 
     protected boolean run() {
-    	return Robot.driveTrain.turnRight(ticks, speed);
+    	return Robot.driveTrain.rotateRight(ticks, speed);
     }
 }

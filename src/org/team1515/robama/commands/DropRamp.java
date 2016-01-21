@@ -4,29 +4,35 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ReverseDrive extends Command {	
-	public ReverseDrive() {
-		requires(Robot.driveTrain);
-	}
+public class DropRamp extends Command {
 	
+	//temporary values
+	final double SPEED = 0.5;
+	final int TIME = 500; //in milliseconds
+	
+	public DropRamp() {
+		requires(Robot.ramp);
+		setTimeout(TIME);
+	}
+
 	@Override
 	protected void initialize() {
-		requires(Robot.driveTrain);
+		Robot.ramp.drop(SPEED);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.driveTrain.reverse();
+		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return isTimedOut();
 	}
 
 	@Override
 	protected void end() {
-		
+		Robot.ramp.stop();
 	}
 
 	@Override
