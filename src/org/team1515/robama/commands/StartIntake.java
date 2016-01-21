@@ -4,39 +4,39 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Shoot extends Command {
+public class StartIntake extends Command {
 	
-	private double speed;
-
-	public Shoot(double speed) {
+	double intakeSpeed;
+	
+	public StartIntake(double intakeSpeed) {
 		requires(Robot.shooter);
-		this.speed = speed;
+		this.intakeSpeed = intakeSpeed;
 	}
-	
+
 	@Override
 	protected void initialize() {
-		
+		Robot.shooter.setIntakeSpeed(intakeSpeed);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.shooter.setSpeed(speed);
-		
+
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return isTimedOut();
 	}
 
 	@Override
 	protected void end() {
-		Robot.shooter.stop();
+		Robot.shooter.stopIntake();
 	}
 
 	@Override
 	protected void interrupted() {
 		end();
 	}
-
+	
+	
 }

@@ -1,5 +1,6 @@
 package org.team1515.robama;
 
+import org.team1515.robama.commands.IntakeMode;
 import org.team1515.robama.commands.ReverseDrive;
 import org.team1515.robama.commands.Shoot;
 
@@ -17,16 +18,17 @@ public class OI {
 	public static final Joystick stick2 = new Joystick(1);
 	
 	private Button 
-		fastShoot,
-		slowShoot,
-		reverseDriveTrain;
+		shoot,
+		reverseDriveTrain,
+		intakeMode;
 	
 	public OI() {		
-		fastShoot = new JoystickButton(stick1, RobotMap.BUTTON_FAST_SHOOT);
-		fastShoot.whileHeld(new Shoot(1));
-	
-		slowShoot = new JoystickButton(stick1, RobotMap.BUTTON_SLOW_SHOOT);
-		slowShoot.whileHeld(new Shoot(0.5));
+		shoot = new JoystickButton(stick1, RobotMap.BUTTON_SHOOT);
+		shoot.whileHeld(new Shoot(1));
+		
+		//TODO: before we start this command, make sure that ramp is at initial state
+		intakeMode = new JoystickButton(stick1, RobotMap.BUTTON_INTAKE_MODE);
+		intakeMode.whileHeld(new IntakeMode(1, 0.5, 500));
 		
 		reverseDriveTrain = new JoystickButton(stick1, 12);
 		reverseDriveTrain.whenPressed(new ReverseDrive());
