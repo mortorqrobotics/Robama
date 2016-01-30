@@ -16,7 +16,7 @@ public class ReverseDrive extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.driveTrain.isReversed = !Robot.driveTrain.isReversed;
+		Robot.driveTrain.reverse();
 	}
 
 	@Override

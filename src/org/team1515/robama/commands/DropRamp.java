@@ -4,39 +4,38 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Shoot extends Command {
+public class DropRamp extends Command {
 	
-	private double speed;
-
-	public Shoot(double speed) {
-		requires(Robot.shooter);
-		this.speed = speed;
+	//temporary values
+	final int TIME = 500; //in milliseconds
+	
+	public DropRamp() {
+		requires(Robot.ramp);
+		setTimeout(TIME);
 	}
-	
+
 	@Override
 	protected void initialize() {
-		
+		Robot.ramp.drop();
 	}
 
 	@Override
 	protected void execute() {
-		Robot.shooter.setSpeed(speed);
 		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return isTimedOut();
 	}
 
 	@Override
 	protected void end() {
-		Robot.shooter.stop();
+		Robot.ramp.stop();
 	}
 
 	@Override
 	protected void interrupted() {
 		end();
 	}
-
 }

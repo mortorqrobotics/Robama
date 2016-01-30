@@ -1,5 +1,6 @@
 package org.team1515.robama;
 
+import org.team1515.robama.commands.IntakeBall;
 import org.team1515.robama.commands.ReverseDrive;
 import org.team1515.robama.commands.Shoot;
 
@@ -17,16 +18,16 @@ public class OI {
 	public static final Joystick stick2 = new Joystick(2);
 	
 	private Button 
-		fastShoot,
-		slowShoot,
-		reverseDriveTrain;
+		shoot,
+		reverseDriveTrain,
+		intake;
 	
 	public OI() {		
-		fastShoot = new JoystickButton(stick1, RobotMap.BUTTON_FAST_SHOOT);
-		fastShoot.whileHeld(new Shoot(1));
-	
-		slowShoot = new JoystickButton(stick1, RobotMap.BUTTON_SLOW_SHOOT);
-		slowShoot.whileHeld(new Shoot(0.5));
+		shoot = new JoystickButton(stick1, RobotMap.BUTTON_SHOOT);
+		shoot.whileHeld(new Shoot(1));
+		
+		intake = new JoystickButton(stick1, RobotMap.BUTTON_INTAKE);
+		intake.whileHeld(new IntakeBall());
 		
 		reverseDriveTrain = new JoystickButton(stick1, 12);
 		reverseDriveTrain.whenPressed(new ReverseDrive());

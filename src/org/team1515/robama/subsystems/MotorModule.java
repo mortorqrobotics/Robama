@@ -33,6 +33,10 @@ public class MotorModule implements PIDOutput {
 		}
     }
     
+    public MotorModule(Pair<Integer> encoderPorts, int[] motorPorts) {
+    	this(encoderPorts, motorPorts, false);
+    }
+    
     public void setSpeed(double speed){
         if(speed > 1.0){
             speed = 1.0;

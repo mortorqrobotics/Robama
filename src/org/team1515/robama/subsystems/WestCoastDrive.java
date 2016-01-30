@@ -4,6 +4,8 @@ import org.team1515.robama.RobotMap;
 import org.team1515.robama.commands.JoystickDrive;
 import org.team1515.robama.config.Config;
 import org.team1515.robama.config.Configurable;
+import org.team1515.robama.config.ConfigurableType;
+import org.team1515.robama.config.ConfigurableVariable;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,7 +20,7 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	protected MotorModule rightMotors;
 	protected Joystick joystick;
 	
-	public boolean isReversed;
+	protected boolean isReversed;
 
 	
 	public WestCoastDrive(Joystick joystick) {
@@ -52,16 +54,20 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 		return setSpeed(ticks, -speed, -speed);
 	}
 	
-	public boolean turnLeft(int ticks, double speed) {
+	public boolean rotateLeft(int ticks, double speed) {
 		return setSpeed(ticks, -speed, speed);
 	}
 	
-	public boolean turnRight(int ticks, double speed) {
+	public boolean rotateRight(int ticks, double speed) {
 		return setSpeed(ticks, speed, -speed);
 	}
 
 	public void stop() {
 		setSpeed(0, 0);
+	}
+	
+	public void reverse() {
+		this.isReversed = !this.isReversed;
 	}
 	
 	protected abstract Pair<Double> getJoystickXY();
@@ -70,7 +76,7 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 		setSpeed(y - x, y + x);
 	}
 	
-	public void drive() {
+	public void joystickDrive() {
 		Pair<Double> pair = getJoystickXY();
 		if(isReversed){
 			setXY(-1 * pair.first * turningScale, -1 * pair.last * drivingScale);
@@ -98,8 +104,16 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	}
 	
 	public void reloadConfig(Config config) {
-		deadBand = config.getDouble("deadBand", 0.15);
-		drivingScale = config.getDouble("drivingScale", 1.0);
-		turningScale = config.getDouble("turningScale", 1.0);
+		deadBand = config.getDouble("deadBand");
+		drivingScale = config.getDouble("drivingScale");
+		turningScale = config.getDouble("turningScale");
+	}
+	
+	public ConfigurableVariable[] registerVariables() {
+		return new ConfigurableVariable[] {
+				new ConfigurableVariable("deadBand", ConfigurableType.DOUBLE, 0.15),
+				new ConfigurableVariable("drivingScale", ConfigurableType.DOUBLE, 1.0),
+				new ConfigurableVariable("turningScale", ConfigurableType.DOUBLE, 1.0),
+		};
 	}
 }

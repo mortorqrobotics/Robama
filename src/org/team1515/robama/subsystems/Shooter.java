@@ -6,17 +6,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
 	
-	private MotorModule leftMotor;
-	private MotorModule rightMotor;
-	
+	private MotorModule topMotor;
+	private MotorModule bottomMotor;
+		
 	public Shooter() {
-		leftMotor = new MotorModule(RobotMap.LEFT_SHOOTER_ECODER, RobotMap.LEFT_SHOOTER_MOTORS, false);
-		rightMotor = new MotorModule(RobotMap.RIGHT_SHOOTER_ENCODER, RobotMap.RIGHT_DRIVE_MOTORS, false);
+		topMotor = new MotorModule(RobotMap.TOP_SHOOTER_ENCODER, RobotMap.TOP_SHOOTER_MOTORS);
+		bottomMotor = new MotorModule(RobotMap.BOTTOM_SHOOTER_ENCODER, RobotMap.BOTTOM_SHOOTER_MOTORS);
 	}
 	
 	public void setSpeed(double speed) {
-		leftMotor.setSpeed(speed);
-		rightMotor.setSpeed(-speed);
+		topMotor.setSpeed(speed);
+		bottomMotor.setSpeed(speed); //it is positive because motors are facing opposite directions and are spinning opposite directions, so essentially a double negative
 	}
 	
 	public void stop() {
