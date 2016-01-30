@@ -23,6 +23,7 @@ public class ArnoldDrive extends WestCoastDrive {
 	}
 	
 	protected double getThrottle() {
+//		System.out.print((-joystick.getRawAxis(2) + 1) / 2 + " ");
 		return (-joystick.getRawAxis(2) + 1) / 2;
 	}
 	

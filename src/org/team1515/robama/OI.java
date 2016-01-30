@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	public static final Joystick stick1 = new Joystick(0);
-	public static final Joystick stick2 = new Joystick(1);
+	public static final Joystick stick1 = new Joystick(1);
+	public static final Joystick stick2 = new Joystick(2);
 	
 	private Button 
 		fastShoot,
