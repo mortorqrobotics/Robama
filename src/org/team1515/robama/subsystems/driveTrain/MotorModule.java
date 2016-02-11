@@ -1,4 +1,6 @@
-package org.team1515.robama.subsystems;
+package org.team1515.robama.subsystems.driveTrain;
+
+import org.team1515.robama.Pair;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
@@ -24,7 +26,7 @@ public class MotorModule implements PIDOutput {
 		encoder.setMinRate(10);
 		encoder.setDistancePerPulse(1);
 		encoder.setSamplesToAverage(10);
-		encoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kRate);
+		//encoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kRate); // compile error
 		encoder.reset();
 		
 		if(usePid) {

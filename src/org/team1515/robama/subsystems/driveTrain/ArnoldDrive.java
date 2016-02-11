@@ -1,25 +1,25 @@
-package org.team1515.robama.subsystems;
+package org.team1515.robama.subsystems.driveTrain;
 
 import edu.wpi.first.wpilibj.Joystick;
 
 public class ArnoldDrive extends WestCoastDrive {
 	
+	private static double DEAD_BAND = 0.15;
+	
 	public ArnoldDrive(Joystick joystick) {
 		super(joystick);
 	}
 
-	protected Pair<Double> getJoystickXY() {
+	protected JoystickValues getJoystickXY() {
 		double y = -joystick.getRawAxis(1);
 		double x = joystick.getRawAxis(5);
-		if (Math.abs(y) <= deadBand) {
+		if (Math.abs(y) <= DEAD_BAND) {
 			y = 0.0;
 		}
-		if (Math.abs(x) <= deadBand) {
+		if (Math.abs(x) <= DEAD_BAND) {
 			x = 0.0;
 		}
-		y *= getThrottle();
-		x *= getThrottle();
-		return new Pair<Double>(x, y);
+		return new JoystickValues(x, y, getThrottle());
 	}
 	
 	protected double getThrottle() {

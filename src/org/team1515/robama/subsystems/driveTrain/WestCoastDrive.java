@@ -1,20 +1,13 @@
-package org.team1515.robama.subsystems;
+package org.team1515.robama.subsystems.driveTrain;
 
+import org.team1515.robama.Config;
 import org.team1515.robama.RobotMap;
 import org.team1515.robama.commands.JoystickDrive;
-import org.team1515.robama.config.Config;
-import org.team1515.robama.config.Configurable;
-import org.team1515.robama.config.ConfigurableType;
-import org.team1515.robama.config.ConfigurableVariable;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public abstract class WestCoastDrive extends Subsystem implements Configurable {
-	
-	protected double deadBand = 0.15;
-	protected double drivingScale = 1.0;
-	protected double turningScale = 1.0;
+public abstract class WestCoastDrive extends Subsystem {
 	
 	protected MotorModule leftMotors;
 	protected MotorModule rightMotors;
@@ -29,14 +22,20 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 		
 		isReversed = false;
 		
-		this.joystick = joystick;	
+		this.joystick = joystick;
+
+		Config.setDefault("rotationCorner", 0.25);
+		Config.setDefault("rotationSide", 1.0);
 	}
 
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
 		double factor = 1; //change to -1 to reverse motors
-		leftMotors.setSpeed(-leftSpeed * factor);
-		rightMotors.setSpeed(rightSpeed * factor);
+		if(isReversed) {
+			factor *= -1;
+		}
+		leftMotors.setSpeed(leftSpeed * factor);
+		rightMotors.setSpeed(-rightSpeed * factor);
 	}
 	
 	private boolean setSpeed(int ticks, double leftSpeed, double rightSpeed) {
@@ -70,20 +69,31 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 		this.isReversed = !this.isReversed;
 	}
 	
-	protected abstract Pair<Double> getJoystickXY();
+	protected abstract JoystickValues getJoystickXY();
 
-	public void setXY(double x, double y) {
-		setSpeed(y - x, y + x);
+	public void setXY(double xValue, double yValue) {
+		double x = Math.abs(xValue);
+		double y = Math.abs(yValue);
+		double a = Config.getDouble("rotationSide");
+		double b = Config.getDouble("rotationCorner");
+    	double left = a * x + y * (1 - a * x);
+    	double right = y * (1 + (a + b - 1) * x) - a * x;
+    	if(yValue < 0) {
+    		left *= -1;
+    		right *= -1;
+    		xValue *= -1;
+    	}
+    	if(xValue < 0) {
+    		double temp = left;
+    		left = right;
+    		right = temp;
+    	}
+    	setSpeed(left, right);
 	}
 	
 	public void joystickDrive() {
-		Pair<Double> pair = getJoystickXY();
-		if(isReversed){
-			setXY(-1 * pair.first * turningScale, -1 * pair.last * drivingScale);
-		} else {
-			setXY(pair.first * turningScale, pair.last * drivingScale);
-		}
-		
+		JoystickValues values = getJoystickXY();
+		setXY(values.getX() * values.getThrottle(), values.getY() * values.getThrottle());
  	}
 	
 	public void resetEncoders() {
@@ -101,19 +111,5 @@ public abstract class WestCoastDrive extends Subsystem implements Configurable {
 	
 	protected void initDefaultCommand() {
 		setDefaultCommand(new JoystickDrive());	
-	}
-	
-	public void reloadConfig(Config config) {
-		deadBand = config.getDouble("deadBand");
-		drivingScale = config.getDouble("drivingScale");
-		turningScale = config.getDouble("turningScale");
-	}
-	
-	public ConfigurableVariable[] registerVariables() {
-		return new ConfigurableVariable[] {
-				new ConfigurableVariable("deadBand", ConfigurableType.DOUBLE, 0.15),
-				new ConfigurableVariable("drivingScale", ConfigurableType.DOUBLE, 1.0),
-				new ConfigurableVariable("turningScale", ConfigurableType.DOUBLE, 1.0),
-		};
 	}
 }

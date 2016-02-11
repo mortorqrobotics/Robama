@@ -1,22 +1,20 @@
 
 package org.team1515.robama;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.team1515.robama.config.Config;
-import org.team1515.robama.config.Configurable;
-import org.team1515.robama.subsystems.ArnoldDrive;
 import org.team1515.robama.subsystems.BoulderRamp;
 import org.team1515.robama.subsystems.Intake;
 import org.team1515.robama.subsystems.Shooter;
-import org.team1515.robama.subsystems.WestCoastDrive;
+import org.team1515.robama.subsystems.driveTrain.DecentDrive;
+import org.team1515.robama.subsystems.driveTrain.WestCoastDrive;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,10 +29,12 @@ public class Robot extends IterativeRobot {
 	
 	public static final Joystick stick1 = new Joystick(0);
 	
-	public static final WestCoastDrive driveTrain = new ArnoldDrive(stick1);
+	public static final WestCoastDrive driveTrain = new DecentDrive(stick1);
 	public static final Shooter shooter = new Shooter();
 	public static final Intake intake = new Intake();
 	public static final BoulderRamp ramp = new BoulderRamp();
+	
+	Gyro gyro;
 
     Command autonomousCommand;
     
@@ -47,10 +47,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
-		List<Configurable> configurables = new ArrayList<Configurable>();
-		configurables.add(driveTrain);
-		config = new Config(configurables);
-		config.reload();
+		gyro = new ADXRS450_Gyro();
+		Config.init();
     }
 	
 	public void disabledPeriodic() {
@@ -94,6 +92,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+        SmartDashboard.putData("gyro", (ADXRS450_Gyro) gyro);
         
         System.out.println(driveTrain.getLeftEncoder() + "\t" + driveTrain.getRightEncoder());
     }
