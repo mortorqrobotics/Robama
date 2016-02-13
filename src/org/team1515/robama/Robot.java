@@ -18,18 +18,12 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- */
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	
-	public static final Joystick stick1 = new Joystick(0);
+	public static final Joystick stick1 = new Joystick(RobotMap.JOYSTICK_DRIVE);
+	public static final Joystick stick2 = new Joystick(RobotMap.JOYSTICK_AUX);
 	
 	public static final WestCoastDrive driveTrain = new DecentDrive(stick1);
 	public static final Shooter shooter = new Shooter();
@@ -42,10 +36,6 @@ public class Robot extends IterativeRobot {
     
     Config config;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
@@ -69,45 +59,42 @@ public class Robot extends IterativeRobot {
         driveTrain.resetEncoders();
     }
 
-    /**
-     * This function is called periodically during autonomous
-     */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
     }
 
     public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
+    	// Stop autonomous when teleop starts
         if (autonomousCommand != null) autonomousCommand.cancel();
         
         driveTrain.resetEncoders();
     }
 
-    /**
-     * This function is called when the disabled button is hit.
-     * You can use it to reset subsystems before shutting down.
-     */
     public void disabledInit(){
 
     }
 
-    /**
-     * This function is called periodically during operator control
-     */
+    boolean rumbling = false;
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
         SmartDashboard.putData("gyroAngle", (ADXRS450_Gyro) gyro);
         
         System.out.println(driveTrain.getLeftEncoder() + "\t" + driveTrain.getRightEncoder());
+
+        //Get ready to RUMBLE!!!!!
+        if(Math.random() < 0.01) {
+        	rumbling = !rumbling;
+        }
+        if(rumbling) {
+        	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 1);
+        	stick2.setRumble(Joystick.RumbleType.kRightRumble, 1);
+        } else {
+        	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 0);
+        	stick2.setRumble(Joystick.RumbleType.kRightRumble, 0);
+        }
     }
-    
-    /**
-     * This function is called periodically during test mode
-     */
+
     public void testPeriodic() {
         LiveWindow.run();
     }

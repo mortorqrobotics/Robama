@@ -4,18 +4,18 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DropRamp extends Command {
+public class FlattenRamp extends Command {
 	
 	//temporary values
 	static final int TIME = 500; //in milliseconds
 	
-	public DropRamp() {
+	public FlattenRamp() {
 		setTimeout(TIME);
 		requires(Robot.ramp);
 	}
 
 	protected void initialize() {
-		Robot.ramp.drop();
+		Robot.ramp.flatten();
 	}
 
 	protected void execute() {

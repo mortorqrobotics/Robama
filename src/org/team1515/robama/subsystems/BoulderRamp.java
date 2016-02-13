@@ -18,11 +18,11 @@ public class BoulderRamp extends Subsystem {
 		rampMotor = new MotorModule(RobotMap.RAMP_ENCODER, RobotMap.RAMP_MOTORS);
 	}
 	
-	public void drop() {
+	public void tilt() {
 		rampMotor.setSpeed(DROP_SPEED);
 	}
 	
-	public void raise() {
+	public void flatten() {
 		rampMotor.setSpeed(-RAISE_SPEED);
 	}
 	

@@ -1,10 +1,11 @@
 package org.team1515.robama;
 
+import org.team1515.robama.commands.FlattenRamp;
 import org.team1515.robama.commands.IntakeBall;
 import org.team1515.robama.commands.ReverseDrive;
 import org.team1515.robama.commands.Shoot;
+import org.team1515.robama.commands.TiltRamp;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -14,23 +15,29 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
-	public static final Joystick stick1 = new Joystick(1);
-	public static final Joystick stick2 = new Joystick(2);
-	
-	private Button 
+	private Button
+		reverseDriveTrain, 
 		shoot,
-		reverseDriveTrain,
-		intake;
+		intake,
+		tilt,
+		flatten;
 	
 	public OI() {		
-		shoot = new JoystickButton(stick1, RobotMap.BUTTON_SHOOT);
+		
+		reverseDriveTrain = new JoystickButton(Robot.stick1, 12);
+		reverseDriveTrain.whenPressed(new ReverseDrive());
+		
+		shoot = new JoystickButton(Robot.stick2, RobotMap.BUTTON_SHOOT);
 		shoot.whileHeld(new Shoot(1));
 		
-		intake = new JoystickButton(stick1, RobotMap.BUTTON_INTAKE);
+		intake = new JoystickButton(Robot.stick2, RobotMap.BUTTON_INTAKE);
 		intake.whileHeld(new IntakeBall());
 		
-		reverseDriveTrain = new JoystickButton(stick1, 12);
-		reverseDriveTrain.whenPressed(new ReverseDrive());
+		tilt = new JoystickButton(Robot.stick2, RobotMap.BUTTON_RAMP_TILT);
+		tilt.whenPressed(new TiltRamp());
+		
+		flatten = new JoystickButton(Robot.stick2, RobotMap.BUTTON_RAMP_FLATTEN);
+		flatten.whenPressed(new FlattenRamp());
 	}
 }
 

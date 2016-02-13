@@ -17,7 +17,7 @@ public abstract class WestCoastDrive extends Subsystem {
 
 	
 	public WestCoastDrive(Joystick joystick) {
-		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_ENCODER, RobotMap.LEFT_DRIVE_MOTORS, true);
+		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_ENCODER, RobotMap.LEFT_DRIVE_MOTORS, false);
 		rightMotors = new MotorModule(RobotMap.RIGHT_DRIVE_ENCODER, RobotMap.RIGHT_DRIVE_MOTORS, false);
 		
 		isReversed = false;

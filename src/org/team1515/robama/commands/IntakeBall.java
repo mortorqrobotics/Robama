@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class IntakeBall extends CommandGroup {
 	
 	public IntakeBall() {
-		addParallel(new DropRamp());
+		addParallel(new TiltRamp());
 		addSequential(new IntakeForward());
-		addSequential(new RaiseRamp());
+		addSequential(new FlattenRamp());
 	}
 
 }

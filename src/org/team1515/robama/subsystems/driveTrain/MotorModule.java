@@ -46,9 +46,7 @@ public class MotorModule implements PIDOutput {
         if(speed < -1.0){
             speed = -1.0;
         }
-        // hack
-        speed = 0.25;
-        System.out.println("b "+ speed + "\t" + speed * 450);
+//        System.out.println("b "+ speed + "\t" + speed * 450);
         for(CANTalon talon : talons) {
 
         	if(pid != null) {
@@ -77,18 +75,11 @@ public class MotorModule implements PIDOutput {
     }
     
     public void pidWrite(double value) {
-    	boolean enabled = true;
     	for(CANTalon talon : talons) {
     		talon.pidWrite(value);
 //    		talon.pidWrite(0.25);
-    		if(!talon.isAlive()) {
-    			enabled = false;
-    		}
-    	}
-    	if(enabled) {
-    		System.out.print("a " + value);
     	}
     	
-    	System.out.println("\terror: " + pid.getError() + " " + ((encoder.getRate())) + " setpoint: " + pid.getSetpoint() + " pidGet: " + encoder.pidGet());
+//    	System.out.println("\terror: " + pid.getError() + " " + ((encoder.getRate())) + " setpoint: " + pid.getSetpoint() + " pidGet: " + encoder.pidGet());
     }
 }
