@@ -4,22 +4,19 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class RaiseRamp extends Command {
+public class TiltRamp extends Command {
 	
-	//temporary values
-	static final int TIME = 500; //in milliseconds
 	
-	public RaiseRamp() {
-		setTimeout(TIME);
+	public TiltRamp() {
 		requires(Robot.ramp);
 	}
 
 	protected void initialize() {
-		Robot.ramp.raise();
+		
 	}
 
 	protected void execute() {
-
+		Robot.ramp.tilt();
 	}
 
 	protected boolean isFinished() {

@@ -4,22 +4,18 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DropRamp extends Command {
+public class StraightenRamp extends Command {
 	
-	//temporary values
-	static final int TIME = 500; //in milliseconds
-	
-	public DropRamp() {
-		setTimeout(TIME);
+	public StraightenRamp() {
 		requires(Robot.ramp);
 	}
 
 	protected void initialize() {
-		Robot.ramp.drop();
+		
 	}
 
 	protected void execute() {
-
+		Robot.ramp.straighten();
 	}
 
 	protected boolean isFinished() {
