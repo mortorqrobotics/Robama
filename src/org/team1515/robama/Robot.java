@@ -1,6 +1,8 @@
 
 package org.team1515.robama;
 
+import org.team1515.robama.commands.test.TestForward;
+import org.team1515.robama.commands.test.TestShooter;
 import org.team1515.robama.subsystems.BoulderRamp;
 import org.team1515.robama.subsystems.Intake;
 import org.team1515.robama.subsystems.Shooter;
@@ -48,7 +50,12 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         // instantiate the command used for the autonomous period
 		gyro = new ADXRS450_Gyro();
+		
+		Config.setDefault("testShootSpeed", 1.0);
 		Config.init();
+
+    	SmartDashboard.putData("driveForward", new TestForward());
+    	SmartDashboard.putData("testShooter", new TestShooter());
     }
 	
 	public void disabledPeriodic() {
@@ -93,7 +100,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putData("gyro", (ADXRS450_Gyro) gyro);
+        SmartDashboard.putData("gyroAngle", (ADXRS450_Gyro) gyro);
         
         System.out.println(driveTrain.getLeftEncoder() + "\t" + driveTrain.getRightEncoder());
     }

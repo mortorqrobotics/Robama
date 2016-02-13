@@ -81,11 +81,13 @@ public class MotorModule implements PIDOutput {
     	for(CANTalon talon : talons) {
     		talon.pidWrite(value);
 //    		talon.pidWrite(0.25);
-    		if(!talon.isAlive())
+    		if(!talon.isAlive()) {
     			enabled = false;
+    		}
     	}
-    	if(enabled)
+    	if(enabled) {
     		System.out.print("a " + value);
+    	}
     	
     	System.out.println("\terror: " + pid.getError() + " " + ((encoder.getRate())) + " setpoint: " + pid.getSetpoint() + " pidGet: " + encoder.pidGet());
     }

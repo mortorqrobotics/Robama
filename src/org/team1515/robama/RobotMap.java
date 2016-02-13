@@ -7,10 +7,10 @@ public class RobotMap {
 	public static final int BUTTON_INTAKE = 0;
 	
 	//Axes
-	public static final int THROTTLE_AXIS = 2;
 	public static final int TILT_AXIS = 0;
-	public static final int TWIST_AXIS = 5;
 	public static final int Y_AXIS = 1;
+	public static final int THROTTLE_AXIS = 2;
+	public static final int TWIST_AXIS = 5;
 	
 	//Drive train
 	public static final int[] LEFT_DRIVE_MOTORS = {0, 1, 2};
