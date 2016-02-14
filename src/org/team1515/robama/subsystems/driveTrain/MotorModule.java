@@ -1,11 +1,15 @@
 package org.team1515.robama.subsystems.driveTrain;
 
+import org.team1515.robama.Config;
 import org.team1515.robama.Pair;
+import org.team1515.robama.commands.ActionCommand;
+import org.team1515.robama.commands.test.TestForward;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MotorModule implements PIDOutput {
 	
@@ -75,11 +79,11 @@ public class MotorModule implements PIDOutput {
     	return encoder.getRate();
     }
     
-    public PIDController getPIDController() {
+    public double getPIDError() {
     	if(usePID) {
-    		return pid;
+    		return pid.getError();
     	}
-    	return null;
+    	return 0;
     }
     
     public void pidWrite(double value) {
@@ -90,4 +94,18 @@ public class MotorModule implements PIDOutput {
     	
 //    	System.out.println("\terror: " + pid.getError() + " " + ((encoder.getRate())) + " setpoint: " + pid.getSetpoint() + " pidGet: " + encoder.pidGet());
     }
+    
+    public void testPID() {
+		Config.setDefault("pidP", pid.getP());
+		Config.setDefault("pidI", pid.getI());
+		Config.setDefault("pidD", pid.getD());
+		Config.setDefault("pidF", pid.getF());
+		
+		SmartDashboard.putData("updatePID", new ActionCommand(() -> {
+			pid.setPID(Config.getDouble("pidP"), Config.getDouble("pidI"), Config.getDouble("pidD"), Config.getDouble("pidF"));
+		}));
+		
+		SmartDashboard.putData("testForward", new TestForward(this));
+	}
+
 }
