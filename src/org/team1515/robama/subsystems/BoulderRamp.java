@@ -1,33 +1,32 @@
 package org.team1515.robama.subsystems;
 
 import org.team1515.robama.RobotMap;
-import org.team1515.robama.subsystems.driveTrain.MotorModule;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class BoulderRamp extends Subsystem {
 	
-	private MotorModule rampMotor;
-	
-	private static final double DROP_SPEED = 1;
-	private static final double RAISE_SPEED = 1;
-	
-	private final int MAX_RAMP_DROP = 100; //temp
+	private DoubleSolenoid solenoid;
+	private Compressor comp;
 	
 	public BoulderRamp() {
-		rampMotor = new MotorModule(RobotMap.RAMP_ENCODER, RobotMap.RAMP_MOTORS);
+		comp = new Compressor(11); // magic number, change this
+		comp.setClosedLoopControl(true);
+		solenoid = new DoubleSolenoid(RobotMap.RAMP_SOLENDOID.first, RobotMap.RAMP_SOLENDOID.last);
 	}
 	
 	public void tilt() {
-		rampMotor.setSpeed(DROP_SPEED);
+		solenoid.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public void flatten() {
-		rampMotor.setSpeed(-RAISE_SPEED);
+		solenoid.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public void stop() {
-		rampMotor.setSpeed(0);
+		solenoid.set(DoubleSolenoid.Value.kOff);
 	}
 	
 	protected void initDefaultCommand() {

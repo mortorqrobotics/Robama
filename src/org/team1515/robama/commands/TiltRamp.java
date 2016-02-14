@@ -2,36 +2,11 @@ package org.team1515.robama.commands;
 
 import org.team1515.robama.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
-
-public class TiltRamp extends Command {
-	
-	//temporary values
-	static final int TIME = 500; //in milliseconds
-	
+public class TiltRamp extends ActionCommand {	
 	public TiltRamp() {
-		setTimeout(TIME);
-		requires(Robot.ramp);
+		super(() -> {
+			Robot.ramp.tilt();
+			System.out.println("tilt");
+		}, Robot.ramp);
 	}
-
-	protected void initialize() {
-		Robot.ramp.tilt();
-	}
-
-	protected void execute() {
-
-	}
-
-	protected boolean isFinished() {
-		return isTimedOut();
-	}
-
-	protected void end() {
-		Robot.ramp.stop();
-	}
-
-	protected void interrupted() {
-		end();
-	}
-	
 }

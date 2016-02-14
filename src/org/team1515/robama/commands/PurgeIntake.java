@@ -1,29 +1,25 @@
 package org.team1515.robama.commands;
 
 import org.team1515.robama.Robot;
-import org.team1515.robama.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Shoot extends Command {
-	
-	private double speed;
+public class PurgeIntake extends Command {
 
-	public Shoot(double speed) {
-		requires(Robot.shooter);
+	public PurgeIntake() {
 		requires(Robot.intake);
-		this.speed = speed;
+		requires(Robot.shooter);
 	}
 	
 	@Override
 	protected void initialize() {
-		
+		Robot.intake.reverse();		
+		Robot.shooter.setBottom(-1);
 	}
 
 	@Override
 	protected void execute() {
-		Robot.shooter.setSpeed(speed);
-		Robot.intake.intake();
+
 	}
 
 	@Override
@@ -33,10 +29,8 @@ public class Shoot extends Command {
 
 	@Override
 	protected void end() {
-		if(!Robot.stick2.getRawButton(RobotMap.BUTTON_PREP)) {
-			Robot.shooter.stop();
-		}
 		Robot.intake.stop();
+		Robot.shooter.stop();
 	}
 
 	@Override

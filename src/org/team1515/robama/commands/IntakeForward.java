@@ -12,7 +12,7 @@ public class IntakeForward extends Command {
 
 	@Override
 	protected void initialize() {
-		Robot.intake.start();
+		Robot.intake.intake();
 	}
 
 	@Override

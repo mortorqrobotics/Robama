@@ -80,18 +80,18 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putData("gyroAngle", (ADXRS450_Gyro) gyro);
         
-        System.out.println(driveTrain.getLeftEncoder() + "\t" + driveTrain.getRightEncoder());
+//        System.out.println(driveTrain.getLeftEncoder() + "\t" + driveTrain.getRightEncoder());
 
         //Get ready to RUMBLE!!!!!
         if(Math.random() < 0.01) {
         	rumbling = !rumbling;
         }
         if(rumbling) {
-        	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 1);
-        	stick2.setRumble(Joystick.RumbleType.kRightRumble, 1);
+//        	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 1);
+//        	stick2.setRumble(Joystick.RumbleType.kRightRumble, 1);
         } else {
-        	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 0);
-        	stick2.setRumble(Joystick.RumbleType.kRightRumble, 0);
+//        	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 0);
+//        	stick2.setRumble(Joystick.RumbleType.kRightRumble, 0);
         }
     }
 

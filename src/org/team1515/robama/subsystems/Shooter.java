@@ -16,8 +16,24 @@ public class Shooter extends Subsystem {
 	}
 	
 	public void setSpeed(double speed) {
-		topMotor.setSpeed(speed);
-		bottomMotor.setSpeed(speed); //it is positive because motors are facing opposite directions and are spinning opposite directions, so essentially a double negative
+		setTop(speed);
+		setBottom(speed);
+	}
+	
+	public void setTop(double speed) {
+		topMotor.setSpeed(-speed);
+	}
+	
+	public void stopTop() {
+		topMotor.stop();
+	}
+	
+	public void setBottom(double speed) {
+		bottomMotor.setSpeed(speed);
+	}
+	
+	public void stopBottom() {
+		bottomMotor.stop();
 	}
 	
 	public void stop() {

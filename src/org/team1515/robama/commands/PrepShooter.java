@@ -5,14 +5,13 @@ import org.team1515.robama.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Shoot extends Command {
-	
-	private double speed;
+public class PrepShooter extends Command {
 
-	public Shoot(double speed) {
-		requires(Robot.shooter);
-		requires(Robot.intake);
+	private double speed;
+	
+	public PrepShooter(double speed) {
 		this.speed = speed;
+		requires(Robot.shooter);
 	}
 	
 	@Override
@@ -22,8 +21,7 @@ public class Shoot extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.shooter.setSpeed(speed);
-		Robot.intake.intake();
+		Robot.shooter.setTop(speed);
 	}
 
 	@Override
@@ -33,15 +31,14 @@ public class Shoot extends Command {
 
 	@Override
 	protected void end() {
-		if(!Robot.stick2.getRawButton(RobotMap.BUTTON_PREP)) {
+		if(!Robot.stick2.getRawButton(RobotMap.BUTTON_SHOOT)) {
 			Robot.shooter.stop();
 		}
-		Robot.intake.stop();
 	}
 
 	@Override
 	protected void interrupted() {
-		end();
+		end();		
 	}
 
 }

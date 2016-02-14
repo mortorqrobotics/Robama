@@ -27,7 +27,13 @@ public abstract class WestCoastDrive extends Subsystem {
 		Config.setDefault("rotationCorner", 0.25);
 		Config.setDefault("rotationSide", 1.0);
 	}
-
+	
+	public MotorModule getLeftMotors() {
+		return leftMotors;
+	}
+	public MotorModule getRightMotors() {
+		return rightMotors;
+	}
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
 		double factor = 1; //change to -1 to reverse motors

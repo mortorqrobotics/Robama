@@ -6,20 +6,21 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
 
 public class MotorModule implements PIDOutput {
 	
     private CANTalon[] talons;
 	private PIDController pid;
 	private Encoder encoder;
+	boolean usePID;
     
-    public MotorModule(Pair<Integer> encoderPorts, int[] motorPorts, boolean usePid) {
+    public MotorModule(Pair<Integer> encoderPorts, int[] motorPorts, boolean usePID) {
     	talons = new CANTalon[motorPorts.length];
     	for(int i = 0; i < motorPorts.length; i++) {
     		talons[i] = new CANTalon(motorPorts[i]);
     		talons[i].setSafetyEnabled(false);
     	}
+    	this.usePID = usePID;
     	
     	encoder = new Encoder(encoderPorts.first, encoderPorts.last);
 		encoder.setMaxPeriod(.05);
@@ -29,7 +30,7 @@ public class MotorModule implements PIDOutput {
 		//encoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kRate); // compile error
 		encoder.reset();
 		
-		if(usePid) {
+		if(usePID) {
 			pid = new PIDController(/*-0.0005*/0.005, 0, 0, 0.001111, encoder, this);
 			pid.enable();
 		}
@@ -72,6 +73,13 @@ public class MotorModule implements PIDOutput {
     public double getEncoder() {
 //    	return encoder.get();
     	return encoder.getRate();
+    }
+    
+    public double getPIDError() {
+    	if(usePID) {
+    		return pid.getError();
+    	}
+    	return 0;
     }
     
     public void pidWrite(double value) {

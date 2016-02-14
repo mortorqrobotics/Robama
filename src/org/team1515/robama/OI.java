@@ -2,6 +2,8 @@ package org.team1515.robama;
 
 import org.team1515.robama.commands.FlattenRamp;
 import org.team1515.robama.commands.IntakeBall;
+import org.team1515.robama.commands.PrepShooter;
+import org.team1515.robama.commands.PurgeIntake;
 import org.team1515.robama.commands.ReverseDrive;
 import org.team1515.robama.commands.Shoot;
 import org.team1515.robama.commands.TiltRamp;
@@ -16,9 +18,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	
 	private Button
-		reverseDriveTrain, 
+		reverseDriveTrain,
 		shoot,
+		prepShooter,
 		intake,
+		purgeIntake,
 		tilt,
 		flatten;
 	
@@ -30,8 +34,14 @@ public class OI {
 		shoot = new JoystickButton(Robot.stick2, RobotMap.BUTTON_SHOOT);
 		shoot.whileHeld(new Shoot(1));
 		
+		prepShooter = new JoystickButton(Robot.stick2, RobotMap.BUTTON_PREP);
+		prepShooter.whileHeld(new PrepShooter(1));
+		
 		intake = new JoystickButton(Robot.stick2, RobotMap.BUTTON_INTAKE);
 		intake.whileHeld(new IntakeBall());
+		
+		purgeIntake = new JoystickButton(Robot.stick2, RobotMap.BUTTON_PURGE);
+		purgeIntake.whileHeld(new PurgeIntake());
 		
 		tilt = new JoystickButton(Robot.stick2, RobotMap.BUTTON_RAMP_TILT);
 		tilt.whenPressed(new TiltRamp());

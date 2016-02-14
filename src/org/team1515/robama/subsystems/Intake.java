@@ -14,7 +14,11 @@ public class Intake extends Subsystem {
 		intakeMotor = new MotorModule(RobotMap.INTAKE_ENCODER, RobotMap.INTAKE_MOTORS);
 	}
 	
-	public void start() {
+	public void intake() {
+		intakeMotor.setSpeed(-SPEED);
+	}
+	
+	public void reverse() {
 		intakeMotor.setSpeed(SPEED);
 	}
 	
