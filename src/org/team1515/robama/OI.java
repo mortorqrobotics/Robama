@@ -28,7 +28,7 @@ public class OI {
 	
 	public OI() {		
 		
-		reverseDriveTrain = new JoystickButton(Robot.stick1, 12);
+		reverseDriveTrain = new JoystickButton(Robot.stick1, RobotMap.BUTTON_REVERSE_DRIVE);
 		reverseDriveTrain.whenPressed(new ReverseDrive());
 		
 		shoot = new JoystickButton(Robot.stick2, RobotMap.BUTTON_SHOOT);

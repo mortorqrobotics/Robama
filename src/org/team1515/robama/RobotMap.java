@@ -33,6 +33,7 @@ public class RobotMap {
 	public static final int BUTTON_PURGE = 6;
 	public static final int BUTTON_RAMP_TILT = 1;
 	public static final int BUTTON_RAMP_FLATTEN = 2;
+	public static final int BUTTON_REVERSE_DRIVE = 12;
 	
 	// Axes
 	public static final int TILT_AXIS = 0;

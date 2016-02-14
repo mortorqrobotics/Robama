@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class BoulderRamp extends Subsystem {
 	
 	private DoubleSolenoid solenoid;
-	private Compressor comp;
+	private Compressor compressor;
 	
 	public BoulderRamp() {
-		comp = new Compressor(11); // magic number, change this
-		comp.setClosedLoopControl(true);
-		solenoid = new DoubleSolenoid(RobotMap.RAMP_SOLENDOID.first, RobotMap.RAMP_SOLENDOID.last);
+		compressor = new Compressor(11); // magic number, change this
+		compressor.setClosedLoopControl(true);
+		solenoid = new DoubleSolenoid(RobotMap.RAMP_SOLENOID.first, RobotMap.RAMP_SOLENOID.last);
 	}
 	
 	public void tilt() {
@@ -22,7 +22,7 @@ public class BoulderRamp extends Subsystem {
 	}
 	
 	public void flatten() {
-		solenoid.set(DoubleSolenoid.Value.kForward);
+		solenoid.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 	public void stop() {
