@@ -75,11 +75,11 @@ public class MotorModule implements PIDOutput {
     	return encoder.getRate();
     }
     
-    public double getPIDError() {
+    public PIDController getPIDController() {
     	if(usePID) {
-    		return pid.getError();
+    		return pid;
     	}
-    	return 0;
+    	return null;
     }
     
     public void pidWrite(double value) {

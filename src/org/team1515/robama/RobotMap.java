@@ -59,5 +59,5 @@ public class RobotMap {
 	public static final Pair INTAKE_ENCODER = new Pair<Integer>(8, 9);
 	
 	// Ramp
-	public static final Pair<Integer> RAMP_SOLENDOID = new Pair<>(0, 1);
+	public static final Pair<Integer> RAMP_SOLENOID = new Pair<>(0, 1);
 }

@@ -41,11 +41,9 @@ public class Robot extends IterativeRobot {
         // instantiate the command used for the autonomous period
 		gyro = new ADXRS450_Gyro();
 		
-		Config.setDefault("testShootSpeed", 1.0);
 		Config.init();
 
-    	SmartDashboard.putData("driveForward", new TestForward());
-    	SmartDashboard.putData("testShooter", new TestShooter());
+		// add command to change shooting speed
     }
 	
 	public void disabledPeriodic() {
