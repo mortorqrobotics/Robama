@@ -23,8 +23,7 @@ public class OI {
 		prepShooter,
 		intake,
 		purgeIntake,
-		tilt,
-		flatten,
+		toggleShooter,
 		smallPurge;
 	
 	public OI() {		
@@ -44,11 +43,8 @@ public class OI {
 		purgeIntake = new JoystickButton(Robot.stick2, RobotMap.BUTTON_PURGE);
 		purgeIntake.whileHeld(new PurgeIntake());
 		
-		tilt = new JoystickButton(Robot.stick2, RobotMap.BUTTON_RAMP_TILT);
-		tilt.whenPressed(new TiltRamp());
-		
-		flatten = new JoystickButton(Robot.stick2, RobotMap.BUTTON_RAMP_FLATTEN);
-		flatten.whenPressed(new FlattenRamp());
+		toggleShooter = new JoystickButton(Robot.stick2, RobotMap.BUTTON_RAMP_TOGGLE);
+		toggleShooter.whenPressed(new TiltRamp());
 		
 		smallPurge = new JoystickButton(Robot.stick2, RobotMap.BUTTON_SMALL_PURGE); // untested
 		smallPurge.whenPressed(new PurgeIntake((int) Config.getDouble("purgeTime")));
