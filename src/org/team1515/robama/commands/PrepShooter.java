@@ -1,13 +1,22 @@
 package org.team1515.robama.commands;
 
 import org.team1515.robama.Robot;
-import org.team1515.robama.RobotMap;
 
-import edu.wpi.first.wpilibj.command.Command;
+public class PrepShooter extends ActionCommand {
+	
+	public PrepShooter(double speed) {
+		super(() -> {
+			Robot.shooter.setPrepping(!Robot.shooter.isPrepping());
+			if(Robot.shooter.isPrepping()) {
+				Robot.shooter.setTop(speed);
+			}
+			else {
+				Robot.shooter.stopTop();
+			}
+		}, Robot.shooter);
+	}
 
-public class PrepShooter extends Command {
-
-	private double speed;
+	/*private double speed;
 	
 	public PrepShooter(double speed) {
 		this.speed = speed;
@@ -21,12 +30,12 @@ public class PrepShooter extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.shooter.setTop(speed);
+		
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -34,11 +43,12 @@ public class PrepShooter extends Command {
 		if(!Robot.stick2.getRawButton(RobotMap.BUTTON_SHOOT)) {
 			Robot.shooter.stop();
 		}
+		//Robot.shooter.stopTop();
 	}
 
 	@Override
 	protected void interrupted() {
 		end();		
-	}
+	}*/
 
 }

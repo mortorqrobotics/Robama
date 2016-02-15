@@ -99,6 +99,7 @@ public abstract class WestCoastDrive extends Subsystem {
 	
 	public void joystickDrive() {
 		JoystickValues values = getJoystickXY();
+		Config.setDouble("throttle", values.getThrottle());
 		setXY(values.getX() * values.getThrottle(), values.getY() * values.getThrottle());
  	}
 	

@@ -31,6 +31,7 @@ public class RobotMap {
 	public static final int BUTTON_PREP = 5;
 	public static final int BUTTON_INTAKE = 3;
 	public static final int BUTTON_PURGE = 6;
+	public static final int BUTTON_SMALL_PURGE = 7;
 	public static final int BUTTON_RAMP_TILT = 1;
 	public static final int BUTTON_RAMP_FLATTEN = 2;
 	public static final int BUTTON_REVERSE_DRIVE = 12;

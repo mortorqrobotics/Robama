@@ -33,10 +33,12 @@ public class Shoot extends Command {
 
 	@Override
 	protected void end() {
-		if(!Robot.stick2.getRawButton(RobotMap.BUTTON_PREP)) {
+		/*if(!Robot.stick2.getRawButton(RobotMap.BUTTON_PREP)) {
 			Robot.shooter.stop();
-		}
+		}*/
+		Robot.shooter.stop();
 		Robot.intake.stop();
+		Robot.shooter.setPrepping(false);
 	}
 
 	@Override
