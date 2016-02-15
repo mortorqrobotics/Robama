@@ -3,6 +3,7 @@ package org.team1515.robama.subsystems;
 import org.team1515.robama.RobotMap;
 import org.team1515.robama.subsystems.driveTrain.MotorModule;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
@@ -46,6 +47,14 @@ public class Shooter extends Subsystem {
 	
 	public void stopBottom() {
 		bottomMotor.stop();
+	}
+	
+	public void prep() {
+		setTop(1.0);
+	}
+	
+	public void shoot(double speed) {
+		setSpeed(speed);
 	}
 	
 	public void stop() {

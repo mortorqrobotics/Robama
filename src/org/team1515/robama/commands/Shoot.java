@@ -22,8 +22,10 @@ public class Shoot extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.shooter.setSpeed(speed);
-		Robot.intake.intake();
+		if(Robot.stick2.getRawAxis(RobotMap.SHOOT_AXIS) > 0.5){
+			Robot.shooter.shoot(speed);
+			Robot.intake.intake();
+		}
 	}
 
 	@Override

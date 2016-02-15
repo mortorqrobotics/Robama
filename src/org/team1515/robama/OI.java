@@ -1,13 +1,9 @@
 package org.team1515.robama;
 
-import org.team1515.robama.commands.FlattenRamp;
-import org.team1515.robama.commands.IntakeBall;
-import org.team1515.robama.commands.PrepShooter;
+import org.team1515.robama.commands.IntakeForward;
 import org.team1515.robama.commands.PurgeIntake;
 import org.team1515.robama.commands.ReverseDrive;
-import org.team1515.robama.commands.Shoot;
-import org.team1515.robama.commands.TiltRamp;
-
+import org.team1515.robama.commands.ToggleRamp;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -19,8 +15,6 @@ public class OI {
 	
 	private Button
 		reverseDriveTrain,
-		shoot,
-		prepShooter,
 		intake,
 		purgeIntake,
 		toggleShooter,
@@ -31,20 +25,20 @@ public class OI {
 		reverseDriveTrain = new JoystickButton(Robot.stick1, RobotMap.BUTTON_REVERSE_DRIVE);
 		reverseDriveTrain.whenPressed(new ReverseDrive());
 		
-		shoot = new JoystickButton(Robot.stick2, RobotMap.BUTTON_SHOOT);
-		shoot.whileHeld(new Shoot(1));
-		
-		prepShooter = new JoystickButton(Robot.stick2, RobotMap.BUTTON_PREP);
-		prepShooter.whenPressed(new PrepShooter(1));
+//		shoot = new JoystickButton(Robot.stick2, RobotMap.BUTTON_SHOOT);
+//		shoot.whileHeld(new Shoot(1));
+//		
+//		prepShooter = new JoystickButton(Robot.stick2, RobotMap.BUTTON_PREP);
+//		prepShooter.whileHeld(new PrepShooter());
 		
 		intake = new JoystickButton(Robot.stick2, RobotMap.BUTTON_INTAKE);
-		intake.whileHeld(new IntakeBall());
+		intake.whileHeld(new IntakeForward());
 		
 		purgeIntake = new JoystickButton(Robot.stick2, RobotMap.BUTTON_PURGE);
 		purgeIntake.whileHeld(new PurgeIntake());
 		
 		toggleShooter = new JoystickButton(Robot.stick2, RobotMap.BUTTON_RAMP_TOGGLE);
-		toggleShooter.whenPressed(new TiltRamp());
+		toggleShooter.whenPressed(new ToggleRamp());
 		
 		smallPurge = new JoystickButton(Robot.stick2, RobotMap.BUTTON_SMALL_PURGE); // untested
 		smallPurge.whenPressed(new PurgeIntake((int) Config.getDouble("purgeTime")));

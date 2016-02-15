@@ -1,6 +1,8 @@
 
 package org.team1515.robama;
 
+import org.team1515.robama.commands.PrepShooter;
+import org.team1515.robama.commands.Shoot;
 import org.team1515.robama.subsystems.BoulderRamp;
 import org.team1515.robama.subsystems.Intake;
 import org.team1515.robama.subsystems.Shooter;
@@ -40,6 +42,8 @@ public class Robot extends IterativeRobot {
         // instantiate the command used for the autonomous period
 		gyro = new ADXRS450_Gyro();
 		
+		SmartDashboard.putBoolean("rampTilted", false);
+		
 		Config.init();
 
 		// add command to change shooting speed
@@ -65,6 +69,11 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         
         driveTrain.resetEncoders();
+        
+        ramp.setTilted(SmartDashboard.getBoolean("isTilted", false));
+        
+        new Shoot(1);
+        new PrepShooter();
     }
 
     public void disabledInit(){

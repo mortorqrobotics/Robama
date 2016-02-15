@@ -27,8 +27,6 @@ public class RobotMap {
 	public static final int JOYSTICK_AUX = 1;
 	
 	// Buttons
-	public static final int BUTTON_SHOOT = 4;
-	public static final int BUTTON_PREP = 5;
 	public static final int BUTTON_INTAKE = 5;
 	public static final int BUTTON_PURGE = 6;
 	public static final int BUTTON_SMALL_PURGE = 7;
