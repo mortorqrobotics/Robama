@@ -20,7 +20,7 @@ public class PrepShooter extends Command {
 
 	@Override
 	protected void execute() {
-		
+
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package org.team1515.robama.subsystems;
 
 import org.team1515.robama.Pair;
-import org.team1515.robama.commands.JoystickDrive;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;

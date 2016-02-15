@@ -27,14 +27,13 @@ public class RobotMap {
 	public static final int JOYSTICK_AUX = 1;
 	
 	// Buttons
+	public static final int BUTTON_RAMP_TOGGLE = 1;
+	public static final int BUTTON_INTAKE = 2;
 	public static final int BUTTON_SHOOT = 4;
-	public static final int BUTTON_AUTOSHOOT = 9;
 	public static final int BUTTON_PREP = 5;
-	public static final int BUTTON_INTAKE = 3;
 	public static final int BUTTON_PURGE = 6;
-	public static final int BUTTON_SMALL_PURGE = 7;
-	public static final int BUTTON_RAMP_TILT = 1;
-	public static final int BUTTON_RAMP_FLATTEN = 2;
+	public static final int BUTTON_TIMED_PURGE = 7;
+	public static final int BUTTON_AUTOSHOOT = 9;
 	public static final int BUTTON_REVERSE_DRIVE = 12;
 	
 	// Axes
@@ -42,6 +41,8 @@ public class RobotMap {
 	public static final int Y_AXIS = 1;
 	public static final int THROTTLE_AXIS = 2;
 	public static final int TWIST_AXIS = 5;
+	public static final int PREP_AXIS = 2;
+	public static final int SHOOT_AXIS = 3;
 	
 	// Drive train
 	public static final int[] LEFT_DRIVE_MOTORS = {3, 4};

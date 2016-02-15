@@ -36,6 +36,14 @@ public class Shooter extends Subsystem {
 		bottomMotor.stop();
 	}
 	
+	public void prep() {
+		setTop(1.0);
+	}
+	
+	public void shoot(double speed) {
+		setSpeed(speed);
+	}
+	
 	public void stop() {
 		setSpeed(0);
 	}
