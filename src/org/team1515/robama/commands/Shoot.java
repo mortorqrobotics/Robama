@@ -28,7 +28,7 @@ public class Shoot extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return isTimedOut();
 	}
 
 	@Override
@@ -38,7 +38,6 @@ public class Shoot extends Command {
 		}*/
 		Robot.shooter.stop();
 		Robot.intake.stop();
-		Robot.shooter.setPrepping(false);
 	}
 
 	@Override

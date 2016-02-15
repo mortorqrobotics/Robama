@@ -1,7 +1,6 @@
 
 package org.team1515.robama;
 
-import org.team1515.robama.commands.ActionCommand;
 import org.team1515.robama.subsystems.BoulderRamp;
 import org.team1515.robama.subsystems.Intake;
 import org.team1515.robama.subsystems.Shooter;
@@ -11,7 +10,6 @@ import org.team1515.robama.subsystems.driveTrain.WestCoastDrive;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Gyro;

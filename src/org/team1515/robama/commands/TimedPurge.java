@@ -1,26 +1,27 @@
 package org.team1515.robama.commands;
 
+import org.team1515.robama.Config;
 import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PrepShooter extends Command {
+public class TimedPurge extends Command {
 
-	private double speed;
-	
-	public PrepShooter(double speed) {
-		this.speed = speed;
+	public TimedPurge() {
+		requires(Robot.intake);
 		requires(Robot.shooter);
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.shooter.setTop(speed);
+		Robot.intake.reverse();		
+		Robot.shooter.setBottom(-1);
+		setTimeout(Config.getDouble("purgeTime") / 1000.0);
 	}
 
 	@Override
 	protected void execute() {
-		
+
 	}
 
 	@Override
@@ -30,12 +31,13 @@ public class PrepShooter extends Command {
 
 	@Override
 	protected void end() {
-		Robot.shooter.stopTop();
+		Robot.intake.stop();
+		Robot.shooter.stop();
 	}
 
 	@Override
 	protected void interrupted() {
-		end();		
+		end();
 	}
 
 }

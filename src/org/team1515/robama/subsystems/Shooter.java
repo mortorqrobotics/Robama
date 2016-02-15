@@ -9,22 +9,10 @@ public class Shooter extends Subsystem {
 	
 	private MotorModule topMotor;
 	private MotorModule bottomMotor;
-	
-	boolean isPrepping;
 		
 	public Shooter() {
 		topMotor = new MotorModule(RobotMap.TOP_SHOOTER_ENCODER, RobotMap.TOP_SHOOTER_MOTORS);
 		bottomMotor = new MotorModule(RobotMap.BOTTOM_SHOOTER_ENCODER, RobotMap.BOTTOM_SHOOTER_MOTORS);
-		
-		isPrepping = false;
-	}
-	
-	public boolean isPrepping() {
-		return isPrepping;
-	}
-
-	public void setPrepping(boolean isPrepping) {
-		this.isPrepping = isPrepping;
 	}
 
 	public void setSpeed(double speed) {
