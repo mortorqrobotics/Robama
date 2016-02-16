@@ -15,7 +15,11 @@ public class AxisButton extends Button {
 	public AxisButton(Joystick joystick, int axis, double pressThreshold, double releaseThreshold, boolean reverse) {
 		this.joystick = joystick;
 		this.axis = axis;
-		this.reverseFactor = reverse ? -1 : 1;
+		if(reverse) {
+			this.reverseFactor = -1;
+		} else {
+			this.reverseFactor = 1;
+		}
 		this.pressThreshold = pressThreshold * reverseFactor;
 		this.releaseThreshold = releaseThreshold * reverseFactor;
 		this.wasPressed = false;
@@ -26,8 +30,15 @@ public class AxisButton extends Button {
 	}
 	
 	@Override
-	public boolean get() {		
-		return wasPressed = reverseFactor * joystick.getRawAxis(axis) > (wasPressed ? releaseThreshold : pressThreshold); 
+	public boolean get() {
+		double threshold;
+		if(wasPressed) {
+			threshold = releaseThreshold;
+		} else {
+			threshold = pressThreshold;
+		}
+		this.wasPressed = reverseFactor * joystick.getRawAxis(axis) > threshold; 
+		return wasPressed;
 	}
 
 	
