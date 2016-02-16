@@ -32,13 +32,13 @@ public class OI {
 		reverseDriveTrain = new JoystickButton(Robot.stick1, RobotMap.BUTTON_REVERSE_DRIVE);
 		reverseDriveTrain.whenPressed(new ReverseDrive());
 		
-		shoot = new JoystickButton(Robot.stick2, RobotMap.BUTTON_SHOOT);
+		shoot = new AxisButton(Robot.stick2, RobotMap.AXIS_SHOOT, 0.5, 0.5);
 		shoot.whileHeld(new Shoot(1));
 		
 		autoShoot = new JoystickButton(Robot.stick2, RobotMap.BUTTON_AUTOSHOOT);
 		autoShoot.whenPressed(new AutoShoot());
 		
-		prepShooter = new JoystickButton(Robot.stick2, RobotMap.BUTTON_PREP);
+		prepShooter = new AxisButton(Robot.stick2, RobotMap.AXIS_PREP, 0.5, 0.5);
 		prepShooter.whileHeld(new PrepShooter(1));
 		
 		intake = new JoystickButton(Robot.stick2, RobotMap.BUTTON_INTAKE);

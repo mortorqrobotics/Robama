@@ -17,15 +17,13 @@ public class Shoot extends Command {
 	
 	@Override
 	protected void initialize() {
-		
+		Robot.shooter.shoot(speed);
+		Robot.intake.intake();		
 	}
 
 	@Override
 	protected void execute() {
-		if(Robot.stick2.getRawAxis(RobotMap.SHOOT_AXIS) > 0.5){
-			Robot.shooter.shoot(speed);
-			Robot.intake.intake();
-		}
+
 	}
 
 	@Override
@@ -35,9 +33,6 @@ public class Shoot extends Command {
 
 	@Override
 	protected void end() {
-		/*if(!Robot.stick2.getRawButton(RobotMap.BUTTON_PREP)) {
-			Robot.shooter.stop();
-		}*/
 		Robot.shooter.stop();
 		Robot.intake.stop();
 	}
