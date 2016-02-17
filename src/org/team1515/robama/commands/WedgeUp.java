@@ -4,39 +4,28 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Shoot extends Command {
+public class WedgeUp extends Command {
 	
-	private double speed;
-
-	public Shoot(double speed) {
-		requires(Robot.shooter);
-		requires(Robot.intake);
-		this.speed = speed;
+	public WedgeUp() {
+		requires(Robot.wedge);
 	}
-	
-	@Override
+
 	protected void initialize() {
-		Robot.shooter.shoot(speed);
-		Robot.intake.intake();		
+		Robot.wedge.moveUp();
 	}
 
-	@Override
 	protected void execute() {
 
 	}
 
-	@Override
 	protected boolean isFinished() {
 		return isTimedOut();
 	}
 
-	@Override
 	protected void end() {
-		Robot.shooter.stop();
-		Robot.intake.stop();
+		Robot.wedge.stop();
 	}
 
-	@Override
 	protected void interrupted() {
 		end();
 	}

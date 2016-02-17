@@ -1,7 +1,7 @@
 package org.team1515.robama.commands.test;
 
 import org.team1515.robama.Config;
-import org.team1515.robama.subsystems.driveTrain.MotorModule;
+import org.team1515.robama.subsystems.MotorModule;
 
 import edu.wpi.first.wpilibj.command.Command;
 

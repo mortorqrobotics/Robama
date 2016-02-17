@@ -8,6 +8,8 @@ import org.team1515.robama.commands.ReverseDrive;
 import org.team1515.robama.commands.Shoot;
 import org.team1515.robama.commands.TimedPurge;
 import org.team1515.robama.commands.ToggleRamp;
+import org.team1515.robama.commands.WedgeUp;
+import org.team1515.robama.commands.WedgeDown;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -25,7 +27,9 @@ public class OI {
 		intake,
 		purgeIntake,
 		toggleShooter,
-		timedPurge;
+		timedPurge,
+		wedgeDown,
+		wedgeUp;
 	
 	public OI() {		
 		
@@ -53,6 +57,12 @@ public class OI {
 		Config.setDefault("purgeTime", 60);		
 		timedPurge = new JoystickButton(Robot.stick2, RobotMap.BUTTON_TIMED_PURGE);
 		timedPurge.whenPressed(new TimedPurge());
+
+		wedgeDown = new JoystickButton(Robot.stick2, RobotMap.BUTTON_WEDGE_DOWN);
+		wedgeDown.whileHeld(new WedgeDown());
+		
+		wedgeUp = new JoystickButton(Robot.stick2, RobotMap.BUTTON_WEDGE_UP);
+		wedgeUp.whileHeld(new WedgeUp());
 	}
 }
 

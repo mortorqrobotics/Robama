@@ -1,7 +1,6 @@
 package org.team1515.robama.subsystems;
 
 import org.team1515.robama.RobotMap;
-import org.team1515.robama.subsystems.driveTrain.MotorModule;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 

@@ -3,6 +3,7 @@ package org.team1515.robama.subsystems.driveTrain;
 import org.team1515.robama.Config;
 import org.team1515.robama.RobotMap;
 import org.team1515.robama.commands.JoystickDrive;
+import org.team1515.robama.subsystems.MotorModule;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;

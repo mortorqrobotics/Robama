@@ -1,4 +1,4 @@
-package org.team1515.robama.subsystems.driveTrain;
+package org.team1515.robama.subsystems;
 
 import org.team1515.robama.Config;
 import org.team1515.robama.Pair;
@@ -26,22 +26,31 @@ public class MotorModule implements PIDOutput {
     	}
     	this.usePID = usePID;
     	
-    	encoder = new Encoder(encoderPorts.first, encoderPorts.last);
-		encoder.setMaxPeriod(.05);
-		encoder.setMinRate(10);
-		encoder.setDistancePerPulse(1);
-		encoder.setSamplesToAverage(10);
-		//encoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kRate); // compile error
-		encoder.reset();
+    	if(encoderPorts != null) {
+    		encoder = new Encoder(encoderPorts.first, encoderPorts.last);
+    		encoder.setMaxPeriod(.05);
+    		encoder.setMinRate(10);
+    		encoder.setDistancePerPulse(1);
+    		encoder.setSamplesToAverage(10);
+    		//encoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kRate); // compile error
+    		encoder.reset();
 		
-		if(usePID) {
-			pid = new PIDController(/*-0.0005*/0.005, 0, 0, 0.001111, encoder, this);
-			pid.enable();
-		}
+    		if(usePID) {
+    			pid = new PIDController(/*-0.0005*/0.005, 0, 0, 0.001111, encoder, this);
+    			pid.enable();
+    		}
+    	}
+    	else {
+    		encoder = null;
+    	}
     }
     
     public MotorModule(Pair<Integer> encoderPorts, int[] motorPorts) {
     	this(encoderPorts, motorPorts, false);
+    }
+    
+    public MotorModule(int[] motorPorts) {
+    	this(null, motorPorts);
     }
     
     public void setSpeed(double speed){
