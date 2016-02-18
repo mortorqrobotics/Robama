@@ -6,12 +6,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
 	
-	private MotorModule topMotor;
-	private MotorModule bottomMotor;
+	private PIDMotorModule topMotor; // switch to MotorModule declaration?
+	private PIDMotorModule bottomMotor;
 		
 	public Shooter() {
-		topMotor = new MotorModule(RobotMap.TOP_SHOOTER_ENCODER, RobotMap.TOP_SHOOTER_MOTORS);
-		bottomMotor = new MotorModule(RobotMap.BOTTOM_SHOOTER_ENCODER, RobotMap.BOTTOM_SHOOTER_MOTORS);
+		topMotor = new PIDMotorModule(RobotMap.TOP_SHOOTER_MOTORS, RobotMap.TOP_SHOOTER_ENCODER);
+		bottomMotor = new PIDMotorModule(RobotMap.BOTTOM_SHOOTER_MOTORS, RobotMap.BOTTOM_SHOOTER_ENCODER);
 	}
 
 	public void setSpeed(double speed) {

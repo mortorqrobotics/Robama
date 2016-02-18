@@ -4,22 +4,23 @@ import org.team1515.robama.Config;
 import org.team1515.robama.RobotMap;
 import org.team1515.robama.commands.JoystickDrive;
 import org.team1515.robama.subsystems.MotorModule;
+import org.team1515.robama.subsystems.PIDMotorModule;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class WestCoastDrive extends Subsystem {
 	
-	protected MotorModule leftMotors;
-	protected MotorModule rightMotors;
+	protected PIDMotorModule leftMotors;
+	protected PIDMotorModule rightMotors;
 	protected Joystick joystick;
 	
 	protected boolean isReversed;
 
 	
 	public WestCoastDrive(Joystick joystick) {
-		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_ENCODER, RobotMap.LEFT_DRIVE_MOTORS, false);
-		rightMotors = new MotorModule(RobotMap.RIGHT_DRIVE_ENCODER, RobotMap.RIGHT_DRIVE_MOTORS, false);
+		leftMotors = new PIDMotorModule(RobotMap.LEFT_DRIVE_MOTORS, RobotMap.LEFT_DRIVE_ENCODER);
+		rightMotors = new PIDMotorModule(RobotMap.RIGHT_DRIVE_MOTORS, RobotMap.RIGHT_DRIVE_ENCODER);
 		
 		isReversed = false;
 		
@@ -47,7 +48,7 @@ public abstract class WestCoastDrive extends Subsystem {
 	
 	private boolean setSpeed(int ticks, double leftSpeed, double rightSpeed) {
 		setSpeed(leftSpeed, rightSpeed);
-//		int distance = Math.abs(leftMotors.getEncoder()) + Math.abs(rightMotors.getEncoder());
+//		int distance = Math.abs(leftMotors.getEncoderRate()) + Math.abs(rightMotors.getEncoderRate());
 //		return distance >= ticks * 2;
 		return false;
 	}
@@ -110,11 +111,11 @@ public abstract class WestCoastDrive extends Subsystem {
 	}
 	
 	public double getLeftEncoder() {
-		return leftMotors.getEncoder();
+		return leftMotors.getEncoderRate();
 	}
 	
 	public double getRightEncoder() {
-		return rightMotors.getEncoder();
+		return rightMotors.getEncoderRate();
 	}
 	
 	protected void initDefaultCommand() {

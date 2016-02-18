@@ -61,7 +61,6 @@ public class RobotMap {
 	
 	// Intake
 	public static final int[] INTAKE_MOTORS = {7};
-	public static final Pair INTAKE_ENCODER = new Pair<Integer>(8, 9);
 	
 	// Ramp
 	public static final Pair<Integer> RAMP_SOLENOID = new Pair<>(0, 1);
