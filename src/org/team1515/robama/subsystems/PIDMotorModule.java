@@ -13,7 +13,7 @@ public class PIDMotorModule extends EncoderMotorModule implements PIDOutput {
 	public PIDMotorModule(int[] motorPorts, Pair<Integer> encoderPorts) { // take in max encoder rate?
 		super(motorPorts, encoderPorts);
 
-		pid = new PIDController(0, 0, 0, encoder, this);
+		pid = new PIDController(0, 0, 0, 1, encoder, this);
 		pid.enable();
 	}
 	

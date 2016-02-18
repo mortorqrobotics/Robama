@@ -22,7 +22,7 @@ public abstract class WestCoastDrive extends Subsystem {
 		leftMotors = new PIDMotorModule(RobotMap.LEFT_DRIVE_MOTORS, RobotMap.LEFT_DRIVE_ENCODER);
 		rightMotors = new PIDMotorModule(RobotMap.RIGHT_DRIVE_MOTORS, RobotMap.RIGHT_DRIVE_ENCODER);
 		
-		isReversed = false;
+		isReversed = false; // switch to reverse motors
 		
 		this.joystick = joystick;
 
@@ -38,10 +38,7 @@ public abstract class WestCoastDrive extends Subsystem {
 	}
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
-		double factor = 1; //change to -1 to reverse motors
-		if(isReversed) {
-			factor *= -1;
-		}
+		double factor = isReversed ? -1 : 1;
 		leftMotors.setSpeed(leftSpeed * factor);
 		rightMotors.setSpeed(-rightSpeed * factor);
 	}
