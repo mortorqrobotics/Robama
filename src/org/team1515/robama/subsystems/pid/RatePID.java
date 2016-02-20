@@ -26,6 +26,11 @@ public class RatePID extends PID {
 		}
 	}
 	
-	// reset cumulative pid output
+	public void disable() {
+		if(pidOutput instanceof CumulativePIDOutput) {
+			((CumulativePIDOutput) pidOutput).reset();
+		}
+		super.disable();
+	}
 
 }
