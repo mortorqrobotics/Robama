@@ -23,9 +23,13 @@ public class PigeonVision {
 	final static double IMG_HEIGHT = 480; // pixels of image resolution
 	final static double IMG_WIDTH = 640; // pixels of image resolution
 	
+	VideoCapture camera;
+	
 	public PigeonVision() {
 		System.load("/usr/local/lib/libopencv_java310.so");
 	    System.out.println("Welcome to OpenCV " + Core.VERSION);
+	    camera = new VideoCapture();
+	    camera.open(0);
 	    Mat m = new Mat(5, 10, CvType.CV_8UC1, new Scalar(0));
 	    System.out.println("OpenCV Mat: " + m);
 	    Mat mr1 = m.row(1);
@@ -35,17 +39,17 @@ public class PigeonVision {
 	    System.out.println("OpenCV Mat data:\n" + m.dump());
 	}
 	
-	public void findGoal(VideoCapture camera) {
+	public void findGoal() {
 		long time = System.currentTimeMillis();
-		Mat frame = new Mat();
+//		Mat frame = new Mat();
 		Mat output = new Mat();
-		camera.read(frame);
+//		camera.read(frame);
+		Mat frame = Imgcodecs.imread("/goal.png");
 		
-		Imgcodecs.imwrite("original.png", frame);
 		convertImage(frame, output);
 		Imgcodecs.imwrite("converted.png", output);
 		cancelColorsTape(output, output);
-		Imgcodecs.imwrite("tape.png", output);
+		Imgcodecs.imwrite("cancelcolors.png", output);
 		
 		List<MatOfPoint> contours = findContours(output);
 		contours = filterContours(contours);
@@ -57,7 +61,6 @@ public class PigeonVision {
 			Point[] bottomY = findBottomY(points2f.toArray());
 			Point[] topY = findTopY(points2f.toArray());
 			
-			Imgcodecs.imwrite("submat.png", frame.submat(goalRect));
 			double distToGoal = findDistToGoal(goalRect.width, 31);
 			System.out.println(distToGoal);
 			
@@ -110,9 +113,9 @@ public class PigeonVision {
 					&& rect.height > 30 && rect.height < 100
 					&& rect.y < 400) {
 				MatOfPoint2f point2f = approxPoly(contours.get(i));
-				if(point2f.toList().size() >= 7 && point2f.toList().size() <= 9) {
+			//	if(point2f.toList().size() >= 7 && point2f.toList().size() <= 9) {
 					newContours.add(contours.get(i));
-				}
+				//}
 			}
 		}
 		return newContours;
