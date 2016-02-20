@@ -17,12 +17,15 @@ public class ExternalPIDMotorModule extends PIDMotorModule {
 		encoder.setMinRate(10);
 		encoder.setDistancePerPulse(1);
 		encoder.setSamplesToAverage(10); // does this increase oscillation?
+		encoder.setPIDSourceType(getPIDSourceType());
 		encoder.reset();
 	}
 	
 	public void setPIDSourceType(PIDSourceType type) {
 		super.setPIDSourceType(type);
-		encoder.setPIDSourceType(type);
+		if(encoder != null) {
+			encoder.setPIDSourceType(type);
+		}
 	}
 
 	public void resetEncoder() {

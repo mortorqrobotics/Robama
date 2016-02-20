@@ -45,8 +45,8 @@ public abstract class PIDMotorModule extends MotorModule implements PIDSource, P
 	
 	public void pidWrite(double value) {
 		lastSpeed += value;
-    	super.setSpeed(lastSpeed);
-    }
+		super.setSpeed(lastSpeed);
+	}
 	
 	public void setPIDSourceType(PIDSourceType type) {
 		this.pidSourceType = type;
