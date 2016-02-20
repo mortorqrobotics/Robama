@@ -9,13 +9,13 @@ public class TimedPurge extends Command {
 
 	public TimedPurge() {
 		requires(Robot.intake);
-		requires(Robot.shooter);
+		requires(Robot.bottomShooter);
 	}
 	
 	@Override
 	protected void initialize() {
 		Robot.intake.reverse();		
-		Robot.shooter.setBottom(-1);
+		Robot.bottomShooter.setSpeed(-1);
 		setTimeout(Config.getDouble("purgeTime") / 1000.0);
 	}
 
@@ -32,7 +32,7 @@ public class TimedPurge extends Command {
 	@Override
 	protected void end() {
 		Robot.intake.stop();
-		Robot.shooter.stop();
+		Robot.bottomShooter.stop();
 	}
 
 	@Override

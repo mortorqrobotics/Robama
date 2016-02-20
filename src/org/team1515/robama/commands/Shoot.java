@@ -9,14 +9,16 @@ public class Shoot extends Command {
 	private double speed;
 
 	public Shoot(double speed) {
-		requires(Robot.shooter);
+		requires(Robot.topShooter);
+		requires(Robot.bottomShooter);
 		requires(Robot.intake);
 		this.speed = speed;
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.shooter.shoot(speed);
+		Robot.topShooter.setSpeed(speed);
+		Robot.bottomShooter.setSpeed(speed);
 		Robot.intake.intake();		
 	}
 
@@ -32,7 +34,8 @@ public class Shoot extends Command {
 
 	@Override
 	protected void end() {
-		Robot.shooter.stop();
+		Robot.topShooter.stop();
+		Robot.bottomShooter.stop();
 		Robot.intake.stop();
 	}
 

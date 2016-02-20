@@ -3,9 +3,10 @@ package org.team1515.robama;
 
 import org.team1515.robama.commands.PrepShooter;
 import org.team1515.robama.commands.Shoot;
+import org.team1515.robama.subsystems.BottomShooter;
 import org.team1515.robama.subsystems.BoulderRamp;
 import org.team1515.robama.subsystems.Intake;
-import org.team1515.robama.subsystems.Shooter;
+import org.team1515.robama.subsystems.TopShooter;
 import org.team1515.robama.subsystems.Wedge;
 import org.team1515.robama.subsystems.driveTrain.DecentDrive;
 import org.team1515.robama.subsystems.driveTrain.WestCoastDrive;
@@ -27,7 +28,8 @@ public class Robot extends IterativeRobot {
 	public static final Joystick stick2 = new Joystick(RobotMap.JOYSTICK_AUX);
 	
 	public static final WestCoastDrive driveTrain = new DecentDrive(stick1);
-	public static final Shooter shooter = new Shooter();
+	public static final TopShooter topShooter = new TopShooter();
+	public static final BottomShooter bottomShooter = new BottomShooter();
 	public static final Intake intake = new Intake();
 	public static final BoulderRamp ramp = new BoulderRamp();
 	public static final Wedge wedge = new Wedge();

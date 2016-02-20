@@ -8,13 +8,13 @@ public class PurgeIntake extends Command {
 
 	public PurgeIntake() {
 		requires(Robot.intake);
-		requires(Robot.shooter);
+		requires(Robot.bottomShooter);
 	}
 	
 	@Override
 	protected void initialize() {
 		Robot.intake.reverse();		
-		Robot.shooter.setBottom(-1);
+		Robot.bottomShooter.setSpeed(-1);
 	}
 
 	@Override
@@ -24,13 +24,13 @@ public class PurgeIntake extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return isTimedOut();
 	}
 
 	@Override
 	protected void end() {
 		Robot.intake.stop();
-		Robot.shooter.stop();
+		Robot.bottomShooter.stop();
 	}
 
 	@Override

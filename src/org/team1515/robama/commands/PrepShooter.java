@@ -10,12 +10,12 @@ public class PrepShooter extends Command {
 	
 	public PrepShooter(double speed) {
 		this.speed = speed;
-		requires(Robot.shooter);
+		requires(Robot.topShooter);
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.shooter.setTop(speed);
+		Robot.topShooter.setSpeed(speed);
 	}
 
 	@Override
@@ -30,12 +30,12 @@ public class PrepShooter extends Command {
 
 	@Override
 	protected void end() {
-		Robot.shooter.stopTop();
+		Robot.topShooter.stop();
 	}
 
 	@Override
 	protected void interrupted() {
-		end();		
+//		end();		
 	}
 
 }
