@@ -16,12 +16,7 @@ public class MotorModule {
     }
     
     public void setSpeed(double speed){
-        if(speed > 1.0){
-            speed = 1.0;
-        }
-        if(speed < -1.0){
-            speed = -1.0;
-        }
+		speed = Math.max(-1, Math.min(1, speed));
         for(CANTalon talon : talons) {
            	talon.set(speed);
         }

@@ -3,10 +3,12 @@ package org.team1515.robama.subsystems.driveTrain;
 import org.team1515.robama.Config;
 import org.team1515.robama.RobotMap;
 import org.team1515.robama.commands.JoystickDrive;
+import org.team1515.robama.subsystems.ExternalPIDMotorModule;
 import org.team1515.robama.subsystems.MotorModule;
 import org.team1515.robama.subsystems.PIDMotorModule;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class WestCoastDrive extends Subsystem {
@@ -19,8 +21,8 @@ public abstract class WestCoastDrive extends Subsystem {
 
 	
 	public WestCoastDrive(Joystick joystick) {
-		leftMotors = new PIDMotorModule(RobotMap.LEFT_DRIVE_MOTORS, RobotMap.LEFT_DRIVE_ENCODER);
-		rightMotors = new PIDMotorModule(RobotMap.RIGHT_DRIVE_MOTORS, RobotMap.RIGHT_DRIVE_ENCODER);
+		leftMotors = new ExternalPIDMotorModule(RobotMap.LEFT_DRIVE_MOTORS, RobotMap.LEFT_DRIVE_ENCODER, 550, PIDSourceType.kRate, 0, 0, 0);
+		rightMotors = new ExternalPIDMotorModule(RobotMap.RIGHT_DRIVE_MOTORS, RobotMap.RIGHT_DRIVE_ENCODER, 550, PIDSourceType.kRate, 0, 0, 0);
 		
 		isReversed = false; // switch to reverse motors
 		
@@ -108,11 +110,11 @@ public abstract class WestCoastDrive extends Subsystem {
 	}
 	
 	public double getLeftEncoder() {
-		return leftMotors.getEncoderRate();
+		return leftMotors.pidGet();
 	}
 	
 	public double getRightEncoder() {
-		return rightMotors.getEncoderRate();
+		return rightMotors.pidGet();
 	}
 	
 	protected void initDefaultCommand() {

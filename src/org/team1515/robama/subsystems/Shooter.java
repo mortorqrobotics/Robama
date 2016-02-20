@@ -2,6 +2,7 @@ package org.team1515.robama.subsystems;
 
 import org.team1515.robama.RobotMap;
 
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
@@ -10,8 +11,8 @@ public class Shooter extends Subsystem {
 	private PIDMotorModule bottomMotor;
 		
 	public Shooter() {
-		topMotor = new PIDMotorModule(RobotMap.TOP_SHOOTER_MOTORS, RobotMap.TOP_SHOOTER_ENCODER);
-		bottomMotor = new PIDMotorModule(RobotMap.BOTTOM_SHOOTER_MOTORS, RobotMap.BOTTOM_SHOOTER_ENCODER);
+		topMotor = new InternalPIDMotorModule(RobotMap.TOP_SHOOTER_MOTOR, 36000, PIDSourceType.kRate, 0, 0, 0);
+		bottomMotor = new InternalPIDMotorModule(RobotMap.BOTTOM_SHOOTER_MOTOR, 36000, PIDSourceType.kRate, 0, 0, 0);
 	}
 
 	public void setSpeed(double speed) {
