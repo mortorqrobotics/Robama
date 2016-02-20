@@ -3,26 +3,29 @@ package org.team1515.robama.subsystems.driveTrain;
 import org.team1515.robama.Config;
 import org.team1515.robama.RobotMap;
 import org.team1515.robama.commands.JoystickDrive;
-import org.team1515.robama.subsystems.ExternalPIDMotorModule;
 import org.team1515.robama.subsystems.MotorModule;
-import org.team1515.robama.subsystems.PIDMotorModule;
+import org.team1515.robama.subsystems.pid.ExternalEncoder;
+import org.team1515.robama.subsystems.pid.RatePID;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class WestCoastDrive extends Subsystem {
 	
-	protected PIDMotorModule leftMotors;
-	protected PIDMotorModule rightMotors;
+	protected MotorModule leftMotors;
+	private RatePID leftRatePID;
+	protected MotorModule rightMotors;
+	private RatePID rightRatePID;
 	protected Joystick joystick;
 	
 	protected boolean isReversed;
 
 	
 	public WestCoastDrive(Joystick joystick) {
-		leftMotors = new ExternalPIDMotorModule(RobotMap.LEFT_DRIVE_MOTORS, RobotMap.LEFT_DRIVE_ENCODER, 550, PIDSourceType.kRate, 0, 0, 0);
-		rightMotors = new ExternalPIDMotorModule(RobotMap.RIGHT_DRIVE_MOTORS, RobotMap.RIGHT_DRIVE_ENCODER, 550, PIDSourceType.kRate, 0, 0, 0);
+		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_MOTORS);
+		leftRatePID = new RatePID(leftMotors, new ExternalEncoder(RobotMap.LEFT_DRIVE_ENCODER), 0, 0, 0, 550);
+		rightMotors = new MotorModule(RobotMap.RIGHT_DRIVE_MOTORS);
+		rightRatePID = new RatePID(rightMotors, new ExternalEncoder(RobotMap.RIGHT_DRIVE_ENCODER), 0, 0, 0, 550);
 		
 		isReversed = false; // switch to reverse motors
 		
@@ -41,8 +44,10 @@ public abstract class WestCoastDrive extends Subsystem {
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
 		double factor = isReversed ? -1 : 1;
-		leftMotors.setSpeed(leftSpeed * factor);
-		rightMotors.setSpeed(-rightSpeed * factor);
+//		leftMotors.setSpeed(leftSpeed * factor);
+//		rightMotors.setSpeed(-rightSpeed * factor);
+		leftRatePID.setSetpoint(leftSpeed * factor);
+		rightRatePID.setSetpoint(-rightSpeed * factor);
 	}
 	
 	private boolean setSpeed(int ticks, double leftSpeed, double rightSpeed) {
@@ -105,16 +110,8 @@ public abstract class WestCoastDrive extends Subsystem {
  	}
 	
 	public void resetEncoders() {
-		leftMotors.resetEncoder();
-		rightMotors.resetEncoder();
-	}
-	
-	public double getLeftEncoder() {
-		return leftMotors.pidGet();
-	}
-	
-	public double getRightEncoder() {
-		return rightMotors.pidGet();
+//		leftMotors.resetEncoder();
+//		rightMotors.resetEncoder();
 	}
 	
 	protected void initDefaultCommand() {

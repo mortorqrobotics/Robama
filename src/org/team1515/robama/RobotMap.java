@@ -53,8 +53,8 @@ public class RobotMap {
     public static final Pair RIGHT_DRIVE_ENCODER = new Pair<Integer>(2, 3);
 	
 	// Shooter
-	public static final int TOP_SHOOTER_MOTOR = 5;
-	public static final int BOTTOM_SHOOTER_MOTOR = 6;
+	public static final int[] TOP_SHOOTER_MOTORS = {5};
+	public static final int[] BOTTOM_SHOOTER_MOTORS = {6};
 
 	
 	// Intake

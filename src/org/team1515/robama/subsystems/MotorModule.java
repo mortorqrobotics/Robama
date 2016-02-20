@@ -1,8 +1,9 @@
 package org.team1515.robama.subsystems;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.PIDOutput;
 
-public class MotorModule {
+public class MotorModule implements PIDOutput {
 	
     protected CANTalon[] talons;
     
@@ -25,5 +26,13 @@ public class MotorModule {
     public void stop(){
         setSpeed(0.0);
     }
+    
+    public CANTalon getFirstTalon() {
+    	return talons[0];
+    }
+
+	public void pidWrite(double output) {
+		setSpeed(output);
+	}
 
 }
