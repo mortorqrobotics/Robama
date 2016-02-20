@@ -8,6 +8,7 @@ import org.team1515.robama.subsystems.BoulderRamp;
 import org.team1515.robama.subsystems.Intake;
 import org.team1515.robama.subsystems.TopShooter;
 import org.team1515.robama.subsystems.Wedge;
+import org.team1515.robama.subsystems.WedgeIntake;
 import org.team1515.robama.subsystems.driveTrain.DecentDrive;
 import org.team1515.robama.subsystems.driveTrain.WestCoastDrive;
 
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
 	public static final Intake intake = new Intake();
 	public static final BoulderRamp ramp = new BoulderRamp();
 	public static final Wedge wedge = new Wedge();
+	public static final WedgeIntake wedgeIntake = new WedgeIntake();
 	
 	Gyro gyro;
 

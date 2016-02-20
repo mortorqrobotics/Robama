@@ -65,4 +65,7 @@ public class RobotMap {
 	
 	// Wedge
 	public static final int[] WEDGE_MOTORS = {8};
+	
+	// Wedge Intake
+	public static final int[] WEDGE_INTAKE_MOTORS = {9};
 }

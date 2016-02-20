@@ -8,11 +8,13 @@ public class IntakeForward extends Command {
 	
 	public IntakeForward() {
 		requires(Robot.intake);
+		requires(Robot.wedgeIntake);
 	}
 
 	@Override
 	protected void initialize() {
 		Robot.intake.intake();
+		Robot.wedgeIntake.intake();
 	}
 
 	@Override
@@ -28,6 +30,7 @@ public class IntakeForward extends Command {
 	@Override
 	protected void end() {
 		Robot.intake.stop();
+		Robot.wedgeIntake.stop();
 	}
 
 	@Override
