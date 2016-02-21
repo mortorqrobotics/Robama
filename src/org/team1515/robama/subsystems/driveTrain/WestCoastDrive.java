@@ -23,9 +23,9 @@ public abstract class WestCoastDrive extends Subsystem {
 	
 	public WestCoastDrive(Joystick joystick) {
 		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_MOTORS);
-		leftRatePID = new RatePID(leftMotors, new ExternalEncoder(RobotMap.LEFT_DRIVE_ENCODER), 0, 0, 0, 550);
+		leftRatePID = new RatePID(leftMotors, new ExternalEncoder(RobotMap.LEFT_DRIVE_ENCODER), 0.0006, 0, 0, 550);
 		rightMotors = new MotorModule(RobotMap.RIGHT_DRIVE_MOTORS);
-		rightRatePID = new RatePID(rightMotors, new ExternalEncoder(RobotMap.RIGHT_DRIVE_ENCODER), 0, 0, 0, 550);
+		rightRatePID = new RatePID(rightMotors, new ExternalEncoder(RobotMap.RIGHT_DRIVE_ENCODER), 0.0006, 0, 0, 550);
 		
 		isReversed = false; // switch to reverse motors
 		

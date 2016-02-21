@@ -8,7 +8,7 @@ public class RatePID extends PID {
 	private double speedFactor;
 
 	public RatePID(PIDOutput pidOutput, PIDInput pidInput, double p, double i, double d, double speedFactor) {
-		super(new CumulativePIDOutput(pidOutput), pidInput, p, i, d);
+		super(pidOutput, pidInput, p, i, d);
 		
 		this.speedFactor = speedFactor;
 
@@ -24,13 +24,6 @@ public class RatePID extends PID {
 			enable();
 			super.setSetpoint(speed * speedFactor);
 		}
-	}
-	
-	public void disable() {
-		if(pidOutput instanceof CumulativePIDOutput) {
-			((CumulativePIDOutput) pidOutput).reset();
-		}
-		super.disable();
 	}
 
 }

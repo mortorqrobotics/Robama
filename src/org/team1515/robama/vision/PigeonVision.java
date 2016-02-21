@@ -47,9 +47,10 @@ public class PigeonVision {
 		Mat frame = Imgcodecs.imread("/goal.png");
 		
 		convertImage(frame, output);
-		Imgcodecs.imwrite("converted.png", output);
+//		Imgcodecs.imwrite("converted.png", output);
+		
 		cancelColorsTape(output, output);
-		Imgcodecs.imwrite("cancelcolors.png", output);
+//		Imgcodecs.imwrite("cancelcolors.png", output);
 		
 		List<MatOfPoint> contours = findContours(output);
 		contours = filterContours(contours);
