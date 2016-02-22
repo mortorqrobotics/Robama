@@ -13,17 +13,21 @@ public class TopShooter extends Subsystem {
 		
 	public TopShooter() {
 		motor = new MotorModule(RobotMap.TOP_SHOOTER_MOTORS);
-		ratePID = new RatePID(motor, new InternalEncoder(motor), 0.00001, 0, 0.0001, 36000);
+		ratePID = new RatePID(motor, new InternalEncoder(motor, true), 0.00001, 0, 0.00008, 25000);
 	}
 
 	public void setSpeed(double speed) {
-		ratePID.setSetpoint(speed);
+		ratePID.setSetpoint(-speed);
 //		motor.setSpeed(speed);
 	}
 	
 	public void stop() {
 		ratePID.disable();
 //		setSpeed(0);
+	}
+	
+	public double getEncoder() {
+		return ratePID.getInput();
 	}
 	
 	protected void initDefaultCommand() {

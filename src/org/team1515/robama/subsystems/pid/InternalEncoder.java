@@ -9,17 +9,24 @@ public class InternalEncoder implements PIDInput {
 	
 	CANTalon talon;
 	PIDSourceType pidSourceType;
+	boolean reversed;
+	
+	public InternalEncoder(MotorModule motors, boolean reversed) {
+		talon = motors.getFirstTalon();
+		this.reversed = reversed;
+	}
 	
 	public InternalEncoder(MotorModule motors) {
-		talon = motors.getFirstTalon();
+		this(motors, false);
 	}
 
 	public double pidGet() {
+		int reverseFactor = reversed ? -1 : 1;
 		if(pidSourceType.equals(PIDSourceType.kRate)) {
-			return talon.getEncVelocity();
+			return talon.getEncVelocity() * reverseFactor;
 		}
 		else {
-			return talon.getEncPosition();
+			return talon.getEncPosition() * reverseFactor;
 		}
 	}
 

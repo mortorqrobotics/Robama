@@ -17,7 +17,7 @@ public class Intake extends Subsystem {
 		intakeMotor.setSpeed(-SPEED);
 	}
 	
-	public void reverse() {
+	public void purge() {
 		intakeMotor.setSpeed(SPEED);
 	}
 	

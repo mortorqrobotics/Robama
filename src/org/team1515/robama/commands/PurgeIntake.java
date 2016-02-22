@@ -13,7 +13,7 @@ public class PurgeIntake extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.intake.reverse();		
+		Robot.intake.purge();		
 		Robot.bottomShooter.setSpeed(-1);
 	}
 

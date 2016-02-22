@@ -23,4 +23,8 @@ public abstract class PID extends PIDController implements PIDOutput {
 		setSetpoint(output);
 	}
 	
+	public double getInput() {
+		return pidInput.pidGet();
+	}
+	
 }

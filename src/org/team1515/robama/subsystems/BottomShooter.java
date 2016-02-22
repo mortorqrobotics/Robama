@@ -13,7 +13,7 @@ public class BottomShooter extends Subsystem {
 		
 	public BottomShooter() {
 		motor = new MotorModule(RobotMap.BOTTOM_SHOOTER_MOTORS);
-		ratePID = new RatePID(motor, new InternalEncoder(motor), 0.000003, 0, 0.00001, 36000);
+		ratePID = new RatePID(motor, new InternalEncoder(motor), 0.000003, 0, 0.00001, 25000);
 	}
 
 	public void setSpeed(double speed) {
@@ -24,6 +24,14 @@ public class BottomShooter extends Subsystem {
 	public void stop() {
 		ratePID.disable();
 //		setSpeed(0);
+	}
+	
+	public void setMotor(double speed) {
+		motor.setSpeed(speed);
+	}
+	
+	public double getEncoder() {
+		return ratePID.getInput();
 	}
 	
 	protected void initDefaultCommand() {
