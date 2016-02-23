@@ -9,12 +9,14 @@ public class PurgeIntake extends Command {
 	public PurgeIntake() {
 		requires(Robot.intake);
 		requires(Robot.bottomShooter);
+		requires(Robot.wedgeIntake);
 	}
 	
 	@Override
 	protected void initialize() {
 		Robot.intake.purge();		
-		Robot.bottomShooter.setSpeed(-1);
+		Robot.bottomShooter.setMotor(-1);
+		Robot.wedgeIntake.intake(0.2);
 	}
 
 	@Override
@@ -30,7 +32,8 @@ public class PurgeIntake extends Command {
 	@Override
 	protected void end() {
 		Robot.intake.stop();
-		Robot.bottomShooter.stop();
+		Robot.bottomShooter.setMotor(0);
+		Robot.wedgeIntake.stop();
 	}
 
 	@Override

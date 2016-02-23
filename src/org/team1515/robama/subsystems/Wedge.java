@@ -11,7 +11,8 @@ public class Wedge extends Subsystem {
 	DigitalInput highLimitSwitch; // false when down
 	DigitalInput lowLimitSwitch; // true when up
 	
-	final double SPEED = 1;
+	final double SPEED_UP = 1;
+	final double SPEED_DOWN = 1;
 	
 	public Wedge() {
 		motor = new MotorModule(RobotMap.WEDGE_MOTORS);
@@ -19,16 +20,18 @@ public class Wedge extends Subsystem {
 		lowLimitSwitch = new DigitalInput(RobotMap.WEDGE_LOW_LIMIT_SWITCH);
 	}
 	
+	// i think up and down are switched
+	
 	public void moveDown() {
 //		if(!lowLimitSwitch.get()) {
-			motor.setSpeed(-SPEED);System.out.println(lowLimitSwitch.get());
+			motor.setSpeed(-SPEED_DOWN);
 //		}
 	}
 	
 	public void moveUp() {
-		if(highLimitSwitch.get()) {
-			motor.setSpeed(SPEED);
-		}
+//		if(highLimitSwitch.get()) {
+			motor.setSpeed(SPEED_UP);
+//		}
 	}
 	
 	public void stop() {

@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class TimedPurge extends Command {
 
 	public TimedPurge() {
-//		requires(Robot.intake);
+		requires(Robot.intake);
 		requires(Robot.bottomShooter);
 	}
 	
 	@Override
 	protected void initialize() {
-//		Robot.intake.purge();		
+		Robot.intake.purge();		
 		Robot.bottomShooter.setMotor(-1);
 		setTimeout(Config.getDouble("purgeTime") / 1000.0);
 	}
@@ -31,7 +31,7 @@ public class TimedPurge extends Command {
 
 	@Override
 	protected void end() {
-//		Robot.intake.stop();
+		Robot.intake.stop();
 		Robot.bottomShooter.stop();
 	}
 

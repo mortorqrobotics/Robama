@@ -13,11 +13,15 @@ public class WedgeIntake extends Subsystem {
 	}
 	
 	public void intake() {
-		motor.setSpeed(1);
+		intake(1);
 	}
 	
 	public void stop() {
 		motor.stop();
+	}
+	
+	public void intake(double speed) {
+		motor.setSpeed(speed);
 	}
 
 	protected void initDefaultCommand() {

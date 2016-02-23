@@ -114,6 +114,13 @@ public class Robot extends IterativeRobot {
 //        	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 0);
 //        	stick2.setRumble(Joystick.RumbleType.kRightRumble, 0);
         }
+        
+        SmartDashboard.putString("encoders", String.format("L:%d\tR:%d\tT:%d\tB:%d",
+       		(int) driveTrain.getLeftEncoder(),
+       		(int) driveTrain.getRightEncoder(),
+        	(int) topShooter.getEncoder(),
+        	(int) bottomShooter.getEncoder()
+        ));
     }
 
     public void testPeriodic() {

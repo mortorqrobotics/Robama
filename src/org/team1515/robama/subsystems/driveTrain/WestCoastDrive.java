@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public abstract class WestCoastDrive extends Subsystem {
 	
 	protected MotorModule leftMotors;
-	private RatePID leftRatePID;
+	private ExternalEncoder leftEncoder;
+//	private RatePID leftRatePID;
 	protected MotorModule rightMotors;
-	private RatePID rightRatePID;
+	private ExternalEncoder rightEncoder;
+//	private RatePID rightRatePID;
 	protected Joystick joystick;
 	
 	protected boolean isReversed;
@@ -23,9 +25,11 @@ public abstract class WestCoastDrive extends Subsystem {
 	
 	public WestCoastDrive(Joystick joystick) {
 		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_MOTORS);
-		leftRatePID = new RatePID(leftMotors, new ExternalEncoder(RobotMap.LEFT_DRIVE_ENCODER), 0.0006, 0, 0, 550);
+		leftEncoder = new ExternalEncoder(RobotMap.LEFT_DRIVE_ENCODER);
+//		leftRatePID = new RatePID(leftMotors, leftEncoder, 0.0006, 0, 0, 550);
 		rightMotors = new MotorModule(RobotMap.RIGHT_DRIVE_MOTORS);
-		rightRatePID = new RatePID(rightMotors, new ExternalEncoder(RobotMap.RIGHT_DRIVE_ENCODER), 0.0006, 0, 0, 550);
+		rightEncoder = new ExternalEncoder(RobotMap.RIGHT_DRIVE_ENCODER);
+//		rightRatePID = new RatePID(rightMotors, rightEncoder, 0.0006, 0, 0, 550);
 		
 		isReversed = false; // switch to reverse motors
 		
@@ -44,10 +48,10 @@ public abstract class WestCoastDrive extends Subsystem {
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
 		double factor = isReversed ? -1 : 1;
-//		leftMotors.setSpeed(leftSpeed * factor);
-//		rightMotors.setSpeed(-rightSpeed * factor);
-		leftRatePID.setSetpoint(leftSpeed * factor);
-		rightRatePID.setSetpoint(-rightSpeed * factor);
+		leftMotors.setSpeed(leftSpeed * factor);
+		rightMotors.setSpeed(-rightSpeed * factor);
+//		leftRatePID.setSetpoint(leftSpeed * factor);
+//		rightRatePID.setSetpoint(-rightSpeed * factor);
 	}
 	
 	private boolean setSpeed(int ticks, double leftSpeed, double rightSpeed) {
@@ -112,6 +116,14 @@ public abstract class WestCoastDrive extends Subsystem {
 	public void resetEncoders() {
 //		leftMotors.resetEncoder();
 //		rightMotors.resetEncoder();
+	}
+	
+	public double getLeftEncoder() {
+		return leftEncoder.pidGet();
+	}
+	
+	public double getRightEncoder() {
+		return rightEncoder.pidGet();
 	}
 	
 	protected void initDefaultCommand() {

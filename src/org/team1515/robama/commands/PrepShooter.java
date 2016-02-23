@@ -3,7 +3,6 @@ package org.team1515.robama.commands;
 import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PrepShooter extends Command {
 
@@ -18,12 +17,14 @@ public class PrepShooter extends Command {
 	@Override
 	protected void initialize() {
 		Robot.topShooter.setSpeed(speed);
-		Robot.bottomShooter.setSpeed(speed);
+		Robot.bottomShooter.setMotor(speed);
+//		Robot.bottomShooter.setSpeed(speed);
 	}
 
 	@Override
 	protected void execute() {
 //		SmartDashboard.putNumber("pidError", Robot.topShooter.getEncoder() + Math.random() / 1e9);
+		System.out.println(Robot.topShooter.getEncoder() + " " + Robot.bottomShooter.getEncoder());
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class PrepShooter extends Command {
 	protected void end() {
 		if(!isTimedOut()) {
 			Robot.topShooter.stop();
-			Robot.bottomShooter.stop();
+//			Robot.bottomShooter.stop();
 		}
 	}
 

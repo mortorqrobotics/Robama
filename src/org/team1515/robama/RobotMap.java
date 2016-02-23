@@ -27,18 +27,19 @@ public class RobotMap {
 	public static final int JOYSTICK_AUX = 1;
 	
 	// Auxiliary Buttons
-	public static final int BUTTON_WEDGE_DOWN = 1;
-	public static final int BUTTON_WEDGE_UP = 2;
-	public static final int BUTTON_RAMP_TOGGLE = 3;
-	public static final int BUTTON_AUTOSHOOT = 4;
-	public static final int BUTTON_INTAKE = 5;
-	public static final int BUTTON_PURGE = 6;
-	public static final int BUTTON_TIMED_PURGE = 7;
+	public static final int BUTTON_WEDGE_DOWN = 1; // A
+	public static final int BUTTON_WEDGE_UP = 2; // B
+	public static final int BUTTON_RAMP_TOGGLE = 3; // X
+	public static final int BUTTON_AUTOSHOOT = 4; // Y
+	public static final int BUTTON_INTAKE = 5; // LB
+	public static final int BUTTON_PURGE = 6; // RB
+	public static final int BUTTON_TIMED_PURGE = 7; // SELECT
+	
 	public static final int BUTTON_REVERSE_DRIVE = 12;
 	
 	// Auxiliary Axes
-	public static final int AXIS_PREP = 2;
-	public static final int AXIS_SHOOT = 3;
+	public static final int AXIS_PREP = 2; // LT
+	public static final int AXIS_SHOOT = 3; // RT
 	
 	// Drive Axes
 	public static final int TILT_AXIS = 0;
