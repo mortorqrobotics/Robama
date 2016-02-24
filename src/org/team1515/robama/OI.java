@@ -1,5 +1,6 @@
 package org.team1515.robama;
 
+import org.team1515.robama.commands.ActionCommand;
 import org.team1515.robama.commands.AutoShoot;
 import org.team1515.robama.commands.IntakeForward;
 import org.team1515.robama.commands.PrepShooter;
@@ -8,8 +9,8 @@ import org.team1515.robama.commands.ReverseDrive;
 import org.team1515.robama.commands.Shoot;
 import org.team1515.robama.commands.TimedPurge;
 import org.team1515.robama.commands.ToggleRamp;
-import org.team1515.robama.commands.WedgeUp;
 import org.team1515.robama.commands.WedgeDown;
+import org.team1515.robama.commands.WedgeUp;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -29,7 +30,8 @@ public class OI {
 		toggleShooter,
 		timedPurge,
 		wedgeDown,
-		wedgeUp;
+		wedgeUp,
+		prePrep;
 	
 	public OI() {		
 		
@@ -63,6 +65,11 @@ public class OI {
 		
 		wedgeUp = new JoystickButton(Robot.stick2, RobotMap.BUTTON_WEDGE_UP);
 		wedgeUp.whileHeld(new WedgeUp());
+		
+		prePrep = new JoystickButton(Robot.stick2, RobotMap.BUTTON_PRE_PREP);
+		prePrep.whenPressed(new ActionCommand(() -> {
+			Robot.topShooter.togglePrePrep();
+		}));
 	}
 }
 

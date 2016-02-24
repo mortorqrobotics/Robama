@@ -9,6 +9,7 @@ import org.team1515.robama.subsystems.pid.RatePID;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public abstract class WestCoastDrive extends Subsystem {
 	
@@ -47,9 +48,8 @@ public abstract class WestCoastDrive extends Subsystem {
 	}
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
-		double factor = isReversed ? -1 : 1;
-		leftMotors.setSpeed(leftSpeed * factor);
-		rightMotors.setSpeed(-rightSpeed * factor);
+		leftMotors.setSpeed(leftSpeed);
+		rightMotors.setSpeed(-rightSpeed);
 //		leftRatePID.setSetpoint(leftSpeed * factor);
 //		rightRatePID.setSetpoint(-rightSpeed * factor);
 	}
@@ -88,8 +88,10 @@ public abstract class WestCoastDrive extends Subsystem {
 	protected abstract JoystickValues getJoystickXY();
 
 	public void setXY(double xValue, double yValue) {
+		double reverseFactor = isReversed ? -1 : 1;
+		yValue *= reverseFactor;
 		double x = Math.abs(xValue);
-		double y = Math.abs(yValue);
+		double y = Math.abs(yValue) * reverseFactor;
 		double a = Config.getDouble("rotationSide");
 		double b = Config.getDouble("rotationCorner");
     	double left = a * x + y * (1 - a * x);
@@ -105,11 +107,12 @@ public abstract class WestCoastDrive extends Subsystem {
     		right = temp;
     	}
     	setSpeed(left, right);
+    	SmartDashboard.putNumber("leftDriveSpeed", left);
+    	SmartDashboard.putNumber("rightDriveSpeed", right);
 	}
 	
 	public void joystickDrive() {
 		JoystickValues values = getJoystickXY();
-		Config.setDouble("throttle", values.getThrottle());
 		setXY(values.getX() * values.getThrottle(), values.getY() * values.getThrottle());
  	}
 	

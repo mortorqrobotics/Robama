@@ -34,6 +34,7 @@ public class RobotMap {
 	public static final int BUTTON_INTAKE = 5; // LB
 	public static final int BUTTON_PURGE = 6; // RB
 	public static final int BUTTON_TIMED_PURGE = 7; // SELECT
+	public static final int BUTTON_PRE_PREP = 8;
 	
 	public static final int BUTTON_REVERSE_DRIVE = 12;
 	
@@ -57,7 +58,6 @@ public class RobotMap {
 	public static final int[] TOP_SHOOTER_MOTORS = {5};
 	public static final int[] BOTTOM_SHOOTER_MOTORS = {6};
 
-	
 	// Intake
 	public static final int[] INTAKE_MOTORS = {7};
 	

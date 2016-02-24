@@ -61,7 +61,10 @@ public class Robot extends IterativeRobot {
 		
 		Config.init();
 
-		// add command to change shooting speed
+        SmartDashboard.putNumber("topPIDFactor", 30000);
+        SmartDashboard.putData("updateTopPIDFactor", new ActionCommand(() -> {
+        	topShooter.setPIDFactor(SmartDashboard.getNumber("topPIDFactor", 30000));
+        }));
     }
 	
 	public void disabledPeriodic() {
@@ -86,11 +89,6 @@ public class Robot extends IterativeRobot {
         driveTrain.resetEncoders();
         
         ramp.setTilted(SmartDashboard.getBoolean("isTilted", false));
-
-        SmartDashboard.putNumber("topPIDFactor", 30000);
-        SmartDashboard.putData("updateTopPIDFactor", new ActionCommand(() -> {
-        	topShooter.setPIDFactor(SmartDashboard.getNumber("topPIDFactor", 30000));
-        }));
     }
 
     public void disabledInit(){
