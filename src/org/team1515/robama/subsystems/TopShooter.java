@@ -30,6 +30,10 @@ public class TopShooter extends Subsystem {
 		return ratePID.getInput();
 	}
 	
+	public void setPIDFactor(double factor) {
+		ratePID.setFactor(factor);
+	}
+	
 	protected void initDefaultCommand() {
 		
 	}

@@ -17,8 +17,12 @@ public class Intake extends Subsystem {
 		intakeMotor.setSpeed(-SPEED);
 	}
 	
+	public void purge(double speed) {
+		intakeMotor.setSpeed(speed);
+	}
+	
 	public void purge() {
-		intakeMotor.setSpeed(SPEED);
+		purge(SPEED);
 	}
 	
 	public void stop() {

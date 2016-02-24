@@ -86,9 +86,11 @@ public class Robot extends IterativeRobot {
         driveTrain.resetEncoders();
         
         ramp.setTilted(SmartDashboard.getBoolean("isTilted", false));
-        
-        new Shoot(1);
-        new PrepShooter(1);
+
+        SmartDashboard.putNumber("topPIDFactor", 30000);
+        SmartDashboard.putData("updateTopPIDFactor", new ActionCommand(() -> {
+        	topShooter.setPIDFactor(SmartDashboard.getNumber("topPIDFactor", 30000));
+        }));
     }
 
     public void disabledInit(){

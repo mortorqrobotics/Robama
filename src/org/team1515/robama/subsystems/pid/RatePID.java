@@ -25,5 +25,9 @@ public class RatePID extends PID {
 			super.setSetpoint(speed * speedFactor);
 		}
 	}
+	
+	public void setFactor(double factor) {
+		this.speedFactor = factor;
+	}
 
 }

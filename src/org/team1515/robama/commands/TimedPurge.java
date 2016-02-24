@@ -3,6 +3,7 @@ package org.team1515.robama.commands;
 import org.team1515.robama.Config;
 import org.team1515.robama.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TimedPurge extends Command {
@@ -14,8 +15,9 @@ public class TimedPurge extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.intake.purge();		
-		Robot.bottomShooter.setMotor(-1);
+		double power = 8 / DriverStation.getInstance().getBatteryVoltage();
+		Robot.intake.purge(power);		
+		Robot.bottomShooter.setMotor(-power);
 		setTimeout(Config.getDouble("purgeTime") / 1000.0);
 	}
 

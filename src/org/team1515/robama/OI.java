@@ -54,7 +54,7 @@ public class OI {
 		toggleShooter = new JoystickButton(Robot.stick2, RobotMap.BUTTON_RAMP_TOGGLE);
 		toggleShooter.whenPressed(new ToggleRamp());
 		
-		Config.setDefault("purgeTime", 60);		
+		Config.setDefault("purgeTime", 100);		
 		timedPurge = new JoystickButton(Robot.stick2, RobotMap.BUTTON_TIMED_PURGE);
 		timedPurge.whenPressed(new TimedPurge());
 
