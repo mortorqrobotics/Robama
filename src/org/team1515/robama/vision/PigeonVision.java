@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.opencv.core.Core;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.MatOfPoint2f;
@@ -24,26 +23,32 @@ public class PigeonVision {
 	final static double IMG_WIDTH = 640; // pixels of image resolution
 	
 	VideoCapture camera;
+	Mat image;
 	
 	public PigeonVision() {
 		System.load("/usr/local/lib/libopencv_java310.so");
 	    System.out.println("Welcome to OpenCV " + Core.VERSION);
 	    camera = new VideoCapture();
 	    camera.open(0);
-	    Mat m = new Mat(5, 10, CvType.CV_8UC1, new Scalar(0));
-	    System.out.println("OpenCV Mat: " + m);
-	    Mat mr1 = m.row(1);
-	    mr1.setTo(new Scalar(1));
-	    Mat mc5 = m.col(5);
-	    mc5.setTo(new Scalar(5));
-	    System.out.println("OpenCV Mat data:\n" + m.dump());
+	}
+	
+	private Mat getImg() {
+		Mat frame = new Mat();
+		camera.read(frame);
+		return frame;
+	}
+	
+	public Mat getDriverStationImg() {
+		Mat resized = new Mat();
+		Imgproc.resize(getImg(), resized, new Size(IMG_WIDTH/2, IMG_HEIGHT/2));
+		Imgproc.cvtColor(resized, resized, Imgproc.COLOR_BGR2GRAY);
+		return resized;
 	}
 	
 	public void findGoal() {
 		long time = System.currentTimeMillis();
-//		Mat frame = new Mat();
+//		Mat frame = getImg();
 		Mat output = new Mat();
-//		camera.read(frame);
 		Mat frame = Imgcodecs.imread("/goal.png");
 		
 		convertImage(frame, output);
@@ -82,7 +87,7 @@ public class PigeonVision {
 		System.out.println(System.currentTimeMillis() - time);
 	}
     
-	public static void convertImage(Mat input, Mat output) {
+	private static void convertImage(Mat input, Mat output) {
 		Imgproc.blur(input, output, new Size(5,5));
 		Imgproc.cvtColor(output, output, Imgproc.COLOR_BGR2HSV);
 		
@@ -96,17 +101,17 @@ public class PigeonVision {
 	}
 
 	// scalar params: H(0-180), S(0-255), V(0-255)
-	public static void cancelColorsTape(Mat input, Mat output) {
+	private static void cancelColorsTape(Mat input, Mat output) {
 		Core.inRange(input, new Scalar(25, 0, 220), new Scalar(130, 80, 255), output);
 	}
 	
-	public static List<MatOfPoint> findContours(Mat image) {
+	private static List<MatOfPoint> findContours(Mat image) {
 		List<MatOfPoint> contours = new ArrayList<>();
 		Imgproc.findContours(image, contours, new Mat(), Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
 		return contours;
 	}
 	
-	public static List<MatOfPoint> filterContours(List<MatOfPoint> contours) {
+	private static List<MatOfPoint> filterContours(List<MatOfPoint> contours) {
 		List<MatOfPoint> newContours = new ArrayList<MatOfPoint>();
 		for(int i = 0; i < contours.size(); i++) {
 			Rect rect = Imgproc.boundingRect(contours.get(i));
@@ -122,7 +127,7 @@ public class PigeonVision {
 		return newContours;
 	}
 	
-	public static MatOfPoint findGoalContour(List<MatOfPoint> contours) {
+	private static MatOfPoint findGoalContour(List<MatOfPoint> contours) {
 		List<Rect> rects = new ArrayList<Rect>();
 		rects.add(Imgproc.boundingRect(contours.get(0)));
 		int lrgstRectIndx = 0;
@@ -137,7 +142,7 @@ public class PigeonVision {
 	}
 	
 	//find approximate point vertices of contoured goal tape
-	public static MatOfPoint2f approxPoly(MatOfPoint contour) {
+	private static MatOfPoint2f approxPoly(MatOfPoint contour) {
 		MatOfPoint2f point2f = new MatOfPoint2f();
 		List<Point> points = contour.toList();
 		point2f.fromList(points);
@@ -146,7 +151,7 @@ public class PigeonVision {
 	} 
 	
 	//finds bottom vertices of goal tape
-	public static Point[] findBottomY(Point[] points) {
+	private static Point[] findBottomY(Point[] points) {
 		Point highestY = points[0];
 		Point secondHighestY = points[1];
 		for(int i = 2; i < points.length; i++) {
@@ -161,7 +166,7 @@ public class PigeonVision {
 		return highestYCoords;
 	}
 	
-	public static Point[] findTopY(Point[] points) {
+	private static Point[] findTopY(Point[] points) {
 		Point lowestY = points[0];
 		Point secondLowestY = points[1];
 		for(int i = 2; i < points.length; i++) {
@@ -176,12 +181,12 @@ public class PigeonVision {
 		return lowestYCoords;
 	}
 	
-	public static double pointDist(Point[] points) {
+	private static double pointDist(Point[] points) {
 		double dist = Math.sqrt((points[0].x - points[1].x)*(points[0].x - points[1].x) + (points[0].y - points[1].y)*(points[0].y - points[1].y));
 		return dist;
 	}
 	
-	public static double findDistToGoal(double tapeWidth, double camAngle) {
+	private static double findDistToGoal(double tapeWidth, double camAngle) {
 		camAngle = Math.toRadians(camAngle);
 		double tapeHeight = tapeWidth * 0.7; //ratio from height to width is 14/20 (0.7)
 		double distance = (REAL_TAPE_HEIGHT * ((IMG_HEIGHT/2)/(tapeHeight))) / Math.tan(VERT_FOV/2.0); //Dylan's first dist formula
@@ -191,12 +196,12 @@ public class PigeonVision {
 	}
 	
 	// facing forward relative to closest goal
-	public static boolean isFacingForward(Point[] points) {
+	private static boolean isFacingForward(Point[] points) {
 		return Math.abs(points[0].y - points[1].y) < 5;
 	}
 	
 	//if true then robot turns right to face goal straight on
-	public static boolean isFacingLeft(Point[] points) {
+	private static boolean isFacingLeft(Point[] points) {
 		if(points[0].y > points[1].y) {
 			return points[0].x < points[1].x;
 		}
@@ -204,22 +209,22 @@ public class PigeonVision {
 	}
 	
 	//finds angle at which camera is facing the goal
-		public static double findLateralAngle(Point[] points) {
-			double angle = Math.toDegrees(Math.asin(Math.abs(points[0].y - points[1].y)/pointDist(points)));
-			return angle;
-		}
+	private static double findLateralAngle(Point[] points) {
+		double angle = Math.toDegrees(Math.asin(Math.abs(points[0].y - points[1].y)/pointDist(points)));
+		return angle;
+	}
 	
 	//midline of the closest goal
-	public static boolean isOnMidline(Rect rect) {
+	private static boolean isOnMidline(Rect rect) {
 		return Math.abs(IMG_WIDTH/2 - (rect.x + rect.width/2)) < 10;
 	}
 	
 	//if true then robot is on right of midline
-	public static boolean isOnRight(Rect rect) {
+	private static boolean isOnRight(Rect rect) {
 		return (rect.x + rect.width/2) < IMG_WIDTH/2;
 	}
 	
-	public static double distFromMidline(Point[] bottomY, Point[] topY, double dist) {
+	private static double distFromMidline(Point[] bottomY, Point[] topY, double dist) {
 		Point bottomLeft = bottomY[0];
 		if(bottomY[1].x < bottomY[0].x) {
 			bottomLeft = bottomY[1];
