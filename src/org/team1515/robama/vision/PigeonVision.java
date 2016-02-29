@@ -161,6 +161,7 @@ public class PigeonVision {
 		Point secondHighestY = points[1];
 		for(int i = 2; i < points.length; i++) {
 			if(points[i].y > highestY.y) {
+				secondHighestY = highestY;
 				highestY = points[i];
 			}
 			else if(points[i].y > secondHighestY.y) {
@@ -176,6 +177,7 @@ public class PigeonVision {
 		Point secondLowestY = points[1];
 		for(int i = 2; i < points.length; i++) {
 			if(points[i].y < lowestY.y) {
+				secondLowestY = lowestY;
 				lowestY = points[i];
 			}
 			else if(points[i].y < secondLowestY.y) {
