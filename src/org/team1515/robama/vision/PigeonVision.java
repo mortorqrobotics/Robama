@@ -50,7 +50,9 @@ public class PigeonVision {
 		Mat output = new Mat();
 		Mat frame = Imgcodecs.imread("/goal.png");
 		
-		convertImage(frame, output);
+		convert2HSV(frame, output);
+		reduceNoise(output);
+//		convertImage(frame, output);
 //		Imgcodecs.imwrite("converted.png", output);
 		
 		cancelColorsTape(output, output);
@@ -85,16 +87,19 @@ public class PigeonVision {
 		}
 		System.out.println(System.currentTimeMillis() - time);
 	}
-    
-	private void convertImage(Mat input, Mat output) {
+	
+    	private void convert2HSV(Mat input, Mat output) {
 		Imgproc.cvtColor(input, output, Imgproc.COLOR_BGR2HSV);
-		
-		Imgproc.erode(output, output, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5, 5)));
-		Imgproc.dilate(output, output, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5, 5)));
-		
-		Imgproc.blur(output, output, new Size(5,5));
 	}
-
+	
+	private void reduceNoise(Mat input) {
+		Mat element = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5, 5));
+		
+		Imgproc.erode(input, input, element);
+		Imgproc.dilate(input, input, element);
+		Imgproc.blur(input, input, new Size(5,5));
+	}
+	
 	// scalar params: H(0-180), S(0-255), V(0-255)
 	private void cancelColorsTape(Mat input, Mat output) {
 		Core.inRange(input, new Scalar(25, 0, 220), new Scalar(130, 80, 255), output);
