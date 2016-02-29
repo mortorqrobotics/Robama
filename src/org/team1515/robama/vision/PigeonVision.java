@@ -87,7 +87,7 @@ public class PigeonVision {
 	}
     
 	private void convertImage(Mat input, Mat output) {
-		Imgproc.cvtColor(output, output, Imgproc.COLOR_BGR2HSV);
+		Imgproc.cvtColor(input, output, Imgproc.COLOR_BGR2HSV);
 		
 		Imgproc.erode(output, output, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5, 5)));
 		Imgproc.dilate(output, output, Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5, 5)));
