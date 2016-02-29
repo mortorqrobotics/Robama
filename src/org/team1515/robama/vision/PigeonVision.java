@@ -26,9 +26,9 @@ public class PigeonVision {
 	
 	public PigeonVision() {
 		System.load("/usr/local/lib/libopencv_java310.so");
-	    System.out.println("Welcome to OpenCV " + Core.VERSION);
-	    camera = new VideoCapture();
-	    camera.open(0);
+		System.out.println("Welcome to OpenCV " + Core.VERSION);
+		camera = new VideoCapture();
+		camera.open(0);
 	}
 	
 	private Mat getImg() {
@@ -50,12 +50,12 @@ public class PigeonVision {
 		Mat output = new Mat();
 		Mat frame = Imgcodecs.imread("/goal.png");
 		
-		convert2HSV(frame, output);
+		BGR2HLS(frame, output);
 		reduceNoise(output);
-//		convertImage(frame, output);
+		
 //		Imgcodecs.imwrite("converted.png", output);
 		
-		cancelColorsTape(output, output);
+		tapeThreshold(output, output);
 //		Imgcodecs.imwrite("cancelcolors.png", output);
 		
 		List<MatOfPoint> contours = findContours(output);
@@ -88,8 +88,12 @@ public class PigeonVision {
 		System.out.println(System.currentTimeMillis() - time);
 	}
 	
-    	private void convert2HSV(Mat input, Mat output) {
+    	private void BGR2HSV(Mat input, Mat output) {
 		Imgproc.cvtColor(input, output, Imgproc.COLOR_BGR2HSV);
+	}
+	
+	private void BGR2HLS(Mat input, Mat output) {
+		Imgproc.cvtColor(input, output, Imgproc.COLOR_BGR2HLS);
 	}
 	
 	private void reduceNoise(Mat input) {
@@ -100,9 +104,11 @@ public class PigeonVision {
 		Imgproc.blur(input, input, new Size(5,5));
 	}
 	
-	// scalar params: H(0-180), S(0-255), V(0-255)
-	private void cancelColorsTape(Mat input, Mat output) {
-		Core.inRange(input, new Scalar(25, 0, 220), new Scalar(130, 80, 255), output);
+	// scalar params: H(0-180), L(0-255), S(0-255)
+	private void tapeTreshold(Mat input, Mat output) {
+		//For Hue, 40 - 75 is the green range
+		//For Luminance, 242 - 255 should be the range if a flashlight is flashing on the tape
+		Core.inRange(input, new Scalar(40, 242, 0), new Scalar(75, 255, 255), output);
 	}
 	
 	private List<MatOfPoint> findContours(Mat image) {
