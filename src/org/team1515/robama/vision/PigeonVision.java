@@ -47,18 +47,16 @@ public class PigeonVision {
 	public void findGoal() {
 		long time = System.currentTimeMillis();
 //		Mat frame = getImg();
-		Mat output = new Mat();
 		Mat frame = Imgcodecs.imread("/goal.png");
 		
-		BGR2HLS(frame, output);
-		reduceNoise(output);
+		BGR2HSV(frame);
+		reduceNoise(frame);
+//		Imgcodecs.imwrite("converted.png", frame);
 		
-//		Imgcodecs.imwrite("converted.png", output);
+		tapeHSVThreshold(frame);
+//		Imgcodecs.imwrite("cancelcolors.png", frame);
 		
-		tapeThreshold(output, output);
-//		Imgcodecs.imwrite("cancelcolors.png", output);
-		
-		List<MatOfPoint> contours = findContours(output);
+		List<MatOfPoint> contours = findContours(frame);
 		contours = filterContours(contours);
 		
 		if(contours.size() > 0) {
@@ -69,7 +67,7 @@ public class PigeonVision {
 			Point[] topY = findTopY(points2f.toArray());
 			
 			double distToGoal = findDistToGoal(goalRect.width, 31);
-			System.out.println(distToGoal);
+			System.out.println("dist: " + distToGoal);
 			
 			if(isFacingForward(bottomY)) {
 				System.out.println("facing forward");
@@ -88,12 +86,12 @@ public class PigeonVision {
 		System.out.println(System.currentTimeMillis() - time);
 	}
 	
-    	private void BGR2HSV(Mat input, Mat output) {
-		Imgproc.cvtColor(input, output, Imgproc.COLOR_BGR2HSV);
+	private void BGR2HSV(Mat input) {
+		Imgproc.cvtColor(input, input, Imgproc.COLOR_BGR2HSV);
 	}
 	
-	private void BGR2HLS(Mat input, Mat output) {
-		Imgproc.cvtColor(input, output, Imgproc.COLOR_BGR2HLS);
+	private void BGR2HLS(Mat input) {
+		Imgproc.cvtColor(input, input, Imgproc.COLOR_BGR2HLS);
 	}
 	
 	private void reduceNoise(Mat input) {
@@ -104,11 +102,16 @@ public class PigeonVision {
 		Imgproc.blur(input, input, new Size(5,5));
 	}
 	
+	// scalar params: H(0-180), S(0-255), V(0-255)
+	private void tapeHSVThreshold(Mat input) {
+		Core.inRange(input, new Scalar(60, 0, 240), new Scalar(95, 255, 255), input);
+	}
+	
 	// scalar params: H(0-180), L(0-255), S(0-255)
-	private void tapeTreshold(Mat input, Mat output) {
-		//For Hue, 40 - 75 is the green range
-		//For Luminance, 242 - 255 should be the range if a flashlight is flashing on the tape
-		Core.inRange(input, new Scalar(40, 242, 0), new Scalar(75, 255, 255), output);
+	private void tapeHLSThreshold(Mat input) {
+		//For Hue, 60 - 95 is the green range
+		//For Luminance, 140 - 255 should be the range if a flashlight is flashing on the tape
+		Core.inRange(input, new Scalar(60, 140, 170), new Scalar(95, 255, 255), input);
 	}
 	
 	private List<MatOfPoint> findContours(Mat image) {
