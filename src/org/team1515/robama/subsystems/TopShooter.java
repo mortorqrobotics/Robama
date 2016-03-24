@@ -6,8 +6,11 @@ import org.team1515.robama.subsystems.pid.InternalEncoder;
 import org.team1515.robama.subsystems.pid.RatePID;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TopShooter extends Subsystem {
+	
+	private State state;
 	
 	private MotorModule motor;
 	private RatePID ratePID;
@@ -17,6 +20,7 @@ public class TopShooter extends Subsystem {
 		motor = new MotorModule(RobotMap.TOP_SHOOTER_MOTORS);
 		ratePID = new RatePID(motor, new InternalEncoder(motor, true), 0.00001, 0, 0.00008, 30000);
 		prePrepping = false;
+		state = State.REST;
 		
 		Config.setDefault("prePrepSpeed", 0.25);
 	}
@@ -37,13 +41,18 @@ public class TopShooter extends Subsystem {
 	}
 	
 	public void togglePrePrep() {
+		if (state != State.REST && state != State.PREPREP) {
+			return;
+		}
 		prePrepping = !prePrepping;
-		if(prePrepping) {
+		if (prePrepping) {
 			setMotor(Config.getDouble("prePrepSpeed"));
-		}
-		else {
+			state = State.PREPREP;
+		} else {
 			setMotor(0);
+			state = State.REST;
 		}
+		SmartDashboard.putBoolean("prePrepping", prePrepping);
 	}
 
 	public void setMotor(double speed) {
@@ -60,6 +69,18 @@ public class TopShooter extends Subsystem {
 	
 	protected void initDefaultCommand() {
 		
+	}
+	
+	public static enum State {
+		REST, PREPREP, PREP, PREPPED;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+	
+	public State getState() {
+		return state;
 	}
 
 }

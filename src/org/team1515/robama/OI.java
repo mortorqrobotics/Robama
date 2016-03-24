@@ -45,7 +45,7 @@ public class OI {
 		autoShoot.whenPressed(new AutoShoot());
 		
 		prepShooter = new AxisButton(Robot.stick2, RobotMap.AXIS_PREP, 0.5, 0.5);
-		prepShooter.whileHeld(new PrepShooter(1));
+		prepShooter.whenPressed(new PrepShooter(1));
 		
 		intake = new JoystickButton(Robot.stick2, RobotMap.BUTTON_INTAKE);
 		intake.whileHeld(new IntakeForward());

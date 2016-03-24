@@ -1,9 +1,9 @@
 package org.team1515.robama.commands;
 
 import org.team1515.robama.Robot;
+import org.team1515.robama.subsystems.TopShooter;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PrepShooter extends Command {
 
@@ -13,19 +13,24 @@ public class PrepShooter extends Command {
 	public PrepShooter(double speed) {
 		this.speed = speed;
 		requires(Robot.topShooter);
-		requires(Robot.bottomShooter);
+		setTimeout(2);
+//		requires(Robot.bottomShooter);
 	}
 	
 	@Override
 	protected void initialize() {
 //		lastEncoder = 0;
 		Robot.topShooter.setSpeed(speed);
-		Robot.bottomShooter.setMotor(speed);
+		Robot.topShooter.setState(TopShooter.State.PREP);
+//		Robot.bottomShooter.setMotor(speed);
 //		Robot.bottomShooter.setSpeed(speed);
 	}
 
 	@Override
 	protected void execute() {
+		if(isTimedOut()) {
+			Robot.topShooter.setState(TopShooter.State.PREPPED);
+		}
 //		SmartDashboard.putNumber("pidError", Robot.topShooter.getEncoder() + Math.random() / 1e9);
 //		System.out.println(Robot.topShooter.getEncoder() + " " + Robot.bottomShooter.getEncoder());
 	}
@@ -38,15 +43,16 @@ public class PrepShooter extends Command {
 //			return true;
 //		}
 //		lastEncoder = encoder;
-		return isTimedOut();
+//		return isTimedOut();
+		return false;
 	}
 
 	@Override
 	protected void end() {
-		if(!isTimedOut()) {
-			Robot.topShooter.stop();
-//			Robot.bottomShooter.stop();
-		}
+//		if(!isTimedOut()) {
+//			Robot.topShooter.stop();
+////			Robot.bottomShooter.stop();
+//		}
 	}
 
 	@Override
