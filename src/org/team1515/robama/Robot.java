@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 	
 	PigeonVision vision;
 	
-	Gyro gyro;
+	public static final Gyro gyro = new ADXRS450_Gyro();
 
     Command autonomousCommand;
     
@@ -54,8 +54,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("vision", new ActionCommand(() -> {
 			vision.findGoal();
 		}));
-		
-		gyro = new ADXRS450_Gyro();
 		
 		SmartDashboard.putBoolean("rampTilted", false);
 		
