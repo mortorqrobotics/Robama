@@ -1,10 +1,9 @@
 package org.team1515.robama.commands;
 
 import org.team1515.robama.Robot;
-import org.team1515.robama.subsystems.TopShooter;
+import org.team1515.robama.subsystems.State;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Shoot extends Command {
 	
@@ -20,7 +19,7 @@ public class Shoot extends Command {
 	
 	@Override
 	protected void initialize() {
-		Robot.topShooter.setSpeed(speed);
+		Robot.topShooter.prep();
 		Robot.bottomShooter.setSpeed(speed);
 		Robot.bottomShooter.setMotor(speed);
 		Robot.wedgeIntake.intake();
@@ -43,7 +42,7 @@ public class Shoot extends Command {
 		Robot.bottomShooter.stop();
 		Robot.intake.stop();
 		Robot.wedgeIntake.stop();
-		Robot.topShooter.setState(TopShooter.State.REST);
+		Robot.topShooter.setState(State.REST);
 	}
 
 	@Override

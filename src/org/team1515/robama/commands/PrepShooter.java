@@ -1,36 +1,45 @@
 package org.team1515.robama.commands;
 
 import org.team1515.robama.Robot;
-import org.team1515.robama.subsystems.TopShooter;
+import org.team1515.robama.subsystems.State;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PrepShooter extends Command {
 
-	private double speed;
 //	private double lastEncoder;
+	double startTime;
+//	boolean finished;
 	
-	public PrepShooter(double speed) {
-		this.speed = speed;
+	public PrepShooter() {
 		requires(Robot.topShooter);
-		setTimeout(2);
 //		requires(Robot.bottomShooter);
 	}
 	
 	@Override
 	protected void initialize() {
+//		if(Robot.topShooter.getState().equals(TopShooter.State.PREP)
+//			|| Robot.topShooter.getState().equals(TopShooter.State.PREPPED)) {
+//			Robot.topShooter.stop();
+//			Robot.topShooter.setState(TopShooter.State.REST);
+//			finished = true;
+//			return;
+//		}
+//		finished = false;
+		startTime = System.currentTimeMillis();
 //		lastEncoder = 0;
-		Robot.topShooter.setSpeed(speed);
-		Robot.topShooter.setState(TopShooter.State.PREP);
+		Robot.topShooter.prep();
+		Robot.topShooter.setState(State.PREP);
+		Robot.topShooter.setPrepStart();
 //		Robot.bottomShooter.setMotor(speed);
 //		Robot.bottomShooter.setSpeed(speed);
 	}
 
 	@Override
 	protected void execute() {
-		if(isTimedOut()) {
-			Robot.topShooter.setState(TopShooter.State.PREPPED);
-		}
+//		if(System.currentTimeMillis() - startTime >= 2000) {
+//			Robot.topShooter.setState(State.PREPPED);
+//		}
 //		SmartDashboard.putNumber("pidError", Robot.topShooter.getEncoder() + Math.random() / 1e9);
 //		System.out.println(Robot.topShooter.getEncoder() + " " + Robot.bottomShooter.getEncoder());
 	}
@@ -44,7 +53,13 @@ public class PrepShooter extends Command {
 //		}
 //		lastEncoder = encoder;
 //		return isTimedOut();
-		return false;
+		
+//		if(Robot.topShooter.getState().equals(State.REST)) {
+//			Robot.topShooter.stop();
+//			return true;
+//		}
+//		return false;
+		return true;
 	}
 
 	@Override
@@ -57,7 +72,8 @@ public class PrepShooter extends Command {
 
 	@Override
 	protected void interrupted() {
-//		end();		
+		System.out.println("C");
+//		end();
 	}
 
 }

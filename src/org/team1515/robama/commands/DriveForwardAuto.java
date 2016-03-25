@@ -1,15 +1,20 @@
 package org.team1515.robama.commands;
 
 import org.team1515.robama.Robot;
-import org.team1515.robama.subsystems.State;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class WaitForPrep extends Command {
+public class DriveForwardAuto extends Command {
+	
+	private static final double SPEED = 0.4;
+	
+	public DriveForwardAuto() {
+		requires(Robot.driveTrain);
+		setTimeout(5);
+	}
 
-	@Override
 	protected void initialize() {
-		
+		Robot.driveTrain.setSpeed(SPEED, SPEED);
 	}
 
 	@Override
@@ -19,13 +24,12 @@ public class WaitForPrep extends Command {
 
 	@Override
 	protected boolean isFinished() {
-//		return Robot.topShooter.getState().equals(State.PREPPED);
-		return System.currentTimeMillis() - Robot.topShooter.getPrepStart() >= 2000;
+		return isTimedOut();
 	}
 
 	@Override
 	protected void end() {
-		
+		Robot.driveTrain.stop();
 	}
 
 	@Override

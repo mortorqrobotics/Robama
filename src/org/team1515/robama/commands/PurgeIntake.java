@@ -17,7 +17,7 @@ public class PurgeIntake extends Command {
 	protected void initialize() {
 		Robot.intake.purge();		
 		Robot.bottomShooter.setMotor(-1);
-		Robot.wedgeIntake.intake(0.2);
+		Robot.wedgeIntake.intake(-1);
 	}
 
 	@Override

@@ -30,13 +30,15 @@ public class RobotMap {
 	public static final int BUTTON_WEDGE_DOWN = 1; // A
 	public static final int BUTTON_WEDGE_UP = 2; // B
 	public static final int BUTTON_RAMP_TOGGLE = 3; // X
-	public static final int BUTTON_AUTOSHOOT = 4; // Y
+	public static final int BUTTON_PREPREP = 4; // Y
 	public static final int BUTTON_INTAKE = 5; // LB
 	public static final int BUTTON_PURGE = 6; // RB
-	public static final int BUTTON_TIMED_PURGE = 7; // SELECT
-	public static final int BUTTON_PRE_PREP = 8;
-	
-	public static final int BUTTON_REVERSE_DRIVE = 12;
+//	public static final int BUTTON_TIMED_PURGE = 7; // SELECT
+//	public static final int BUTTON_PRE_PREP = 8;
+
+	public static final int BUTTON_ALIGN = 2;
+	public static final int BUTTON_REVERSE_DRIVE = 14;
+	public static final int BUTTON_CENTER = 10;
 	
 	// Auxiliary Axes
 	public static final int AXIS_PREP = 2; // LT

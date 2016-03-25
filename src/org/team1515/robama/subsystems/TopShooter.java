@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TopShooter extends Subsystem {
 	
-	private State state;
+	private volatile State state;
+	private long prepStart;
 	
 	private MotorModule motor;
 	private RatePID ratePID;
@@ -23,6 +24,7 @@ public class TopShooter extends Subsystem {
 		state = State.REST;
 		
 		Config.setDefault("prePrepSpeed", 0.25);
+		Config.setDefault("shootPower", 26);
 	}
 
 	public void setSpeed(double speed) {
@@ -70,17 +72,30 @@ public class TopShooter extends Subsystem {
 	protected void initDefaultCommand() {
 		
 	}
-	
-	public static enum State {
-		REST, PREPREP, PREP, PREPPED;
-	}
 
 	public void setState(State state) {
+		System.out.println(state);
 		this.state = state;
 	}
 	
 	public State getState() {
 		return state;
+	}
+	
+	public void increaseShootPower(double amount) {
+		Config.setDouble("shootPower", Config.getDouble("shootPower") + amount);
+	}
+	
+	public void prep() {
+		setSpeed(Config.getDouble("shootPower") * 1000 / 30000);
+	}
+	
+	public void setPrepStart() {
+		this.prepStart = System.currentTimeMillis();
+	}
+	
+	public long getPrepStart() {
+		return prepStart;
 	}
 
 }

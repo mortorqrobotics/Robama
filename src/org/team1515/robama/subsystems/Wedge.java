@@ -11,8 +11,8 @@ public class Wedge extends Subsystem {
 	DigitalInput highLimitSwitch; // false when down
 	DigitalInput lowLimitSwitch; // true when up
 	
-	final double SPEED_UP = 1;
-	final double SPEED_DOWN = 1;
+	final double SPEED_UP = 0.3;
+	final double SPEED_DOWN = 0.3;
 	
 	public Wedge() {
 		motor = new MotorModule(RobotMap.WEDGE_MOTORS);

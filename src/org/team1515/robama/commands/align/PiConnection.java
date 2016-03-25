@@ -6,11 +6,11 @@ public class PiConnection {
 	
 	SerialPort port;
 	
-	final String START_SIGNAL = "ANGLE";
-	final String END_SIGNAL = "$";
-	final String SEND_SIGNAL = "A";
+	static final String START_SIGNAL = "ANGLE";
+	static final String END_SIGNAL = "$";
+	static final String SEND_SIGNAL = "A";
 	
-    public void robotInit() {
+    public PiConnection() {
     	port = new SerialPort(9600, SerialPort.Port.kMXP); // 10 and 14
     }
 
@@ -28,6 +28,7 @@ public class PiConnection {
     				double angle = Double.parseDouble(input.substring(
     					start + START_SIGNAL.length(), end
     				));
+    				System.out.println(angle);
     				new GyroAlign(angle).start();
     			} catch (NumberFormatException ex) {
     				ex.printStackTrace();

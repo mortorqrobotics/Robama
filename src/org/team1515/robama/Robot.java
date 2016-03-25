@@ -2,8 +2,8 @@
 package org.team1515.robama;
 
 import org.team1515.robama.commands.ActionCommand;
-import org.team1515.robama.commands.PrepShooter;
-import org.team1515.robama.commands.Shoot;
+import org.team1515.robama.commands.DriveForwardAuto;
+import org.team1515.robama.commands.align.PiConnection;
 import org.team1515.robama.subsystems.BottomShooter;
 import org.team1515.robama.subsystems.BoulderRamp;
 import org.team1515.robama.subsystems.Intake;
@@ -13,6 +13,7 @@ import org.team1515.robama.subsystems.WedgeIntake;
 import org.team1515.robama.subsystems.driveTrain.DecentDrive;
 import org.team1515.robama.subsystems.driveTrain.WestCoastDrive;
 import org.team1515.robama.vision.PigeonVision;
+import org.team1515.robama.vision.SimpleVision;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -38,9 +39,11 @@ public class Robot extends IterativeRobot {
 	public static final Wedge wedge = new Wedge();
 	public static final WedgeIntake wedgeIntake = new WedgeIntake();
 	
-	PigeonVision vision;
+//	PigeonVision vision;
 	
 	public static final Gyro gyro = new ADXRS450_Gyro();
+	public static final PiConnection rpi = new PiConnection();
+//	public static final SimpleVision vision = new SimpleVision();
 
     Command autonomousCommand;
     
@@ -50,10 +53,10 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         // instantiate the command used for the autonomous period
 		
-		vision = new PigeonVision();
-		SmartDashboard.putData("vision", new ActionCommand(() -> {
-			vision.findGoal();
-		}));
+//		vision = new PigeonVision();
+//		SmartDashboard.putData("vision", new ActionCommand(() -> {
+//			vision.findGoal();
+//		}));
 		
 		SmartDashboard.putBoolean("rampTilted", false);
 		
@@ -63,6 +66,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("updateTopPIDFactor", new ActionCommand(() -> {
         	topShooter.setPIDFactor(SmartDashboard.getNumber("topPIDFactor", 30000));
         }));
+        
+        //autonomousCommand = new DriveForwardAuto();
     }
 	
 	public void disabledPeriodic() {
@@ -98,6 +103,8 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         
         SmartDashboard.putData("gyroAngle", (ADXRS450_Gyro) gyro);
+        
+//        rpi.update();
         
 //        System.out.println(driveTrain.getLeftEncoder() + "\t" + driveTrain.getRightEncoder());
 
