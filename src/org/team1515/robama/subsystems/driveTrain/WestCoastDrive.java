@@ -140,4 +140,9 @@ public abstract class WestCoastDrive extends Subsystem {
 		leftMotors.toggleBrakeMode();
 		rightMotors.toggleBrakeMode();
 	}
+	
+	public void setCoastMode() {
+		leftMotors.setCoastMode();
+		rightMotors.setCoastMode();
+	}
 }

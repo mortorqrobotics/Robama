@@ -43,5 +43,10 @@ public class MotorModule implements PIDOutput {
 			talon.enableBrakeMode(brakeMode);
 		}
 	}
+	
+	public void setCoastMode() {
+		brakeMode = true;
+		toggleBrakeMode();
+	}
 
 }
