@@ -59,8 +59,6 @@ public class Robot extends IterativeRobot {
 //			vision.findGoal();
 //		}));
 		
-		driveTrain.setCoastMode();
-		
 		SmartDashboard.putBoolean("rampTilted", false);
 		
 		Config.init();
@@ -88,8 +86,6 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.start();
         
         driveTrain.resetEncoders();
-        
-        driveTrain.setCoastMode();
     }
 
     public void autonomousPeriodic() {
@@ -101,8 +97,6 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         
         driveTrain.resetEncoders();
-        
-        driveTrain.setCoastMode();
         
         ramp.setTilted(SmartDashboard.getBoolean("isTilted", false));
         

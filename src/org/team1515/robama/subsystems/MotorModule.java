@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.PIDOutput;
 public class MotorModule implements PIDOutput {
 	
     protected CANTalon[] talons;
-    private boolean brakeMode;
     
     public MotorModule(int[] motorPorts) {
     	
@@ -15,7 +14,6 @@ public class MotorModule implements PIDOutput {
     		talons[i] = new CANTalon(motorPorts[i]);
     		talons[i].setSafetyEnabled(false);
     	}
-    	brakeMode = false;
     }
     
     public void setSpeed(double speed){
@@ -35,18 +33,6 @@ public class MotorModule implements PIDOutput {
 
 	public void pidWrite(double output) {
 		setSpeed(output);
-	}
-	
-	public void toggleBrakeMode() {
-		brakeMode = !brakeMode;
-		for(CANTalon talon : talons) {
-			talon.enableBrakeMode(brakeMode);
-		}
-	}
-	
-	public void setCoastMode() {
-		brakeMode = true;
-		toggleBrakeMode();
 	}
 
 }
