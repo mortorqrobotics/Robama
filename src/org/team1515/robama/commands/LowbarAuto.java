@@ -4,15 +4,16 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveForwardAuto extends Command {
+public class LowbarAuto extends Command {
 	
-	private static final double SPEED = 1;
+	private static final double SPEED = 0.5;
 	
-	public DriveForwardAuto() {
+	public LowbarAuto() {
 		requires(Robot.driveTrain);
-		setTimeout(3);
+		setTimeout(6);
 	}
 
+	@Override
 	protected void initialize() {
 		Robot.driveTrain.setSpeed(SPEED, SPEED);
 	}

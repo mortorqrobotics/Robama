@@ -5,7 +5,6 @@ import org.team1515.robama.RobotMap;
 import org.team1515.robama.commands.JoystickDrive;
 import org.team1515.robama.subsystems.MotorModule;
 import org.team1515.robama.subsystems.pid.ExternalEncoder;
-import org.team1515.robama.subsystems.pid.RatePID;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -91,7 +90,7 @@ public abstract class WestCoastDrive extends Subsystem {
 		double reverseFactor = isReversed ? -1 : 1;
 		yValue *= reverseFactor;
 		double x = Math.abs(xValue);
-		double y = Math.abs(yValue) * reverseFactor;
+		double y = Math.abs(yValue);
 		double a = Config.getDouble("rotationSide");
 		double b = Config.getDouble("rotationCorner");
     	double left = a * x + y * (1 - a * x);
@@ -131,5 +130,9 @@ public abstract class WestCoastDrive extends Subsystem {
 	
 	protected void initDefaultCommand() {
 		setDefaultCommand(new JoystickDrive());	
+	}
+
+	public boolean isReversed() {
+		return isReversed;
 	}
 }

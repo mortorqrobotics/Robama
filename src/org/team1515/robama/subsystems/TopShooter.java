@@ -24,7 +24,7 @@ public class TopShooter extends Subsystem {
 		state = State.REST;
 		
 		Config.setDefault("prePrepSpeed", 0.25);
-		Config.setDefault("shootPower", 26);
+		Config.setDefault("shootPower", 14);
 	}
 
 	public void setSpeed(double speed) {

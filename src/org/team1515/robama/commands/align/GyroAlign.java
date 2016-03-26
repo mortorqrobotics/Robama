@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GyroAlign extends AlignCommand {
 	
-	static final double SPEED = 0.1;
+	static final double SPEED = 0.3;
 	
 	double gyroStartAngle;
 	
@@ -17,9 +17,14 @@ public class GyroAlign extends AlignCommand {
 	@Override
 	protected void initialize() {
 		double sign = Math.signum(targetAngle);
-		Robot.driveTrain.setSpeed(sign * SPEED, -sign * SPEED);
+		Robot.driveTrain.setSpeed(-sign * SPEED, sign * SPEED);
 		gyroStartAngle = Robot.gyro.getAngle();
 		SmartDashboard.putBoolean("aligning", true);
+	}
+	
+	@Override
+	protected void execute() {
+		
 	}
 
 	@Override

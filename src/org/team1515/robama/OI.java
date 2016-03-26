@@ -2,6 +2,7 @@ package org.team1515.robama;
 
 import org.team1515.robama.commands.ActionCommand;
 import org.team1515.robama.commands.AutoShoot;
+import org.team1515.robama.commands.ButtonRotate;
 import org.team1515.robama.commands.Center;
 import org.team1515.robama.commands.IntakeForward;
 import org.team1515.robama.commands.PrepShooter;
@@ -35,7 +36,9 @@ public class OI {
 		increasePower,
 		decreasePower,
 		align,
-		center;
+		center,
+		leftRotate,
+		rightRotate;
 	
 	public OI() {
 		
@@ -94,14 +97,27 @@ public class OI {
 			Robot.topShooter.increaseShootPower(-1);
 		}));
 		
+//		boolean aligning = false;
 		align = new JoystickButton(Robot.stick1, RobotMap.BUTTON_ALIGN);
 		align.whenPressed(new ActionCommand(() -> {
-			Robot.rpi.sendAngleRequest();
+//			aligning = !aligning;
+//			if(aligning) {
+				Robot.rpi.sendAngleRequest();
+//			}
+//			else {
+//				Robot.driveTrain.stop();
+//			}
 //			new GyroAlign(Robot.vision.getAngle()).start();
 		}));
 		
 		center = new JoystickButton(Robot.stick1, RobotMap.BUTTON_CENTER);
 		center.whenPressed(new Center());
+		
+		leftRotate = new JoystickButton(Robot.stick1, RobotMap.BUTTON_LEFT_ROTATE);
+		leftRotate.whileHeld(new ButtonRotate(-1, 1));
+		
+		rightRotate = new JoystickButton(Robot.stick1, RobotMap.BUTTON_RIGHT_ROTATE);
+		rightRotate.whileHeld(new ButtonRotate(1, -1));
 	}
 }
 

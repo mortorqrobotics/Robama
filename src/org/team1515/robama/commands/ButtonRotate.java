@@ -4,17 +4,22 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveForwardAuto extends Command {
+public class ButtonRotate extends Command {
 	
-	private static final double SPEED = 1;
+	protected static final double SPEED = 0.3;
 	
-	public DriveForwardAuto() {
+	private double left;
+	private double right;
+	
+	public ButtonRotate(double left, double right) {
+		this.left = left;
+		this.right = right;
 		requires(Robot.driveTrain);
-		setTimeout(3);
 	}
 
+	@Override
 	protected void initialize() {
-		Robot.driveTrain.setSpeed(SPEED, SPEED);
+		Robot.driveTrain.setSpeed(left * SPEED, right * SPEED);
 	}
 
 	@Override

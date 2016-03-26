@@ -37,8 +37,10 @@ public class RobotMap {
 //	public static final int BUTTON_PRE_PREP = 8;
 
 	public static final int BUTTON_ALIGN = 2;
-	public static final int BUTTON_REVERSE_DRIVE = 14;
-	public static final int BUTTON_CENTER = 10;
+	public static final int BUTTON_LEFT_ROTATE = 10;
+	public static final int BUTTON_RIGHT_ROTATE = 14;
+	public static final int BUTTON_REVERSE_DRIVE = 4;
+	public static final int BUTTON_CENTER = 12;
 	
 	// Auxiliary Axes
 	public static final int AXIS_PREP = 2; // LT

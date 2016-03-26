@@ -2,8 +2,6 @@ package org.team1515.robama.commands;
 
 import org.team1515.robama.Robot;
 
-import org.team1515.robama.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Center extends Command {
@@ -20,19 +18,18 @@ public class Center extends Command {
 	@Override
 	protected void initialize() {
 		startAngle = Robot.gyro.getAngle();
-		direction = Math.signum((startAngle + 360) % 360 - 180);
+		direction = getDirection(startAngle); // -1 right, 1 left
 		Robot.driveTrain.setSpeed(direction * SPEED, -direction * SPEED);
 	}
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
-
+		System.out.println(Robot.gyro.getAngle() + " " + ((Robot.gyro.getAngle() + 360 * 100) % 360));
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Math.signum(Robot.gyro.getAngle()) != direction;
+		return getDirection(Robot.gyro.getAngle()) != direction;
 	}
 
 	@Override
@@ -43,6 +40,10 @@ public class Center extends Command {
 	@Override
 	protected void interrupted() {
 		end();
+	}
+	
+	private double getDirection(double angle) {
+		return Math.signum((angle + 360 * 100) % 360 - 180);
 	}
 
 }

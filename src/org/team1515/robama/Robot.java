@@ -3,6 +3,7 @@ package org.team1515.robama;
 
 import org.team1515.robama.commands.ActionCommand;
 import org.team1515.robama.commands.DriveForwardAuto;
+import org.team1515.robama.commands.LowbarAuto;
 import org.team1515.robama.commands.align.PiConnection;
 import org.team1515.robama.subsystems.BottomShooter;
 import org.team1515.robama.subsystems.BoulderRamp;
@@ -12,8 +13,6 @@ import org.team1515.robama.subsystems.Wedge;
 import org.team1515.robama.subsystems.WedgeIntake;
 import org.team1515.robama.subsystems.driveTrain.DecentDrive;
 import org.team1515.robama.subsystems.driveTrain.WestCoastDrive;
-import org.team1515.robama.vision.PigeonVision;
-import org.team1515.robama.vision.SimpleVision;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -67,7 +66,13 @@ public class Robot extends IterativeRobot {
         	topShooter.setPIDFactor(SmartDashboard.getNumber("topPIDFactor", 30000));
         }));
         
-        //autonomousCommand = new DriveForwardAuto();
+        SmartDashboard.putData("copyImages", new ActionCommand(() -> {
+        	rpi.sendCopyRequest();
+        }));
+        
+        // AUTONOMOUS
+//        autonomousCommand = new DriveForwardAuto();
+        autonomousCommand = new DriveForwardAuto();
     }
 	
 	public void disabledPeriodic() {
@@ -92,6 +97,10 @@ public class Robot extends IterativeRobot {
         driveTrain.resetEncoders();
         
         ramp.setTilted(SmartDashboard.getBoolean("isTilted", false));
+        
+        if(driveTrain.isReversed()) {
+        	driveTrain.reverse();
+        }
     }
 
     public void disabledInit(){
@@ -104,7 +113,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putData("gyroAngle", (ADXRS450_Gyro) gyro);
         
-//        rpi.update();
+        rpi.update();
         
 //        System.out.println(driveTrain.getLeftEncoder() + "\t" + driveTrain.getRightEncoder());
 
