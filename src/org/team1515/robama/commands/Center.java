@@ -43,7 +43,7 @@ public class Center extends Command {
 	}
 	
 	private double getDirection(double angle) {
-		return Math.signum((angle + 360 * 100) % 360 - 180);
+		return Math.signum((angle % 360 + 360) % 360 - 180);
 	}
 
 }
