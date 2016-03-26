@@ -38,7 +38,8 @@ public class OI {
 		align,
 		center,
 		leftRotate,
-		rightRotate;
+		rightRotate,
+		brake;
 	
 	public OI() {
 		
@@ -118,6 +119,11 @@ public class OI {
 		
 		rightRotate = new JoystickButton(Robot.stick1, RobotMap.BUTTON_RIGHT_ROTATE);
 		rightRotate.whileHeld(new ButtonRotate(1, -1));
+		
+		brake = new JoystickButton(Robot.stick1, RobotMap.BUTTON_BRAKE);
+		brake.whenPressed(new ActionCommand(() -> {
+			Robot.driveTrain.toggleBrakeMode();
+		}));
 	}
 }
 

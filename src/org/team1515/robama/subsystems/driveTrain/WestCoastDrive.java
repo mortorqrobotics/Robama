@@ -135,4 +135,9 @@ public abstract class WestCoastDrive extends Subsystem {
 	public boolean isReversed() {
 		return isReversed;
 	}
+	
+	public void toggleBrakeMode() {
+		leftMotors.toggleBrakeMode();
+		rightMotors.toggleBrakeMode();
+	}
 }
