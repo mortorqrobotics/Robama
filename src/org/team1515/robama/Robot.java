@@ -47,6 +47,9 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     
     Config config;
+	
+	private long teleopStartTime;
+	private static final int TELEOP_LENGTH = 2 * 60 + 15; // seconds
 
     public void robotInit() {
 		oi = new OI();
@@ -101,13 +104,17 @@ public class Robot extends IterativeRobot {
         if(driveTrain.isReversed()) {
         	driveTrain.reverse();
         }
+        
+        teleopStartTime = System.currentTimeMillis();
+    	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 0);
+    	stick2.setRumble(Joystick.RumbleType.kRightRumble, 0);
     }
 
     public void disabledInit(){
 
     }
 
-    boolean rumbling = false;
+//    boolean rumbling = false;
     public void teleopPeriodic() {    	
         Scheduler.getInstance().run();
         
@@ -118,16 +125,16 @@ public class Robot extends IterativeRobot {
 //        System.out.println(driveTrain.getLeftEncoder() + "\t" + driveTrain.getRightEncoder());
 
         //Get ready to RUMBLE!!!!!
-        if(Math.random() < 0.01) {
-        	rumbling = !rumbling;
-        }
-        if(rumbling) {
+//        if(Math.random() < 0.01) {
+//        	rumbling = !rumbling;
+//        }
+//        if(rumbling) {
 //        	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 1);
 //        	stick2.setRumble(Joystick.RumbleType.kRightRumble, 1);
-        } else {
+//        } else {
 //        	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 0);
 //        	stick2.setRumble(Joystick.RumbleType.kRightRumble, 0);
-        }
+//        }
         
         SmartDashboard.putString("encoders", String.format("L:%d\tR:%d\tT:%d\tB:%d",
        		(int) driveTrain.getLeftEncoder(),
@@ -135,6 +142,11 @@ public class Robot extends IterativeRobot {
         	(int) topShooter.getEncoder(),
         	(int) bottomShooter.getEncoder()
         ));
+        
+        if(System.currentTimeMillis() - teleopStartTime >= TELEOP_LENGTH * 1000) {
+        	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 1);
+        	stick2.setRumble(Joystick.RumbleType.kRightRumble, 1);
+        }
     }
 
     public void testPeriodic() {

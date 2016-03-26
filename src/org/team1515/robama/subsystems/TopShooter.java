@@ -5,6 +5,7 @@ import org.team1515.robama.RobotMap;
 import org.team1515.robama.subsystems.pid.InternalEncoder;
 import org.team1515.robama.subsystems.pid.RatePID;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
