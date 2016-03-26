@@ -25,7 +25,7 @@ public class OI {
 		reverseDriveTrain,
 		shoot,
 //		autoShoot,
-		prepShooter,
+//		prepShooter,
 		intake,
 		purgeIntake,
 		toggleShooter,
@@ -53,16 +53,16 @@ public class OI {
 //		autoShoot = new JoystickButton(Robot.stick2, RobotMap.BUTTON_AUTOSHOOT);
 //		autoShoot.whenPressed(new AutoShoot());
 		
-		prepShooter = new AxisButton(Robot.stick2, RobotMap.AXIS_PREP, 0.5, 0.5);
-		prepShooter.whenPressed(new ActionCommand(() -> {
-			if(Robot.topShooter.getState().equals(State.REST)) {
-				new PrepShooter().start();
-			}
-			else {
-				Robot.topShooter.stop();
-				Robot.topShooter.setState(State.REST);
-			}
-		}));
+//		prepShooter = new AxisButton(Robot.stick2, RobotMap.AXIS_PREP, 0.5, 0.5);
+//		prepShooter.whenPressed(new ActionCommand(() -> {
+//			if(Robot.topShooter.getState().equals(State.REST)) {
+//				new PrepShooter().start();
+//			}
+//			else {
+//				Robot.topShooter.stop();
+//				Robot.topShooter.setState(State.REST);
+//			}
+//		}));
 		
 		intake = new JoystickButton(Robot.stick2, RobotMap.BUTTON_INTAKE);
 		intake.whileHeld(new IntakeForward());

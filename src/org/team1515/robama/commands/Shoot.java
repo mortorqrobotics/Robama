@@ -42,7 +42,6 @@ public class Shoot extends Command {
 		Robot.bottomShooter.stop();
 		Robot.intake.stop();
 		Robot.wedgeIntake.stop();
-		Robot.topShooter.setState(State.REST);
 	}
 
 	@Override

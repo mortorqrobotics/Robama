@@ -44,7 +44,7 @@ public class RobotMap {
 	public static final int BUTTON_BRAKE = 3;
 	
 	// Auxiliary Axes
-	public static final int AXIS_PREP = 2; // LT
+//	public static final int AXIS_PREP = 2; // LT
 	public static final int AXIS_SHOOT = 3; // RT
 	
 	// Drive Axes
