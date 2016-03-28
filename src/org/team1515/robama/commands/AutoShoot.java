@@ -4,8 +4,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoShoot extends CommandGroup {
 	public AutoShoot() {
-		addParallel(new PrepShooter(), 2);
-		addSequential(new PrepBottom());
+		addSequential(new Prep());
 		addSequential(new Shoot(1), 2);
 	}
 }

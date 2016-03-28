@@ -39,7 +39,7 @@ public class PiConnection {
 	    					start + START_SIGNAL.length(), end
 	    				));
 	    				System.out.println(angle);
-//	    				new GyroAlign(angle).start();
+	    				new GyroAlign(angle).start();
 	    			} catch (NumberFormatException ex) {
 	    				ex.printStackTrace();
 	    			}

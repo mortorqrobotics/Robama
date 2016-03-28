@@ -88,7 +88,7 @@ public abstract class WestCoastDrive extends Subsystem {
 
 	public void setXY(double xValue, double yValue) {
 		double reverseFactor = isReversed ? -1 : 1;
-		yValue *= reverseFactor;
+		//yValue *= reverseFactor;
 		double x = Math.abs(xValue);
 		double y = Math.abs(yValue);
 		double a = Config.getDouble("rotationSide");

@@ -72,6 +72,8 @@ public class Robot extends IterativeRobot {
         	rpi.sendCopyRequest();
         }));
         
+        ramp.setTilted(SmartDashboard.getBoolean("isTilted", false));
+        
         // AUTONOMOUS
 //        autonomousCommand = new DriveForwardAuto();
         autonomousCommand = new DriveForwardAuto();
@@ -97,8 +99,6 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         
         driveTrain.resetEncoders();
-        
-        ramp.setTilted(SmartDashboard.getBoolean("isTilted", false));
         
         if(driveTrain.isReversed()) {
         	driveTrain.reverse();

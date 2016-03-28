@@ -10,7 +10,7 @@ public class DriveForwardAuto extends Command {
 	
 	public DriveForwardAuto() {
 		requires(Robot.driveTrain);
-		setTimeout(3);
+		setTimeout(2.5);
 	}
 
 	protected void initialize() {
