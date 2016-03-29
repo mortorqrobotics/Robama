@@ -15,8 +15,8 @@ public class BoulderRamp extends Subsystem {
 	public BoulderRamp() {
 //		Compressor compressor = new Compressor(11);
 //		compressor.setClosedLoopControl(true);
-		solenoid1 = new Solenoid(11, RobotMap.RAMP_SOLENOID.first);
-		solenoid2 = new Solenoid(11, RobotMap.RAMP_SOLENOID.last);
+		solenoid1 = new Solenoid(RobotMap.COMPRESSOR, RobotMap.RAMP_SOLENOID.first);
+		solenoid2 = new Solenoid(RobotMap.COMPRESSOR, RobotMap.RAMP_SOLENOID.last);
 		setTilted(false);
 	}
 	

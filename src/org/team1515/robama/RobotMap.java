@@ -68,6 +68,7 @@ public class RobotMap {
 	
 	// Ramp
 	public static final Pair<Integer> RAMP_SOLENOID = new Pair<>(0, 1);
+	public static final int COMPRESSOR = 11;
 	
 	// Wedge
 	public static final int[] WEDGE_MOTORS = {8};
