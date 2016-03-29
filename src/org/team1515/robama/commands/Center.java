@@ -3,6 +3,7 @@ package org.team1515.robama.commands;
 import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Center extends Command {
 	
@@ -20,6 +21,7 @@ public class Center extends Command {
 		startAngle = Robot.gyro.getAngle();
 		direction = getDirection(startAngle); // -1 right, 1 left
 		Robot.driveTrain.setSpeed(direction * SPEED, -direction * SPEED);
+		SmartDashboard.putBoolean("aligning", true);
 	}
 
 	@Override
@@ -35,6 +37,7 @@ public class Center extends Command {
 	@Override
 	protected void end() {
 		Robot.driveTrain.stop();
+		SmartDashboard.putBoolean("aligning", false);
 	}
 
 	@Override
