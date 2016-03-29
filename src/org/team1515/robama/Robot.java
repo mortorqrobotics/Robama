@@ -74,6 +74,8 @@ public class Robot extends IterativeRobot {
         
         ramp.setTilted(SmartDashboard.getBoolean("isTilted", false));
         
+        Scheduler.getInstance().add(new Stream());
+        
         // AUTONOMOUS
 //        autonomousCommand = new DriveForwardAuto();
         autonomousCommand = new DriveForwardAuto();
