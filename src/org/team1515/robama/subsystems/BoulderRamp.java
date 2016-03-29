@@ -4,6 +4,7 @@ import org.team1515.robama.RobotMap;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class BoulderRamp extends Subsystem {
 
@@ -16,21 +17,21 @@ public class BoulderRamp extends Subsystem {
 //		compressor.setClosedLoopControl(true);
 		solenoid1 = new Solenoid(11, RobotMap.RAMP_SOLENOID.first);
 		solenoid2 = new Solenoid(11, RobotMap.RAMP_SOLENOID.last);
-		isTilted = false;
+		setTilted(false);
 	}
 	
 	public void tilt() {
 //		solenoid.set(DoubleSolenoid.Value.kForward);
 		solenoid1.set(false);
 		solenoid2.set(true);
-		isTilted = true;
+		setTilted(true);
 	}
 	
 	public void flatten() {
 //		solenoid.set(DoubleSolenoid.Value.kReverse);
 		solenoid1.set(true);
 		solenoid2.set(false);
-		isTilted = false;
+		setTilted(false);
 	}
 	
 	public void toggle() {
@@ -41,8 +42,9 @@ public class BoulderRamp extends Subsystem {
 		}
 	}
 	
-	public void setTilted(boolean tilted) {
+	private void setTilted(boolean tilted) {
 		isTilted = tilted;
+		SmartDashboard.putBoolean("rampTilted", isTilted);
 	}
 	
 	public boolean isTilted() {

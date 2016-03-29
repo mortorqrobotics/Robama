@@ -67,8 +67,6 @@ public class Robot extends IterativeRobot {
         	rpi.sendCopyRequest();
         }));
         
-        ramp.setTilted(SmartDashboard.getBoolean("isTilted", false));
-        
         Scheduler.getInstance().add(new Stream());
         
         // AUTONOMOUS
