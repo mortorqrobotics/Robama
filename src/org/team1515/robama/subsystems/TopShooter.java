@@ -16,15 +16,12 @@ public class TopShooter extends Subsystem {
 	
 	private MotorModule motor;
 	private RatePID ratePID;
-	private boolean prePrepping;
 		
 	public TopShooter() {
 		motor = new MotorModule(RobotMap.TOP_SHOOTER_MOTORS);
 		ratePID = new RatePID(motor, new InternalEncoder(motor, true), 0.00001, 0, 0.00008, 30000);
-		prePrepping = false;
 		state = State.REST;
 		
-		Config.setDefault("prePrepSpeed", 0.25);
 		Config.setDefault("shootPower", 14);
 		Config.setDefault("topPIDFactor", 30000);
 	}
@@ -41,22 +38,6 @@ public class TopShooter extends Subsystem {
 	public void stop() {
 		ratePID.disable();
 //		setSpeed(0);
-		prePrepping = false;
-	}
-	
-	public void togglePrePrep() {
-		if (state != State.REST && state != State.PREPREP) {
-			return;
-		}
-		prePrepping = !prePrepping;
-		if (prePrepping) {
-			setMotor(Config.getDouble("prePrepSpeed"));
-			state = State.PREPREP;
-		} else {
-			setMotor(0);
-			state = State.REST;
-		}
-		SmartDashboard.putBoolean("prePrepping", prePrepping);
 	}
 
 	public void setMotor(double speed) {

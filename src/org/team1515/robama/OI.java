@@ -5,13 +5,11 @@ import org.team1515.robama.commands.AutoShoot;
 import org.team1515.robama.commands.ButtonRotate;
 import org.team1515.robama.commands.Center;
 import org.team1515.robama.commands.IntakeForward;
-import org.team1515.robama.commands.PrepShooter;
 import org.team1515.robama.commands.PurgeIntake;
 import org.team1515.robama.commands.ReverseDrive;
 import org.team1515.robama.commands.ToggleRamp;
 import org.team1515.robama.commands.WedgeDown;
 import org.team1515.robama.commands.WedgeUp;
-import org.team1515.robama.subsystems.State;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -32,7 +30,7 @@ public class OI {
 //		timedPurge,
 		wedgeDown,
 		wedgeUp,
-		prePrep,
+//		prePrep,
 		increasePower,
 		decreasePower,
 		align,
@@ -82,10 +80,10 @@ public class OI {
 		wedgeUp = new JoystickButton(Robot.stick2, RobotMap.BUTTON_WEDGE_UP);
 		wedgeUp.whileHeld(new WedgeUp());
 		
-		prePrep = new JoystickButton(Robot.stick2, RobotMap.BUTTON_PREPREP);
-		prePrep.whenPressed(new ActionCommand(() -> {
-			Robot.topShooter.togglePrePrep();
-		}));
+//		prePrep = new JoystickButton(Robot.stick2, RobotMap.BUTTON_PREPREP);
+//		prePrep.whenPressed(new ActionCommand(() -> {
+//			Robot.topShooter.togglePrePrep();
+//		}, Robot.topShooter));
 		
 		increasePower = new POVButton(Robot.stick2, 0); // up
 		increasePower.whenPressed(new ActionCommand(() -> {

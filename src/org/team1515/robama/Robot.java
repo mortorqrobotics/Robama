@@ -60,8 +60,6 @@ public class Robot extends IterativeRobot {
 //		}));
 		
 		SmartDashboard.putBoolean("rampTilted", false);
-		
-		Config.init();
         
         SmartDashboard.putData("copyImages", new ActionCommand(() -> {
         	rpi.sendCopyRequest();
@@ -72,6 +70,8 @@ public class Robot extends IterativeRobot {
         // AUTONOMOUS
 //        autonomousCommand = new DriveForwardAuto();
         autonomousCommand = new DriveForwardAuto();
+
+		Config.init();
     }
 	
 	public void disabledPeriodic() {
