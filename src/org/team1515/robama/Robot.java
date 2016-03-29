@@ -62,11 +62,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("rampTilted", false);
 		
 		Config.init();
-
-        SmartDashboard.putNumber("topPIDFactor", 30000);
-        SmartDashboard.putData("updateTopPIDFactor", new ActionCommand(() -> {
-        	topShooter.setPIDFactor(SmartDashboard.getNumber("topPIDFactor", 30000));
-        }));
         
         SmartDashboard.putData("copyImages", new ActionCommand(() -> {
         	rpi.sendCopyRequest();
@@ -125,7 +120,7 @@ public class Robot extends IterativeRobot {
         
 //        System.out.println(driveTrain.getLeftEncoder() + "\t" + driveTrain.getRightEncoder());
 
-        //Get ready to RUMBLE!!!!!
+        // Get ready to RUMBLE!!!!!
 //        if(Math.random() < 0.01) {
 //        	rumbling = !rumbling;
 //        }

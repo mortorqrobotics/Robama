@@ -26,6 +26,7 @@ public class TopShooter extends Subsystem {
 		
 		Config.setDefault("prePrepSpeed", 0.25);
 		Config.setDefault("shootPower", 14);
+		Config.setDefault("topPIDFactor", 30000);
 	}
 
 	public void setSpeed(double speed) {
@@ -88,7 +89,7 @@ public class TopShooter extends Subsystem {
 	}
 	
 	public void prep() {
-		setSpeed(Config.getDouble("shootPower") * 1000 / 30000);
+		setSpeed(Config.getDouble("shootPower") * 1000 / Config.getDouble("topPIDFactor"));
 	}
 	
 	public void setPrepStart() {

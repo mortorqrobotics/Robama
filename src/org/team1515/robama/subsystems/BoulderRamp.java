@@ -2,7 +2,6 @@ package org.team1515.robama.subsystems;
 
 import org.team1515.robama.RobotMap;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
