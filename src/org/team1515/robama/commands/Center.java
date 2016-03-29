@@ -26,7 +26,7 @@ public class Center extends Command {
 
 	@Override
 	protected void execute() {
-		System.out.println(Robot.gyro.getAngle() + " " + ((Robot.gyro.getAngle() + 360 * 100) % 360));
+//		System.out.println(Robot.gyro.getAngle() + " " + ((Robot.gyro.getAngle() + 360 * 100) % 360));
 	}
 
 	@Override

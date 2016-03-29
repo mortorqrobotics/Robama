@@ -1,0 +1,84 @@
+<xml version="1.0">
+<dashboard>
+	<widget field="aligning" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="921" y="485"/>
+		<width>194</width>
+		<height>139</height>
+	</widget>
+	<widget field="rampTilted" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="911" y="385"/>
+		<width>216</width>
+		<height>107</height>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.WebcamViewerExtension">
+		<location x="1243" y="89"/>
+		<width>616</width>
+		<height>603</height>
+	</static-widget>
+	<widget field="copyImages" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="805" y="19"/>
+	</widget>
+	<widget field="shootPower" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
+		<location x="11" y="124"/>
+		<width>794</width>
+		<height>565</height>
+		<property name="Font Size" value="450"/>
+	</widget>
+	<widget field="prePrepping" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="13" y="13"/>
+	</widget>
+	<widget field="prePrepSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="4" y="48"/>
+	</widget>
+	<widget field="purgeTime" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="260" y="47"/>
+	</widget>
+	<widget field="topPIDFactor" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="258" y="11"/>
+	</widget>
+	<widget field="deadBand" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1112" y="5"/>
+	</widget>
+	<widget field="encoders" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="5" y="83"/>
+		<width>522</width>
+		<height>27</height>
+	</widget>
+	<widget field="throttle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
+		<location x="1669" y="13"/>
+		<property name="Maximum" value="1.0"/>
+	</widget>
+	<widget field="gyroAngle" type="Gyro" class="edu.wpi.first.smartdashboard.gui.elements.Compass">
+		<location x="861" y="109"/>
+		<width>334</width>
+		<height>243</height>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="640" y="19"/>
+		<width>41</width>
+		<height>39</height>
+	</static-widget>
+	<widget field="tiltThreshold" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1092" y="36"/>
+	</widget>
+	<widget field="rotationCorner" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1370" y="43"/>
+	</widget>
+	<widget field="rotationSide" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1388" y="9"/>
+	</widget>
+</dashboard>
+<live-window>
+</live-window>
+	<hidden field="vision"/>
+	<hidden field="driveForward"/>
+	<hidden field="leftTrim"/>
+	<hidden field="updateTopPIDFactor"/>
+	<hidden field="accelZ"/>
+	<hidden field="pidError"/>
+	<hidden field="leftDriveSpeed"/>
+	<hidden field="accelY"/>
+	<hidden field="accelX"/>
+	<hidden field="rightTrim"/>
+	<hidden field="rightDriveSpeed"/>
+</xml>
