@@ -1,22 +1,22 @@
 <xml version="1.0">
 <dashboard>
 	<widget field="aligning" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="921" y="485"/>
+		<location x="996" y="439"/>
 		<width>194</width>
 		<height>139</height>
 	</widget>
 	<widget field="rampTilted" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="911" y="385"/>
+		<location x="94" y="7"/>
 		<width>216</width>
 		<height>107</height>
 	</widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.WebcamViewerExtension">
-		<location x="1243" y="89"/>
-		<width>616</width>
-		<height>603</height>
+		<location x="1365" y="107"/>
+		<width>535</width>
+		<height>528</height>
 	</static-widget>
 	<widget field="copyImages" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="805" y="19"/>
+		<location x="635" y="27"/>
 	</widget>
 	<widget field="shootPower" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.FormattedField">
 		<location x="11" y="124"/>
@@ -24,23 +24,20 @@
 		<height>565</height>
 		<property name="Font Size" value="450"/>
 	</widget>
-	<widget field="purgeTime" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="13" y="6"/>
-	</widget>
 	<widget field="deadBand" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="1112" y="5"/>
+		<location x="1636" y="46"/>
 	</widget>
 	<widget field="throttle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
-		<location x="1669" y="13"/>
+		<location x="1656" y="4"/>
 		<property name="Maximum" value="1.0"/>
 	</widget>
 	<widget field="gyroAngle" type="Gyro" class="edu.wpi.first.smartdashboard.gui.elements.Compass">
-		<location x="861" y="109"/>
+		<location x="924" y="112"/>
 		<width>334</width>
 		<height>243</height>
 	</widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
-		<location x="640" y="19"/>
+		<location x="1074" y="17"/>
 		<width>41</width>
 		<height>39</height>
 	</static-widget>
@@ -54,6 +51,7 @@
 <live-window>
 </live-window>
 	<hidden field="driveForward"/>
+	<hidden field="purgeTime"/>
 	<hidden field="leftTrim"/>
 	<hidden field="pidError"/>
 	<hidden field="leftDriveSpeed"/>
