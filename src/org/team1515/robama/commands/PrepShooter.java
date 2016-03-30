@@ -1,41 +1,12 @@
 package org.team1515.robama.commands;
 
-import org.team1515.robama.Robot;
-import org.team1515.robama.subsystems.State;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
-import edu.wpi.first.wpilibj.command.Command;
-
-public class PrepShooter extends Command {
-
-	double startTime;
+public class PrepShooter extends CommandGroup {
 	
 	public PrepShooter() {
-		requires(Robot.topShooter);
-	}
-	
-	@Override
-	protected void initialize() {
-		Robot.topShooter.prep();
-	}
-
-	@Override
-	protected void execute() {
-
-	}
-
-	@Override
-	protected boolean isFinished() {
-		return isTimedOut();
-	}
-
-	@Override
-	protected void end() {
-		
-	}
-
-	@Override
-	protected void interrupted() {
-		end();
+		addParallel(new PrepTopShooter(), 2);
+		addParallel(new PrepBottom());
 	}
 
 }

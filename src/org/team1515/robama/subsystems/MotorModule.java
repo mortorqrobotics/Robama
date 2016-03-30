@@ -12,7 +12,7 @@ public class MotorModule implements PIDOutput {
     	talons = new CANTalon[motorPorts.length];
     	for(int i = 0; i < motorPorts.length; i++) {
     		talons[i] = new CANTalon(motorPorts[i]);
-    		talons[i].setSafetyEnabled(false);
+    		talons[i].setSafetyEnabled(false); // stop the robot from randomly stopping at competition
     	}
     }
     

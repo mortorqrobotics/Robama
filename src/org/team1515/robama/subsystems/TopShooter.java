@@ -5,30 +5,24 @@ import org.team1515.robama.RobotMap;
 import org.team1515.robama.subsystems.pid.InternalEncoder;
 import org.team1515.robama.subsystems.pid.RatePID;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TopShooter extends Subsystem {
 	
-	private volatile State state;
-	private long prepStart;
-	
 	private MotorModule motor;
 	private RatePID ratePID;
+	
+	private static final double PID_FACTOR = 30000;
 		
 	public TopShooter() {
 		motor = new MotorModule(RobotMap.TOP_SHOOTER_MOTORS);
-		ratePID = new RatePID(motor, new InternalEncoder(motor, true), 0.00001, 0, 0.00008, 30000);
-		state = State.REST;
+		ratePID = new RatePID(motor, new InternalEncoder(motor, true), 0.00001, 0, 0.00008, PID_FACTOR);
 		
 		Config.setDefault("shootPower", 14);
-		Config.setDefault("topPIDFactor", 30000);
 	}
 
 	public void setSpeed(double speed) {
 		ratePID.setSetpoint(-speed);
-//		motor.setSpeed(speed);
 	}
 	
 	public double getSetpoint() {
@@ -37,7 +31,6 @@ public class TopShooter extends Subsystem {
 	
 	public void stop() {
 		ratePID.disable();
-//		setSpeed(0);
 	}
 
 	public void setMotor(double speed) {
@@ -48,37 +41,16 @@ public class TopShooter extends Subsystem {
 		return -ratePID.getInput();
 	}
 	
-	public void setPIDFactor(double factor) {
-		ratePID.setFactor(factor);
-	}
-	
-	protected void initDefaultCommand() {
-		
-	}
-
-	public void setState(State state) {
-		System.out.println(state);
-		this.state = state;
-	}
-	
-	public State getState() {
-		return state;
-	}
-	
 	public void increaseShootPower(double amount) {
 		Config.setDouble("shootPower", Config.getDouble("shootPower") + amount);
 	}
 	
-	public void prep() {
-		setSpeed(Config.getDouble("shootPower") * 1000 / Config.getDouble("topPIDFactor"));
+	public void shoot() {
+		setSpeed(Config.getDouble("shootPower") * 1000 / PID_FACTOR);
 	}
 	
-	public void setPrepStart() {
-		this.prepStart = System.currentTimeMillis();
-	}
+	protected void initDefaultCommand() {
 	
-	public long getPrepStart() {
-		return prepStart;
 	}
 
 }

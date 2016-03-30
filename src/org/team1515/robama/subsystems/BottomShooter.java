@@ -18,16 +18,26 @@ public class BottomShooter extends Subsystem {
 
 	public void setSpeed(double speed) {
 		ratePID.setSetpoint(speed);
-//		motor.setSpeed(speed);
 	}
 	
 	public void stop() {
-		ratePID.disable();
-//		setSpeed(0);
+		ratePID.disable(); // sets speed to 0
 	}
 	
 	public void setMotor(double speed) {
 		motor.setSpeed(speed);
+	}
+	
+	public void shoot() {
+		setSpeed(1);
+	}
+	
+	public void purge(double speed) {
+		setMotor(-speed);
+	}
+	
+	public void purge() {
+		purge(1);
 	}
 	
 	public double getEncoder() {

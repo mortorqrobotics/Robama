@@ -40,7 +40,7 @@ public class RobotMap {
 	public static final int BUTTON_RIGHT_ROTATE = 14;
 	public static final int BUTTON_REVERSE_DRIVE = 4;
 	public static final int BUTTON_CENTER = 12;
-	public static final int BUTTON_BRAKE = 3;
+//	public static final int BUTTON_BRAKE = 3;
 	
 	// Auxiliary Axes
 //	public static final int AXIS_PREP = 2; // LT
@@ -54,9 +54,9 @@ public class RobotMap {
 	
 	// Drive train
 	public static final int[] LEFT_DRIVE_MOTORS = {3, 4};
-	public static final Pair LEFT_DRIVE_ENCODER = new Pair<Integer>(0, 1);
+//	public static final Pair LEFT_DRIVE_ENCODER = new Pair<Integer>(0, 1);
 	public static final int[] RIGHT_DRIVE_MOTORS = {1, 2};
-    public static final Pair RIGHT_DRIVE_ENCODER = new Pair<Integer>(2, 3);
+//    public static final Pair RIGHT_DRIVE_ENCODER = new Pair<Integer>(2, 3);
 	
 	// Shooter
 	public static final int[] TOP_SHOOTER_MOTORS = {5};
@@ -71,8 +71,8 @@ public class RobotMap {
 	
 	// Wedge
 	public static final int[] WEDGE_MOTORS = {8};
-	public static final int WEDGE_HIGH_LIMIT_SWITCH = 9;
-	public static final int WEDGE_LOW_LIMIT_SWITCH = 10;
+//	public static final int WEDGE_HIGH_LIMIT_SWITCH = 9;
+//	public static final int WEDGE_LOW_LIMIT_SWITCH = 10;
 	
 	// Wedge Intake
 	public static final int[] WEDGE_INTAKE_MOTORS = {9};

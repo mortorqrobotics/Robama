@@ -6,7 +6,7 @@ public class PrepBottom extends CommandGroup {
 
 	public PrepBottom() {
 		addSequential(new TimedPurge());
-		addSequential(new PrepBottomShooter(1), 1);
+		addSequential(new PrepBottomShooter(), 1);
 	}
 
 }

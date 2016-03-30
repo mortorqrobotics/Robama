@@ -4,7 +4,6 @@ import org.team1515.robama.Config;
 import org.team1515.robama.RobotMap;
 import org.team1515.robama.commands.JoystickDrive;
 import org.team1515.robama.subsystems.MotorModule;
-import org.team1515.robama.subsystems.pid.ExternalEncoder;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -13,10 +12,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public abstract class WestCoastDrive extends Subsystem {
 	
 	protected MotorModule leftMotors;
-	private ExternalEncoder leftEncoder;
+//	private ExternalEncoder leftEncoder;
 //	private RatePID leftRatePID;
 	protected MotorModule rightMotors;
-	private ExternalEncoder rightEncoder;
+//	private ExternalEncoder rightEncoder;
 //	private RatePID rightRatePID;
 	protected Joystick joystick;
 	
@@ -25,10 +24,10 @@ public abstract class WestCoastDrive extends Subsystem {
 	
 	public WestCoastDrive(Joystick joystick) {
 		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_MOTORS);
-		leftEncoder = new ExternalEncoder(RobotMap.LEFT_DRIVE_ENCODER);
+//		leftEncoder = new ExternalEncoder(RobotMap.LEFT_DRIVE_ENCODER);
 //		leftRatePID = new RatePID(leftMotors, leftEncoder, 0.0006, 0, 0, 550);
 		rightMotors = new MotorModule(RobotMap.RIGHT_DRIVE_MOTORS);
-		rightEncoder = new ExternalEncoder(RobotMap.RIGHT_DRIVE_ENCODER);
+//		rightEncoder = new ExternalEncoder(RobotMap.RIGHT_DRIVE_ENCODER);
 //		rightRatePID = new RatePID(rightMotors, rightEncoder, 0.0006, 0, 0, 550);
 		
 		isReversed = false; // switch to reverse motors
@@ -87,7 +86,7 @@ public abstract class WestCoastDrive extends Subsystem {
 	protected abstract JoystickValues getJoystickXY();
 
 	public void setXY(double xValue, double yValue) {
-		double reverseFactor = isReversed ? -1 : 1;
+//		double reverseFactor = isReversed ? -1 : 1;
 		//yValue *= reverseFactor;
 		double x = Math.abs(xValue);
 		double y = Math.abs(yValue);
@@ -120,20 +119,20 @@ public abstract class WestCoastDrive extends Subsystem {
 //		rightMotors.resetEncoder();
 	}
 	
-	public double getLeftEncoder() {
-		return leftEncoder.pidGet();
-	}
-	
-	public double getRightEncoder() {
-		return rightEncoder.pidGet();
+//	public double getLeftEncoder() {
+//		return leftEncoder.pidGet();
+//	}
+//	
+//	public double getRightEncoder() {
+//		return rightEncoder.pidGet();
+//	}
+
+	public boolean isReversed() {
+		return isReversed;
 	}
 	
 	protected void initDefaultCommand() {
 		setDefaultCommand(new JoystickDrive());	
-	}
-
-	public boolean isReversed() {
-		return isReversed;
 	}
 	
 }

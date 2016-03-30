@@ -7,7 +7,7 @@ public class ReverseDrive extends ActionCommand {
 	public ReverseDrive() {
 		super(() -> {
 			Robot.driveTrain.reverse();
-		}, Robot.driveTrain);
+		});
 	}
 	
 }

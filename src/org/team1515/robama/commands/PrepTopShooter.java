@@ -4,15 +4,15 @@ import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class IntakeForward extends Command {
+public class PrepTopShooter extends Command {
 	
-	public IntakeForward() {
-		requires(Robot.intake);
+	public PrepTopShooter() {
+		requires(Robot.topShooter);
 	}
-
+	
 	@Override
 	protected void initialize() {
-		Robot.intake.intake();
+		Robot.topShooter.shoot();
 	}
 
 	@Override
@@ -27,12 +27,12 @@ public class IntakeForward extends Command {
 
 	@Override
 	protected void end() {
-		Robot.intake.stop();
+		
 	}
 
 	@Override
 	protected void interrupted() {
 		end();
 	}
-	
+
 }

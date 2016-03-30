@@ -15,10 +15,10 @@ public class TimedPurge extends Command {
 	
 	@Override
 	protected void initialize() {
-		double power = 8 / DriverStation.getInstance().getBatteryVoltage();
-		Robot.intake.purge(power);		
-		Robot.bottomShooter.setMotor(-power);
-		setTimeout(Config.getDouble("purgeTime") / 1000.0);
+		double speed = 8 / DriverStation.getInstance().getBatteryVoltage();
+		Robot.intake.purge(speed);		
+		Robot.bottomShooter.purge(speed);
+		setTimeout(Config.getDouble("purgeTime") / 1000.0); // TODO: what is the default?
 	}
 
 	@Override

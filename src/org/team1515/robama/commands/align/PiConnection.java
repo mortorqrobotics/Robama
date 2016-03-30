@@ -5,11 +5,12 @@ import edu.wpi.first.wpilibj.SerialPort;
 public class PiConnection {
 	
 	SerialPort port;
+	boolean expectingAngle;
 	
-	static final String START_SIGNAL = "ANGLE";
-	static final String END_SIGNAL = "$";
-	static final String SEND_SIGNAL = "A";
-	static final String COPY_SIGNAL = "B";
+	static final String RES_START_SIGNAL = "ANGLE";
+	static final String RES_END_SIGNAL = "$";
+	static final String REQ_ANGLE_SIGNAL = "A";
+	static final String REQ_COPY_SIGNAL = "B";
 	
     public PiConnection() {
     	initPort();
@@ -20,23 +21,29 @@ public class PiConnection {
     }
 
     public void sendAngleRequest() {
-    	port.writeString(SEND_SIGNAL);
+    	if (!expectingAngle) {
+    		port.writeString(REQ_ANGLE_SIGNAL);
+    	}
     }
     
     public void sendCopyRequest() {
-    	port.writeString(COPY_SIGNAL);
+    	port.writeString(REQ_COPY_SIGNAL);
     }
     
     public void update() {
+    	if (!expectingAngle) {
+    		return;
+    	} 
+    	expectingAngle = false;
     	try {
 	    	String input = port.readString();
-	    	int start = input.indexOf(START_SIGNAL);
+	    	int start = input.indexOf(RES_START_SIGNAL);
 	    	if (start != -1) {
-	    		int end = input.indexOf(END_SIGNAL);
+	    		int end = input.indexOf(RES_END_SIGNAL);
 	    		if (end != -1) {
 	    			try {
 	    				double angle = Double.parseDouble(input.substring(
-	    					start + START_SIGNAL.length(), end
+	    					start + RES_START_SIGNAL.length(), end
 	    				));
 	    				System.out.println(angle);
 	    				new GyroAlign(angle).start();

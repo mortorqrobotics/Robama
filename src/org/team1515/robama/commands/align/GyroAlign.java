@@ -17,7 +17,7 @@ public class GyroAlign extends AlignCommand {
 	@Override
 	protected void initialize() {
 		double sign = Math.signum(targetAngle);
-		Robot.driveTrain.setSpeed(-sign * SPEED, sign * SPEED);
+		Robot.driveTrain.setSpeed(sign * SPEED, -sign * SPEED); // this was wrong
 		gyroStartAngle = Robot.gyro.getAngle();
 		SmartDashboard.putBoolean("aligning", true);
 	}

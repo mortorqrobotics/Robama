@@ -1,34 +1,28 @@
 package org.team1515.robama.commands;
 
 import org.team1515.robama.Robot;
-import org.team1515.robama.subsystems.State;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Shoot extends Command {
-	
-	private double speed;
 
-	public Shoot(double speed) {
+	public Shoot() {
 		requires(Robot.topShooter);
 		requires(Robot.bottomShooter);
 		requires(Robot.intake);
-		requires(Robot.wedgeIntake);
-		this.speed = speed;
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.topShooter.prep();
-		Robot.bottomShooter.setSpeed(speed);
-		Robot.bottomShooter.setMotor(speed);
-		Robot.wedgeIntake.intake();
+		Robot.topShooter.shoot();
+		Robot.bottomShooter.shoot();
+//		Robot.bottomShooter.setMotor(bottomSpeed);
 		Robot.intake.intake();
 	}
 
 	@Override
 	protected void execute() {
-//		SmartDashboard.putNumber("pidError", Robot.bottomShooter.getEncoder() + Math.random() / 1e9);
+
 	}
 
 	@Override
@@ -41,7 +35,6 @@ public class Shoot extends Command {
 		Robot.topShooter.stop();
 		Robot.bottomShooter.stop();
 		Robot.intake.stop();
-		Robot.wedgeIntake.stop();
 	}
 
 	@Override

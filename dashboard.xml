@@ -25,10 +25,7 @@
 		<property name="Font Size" value="450"/>
 	</widget>
 	<widget field="purgeTime" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="27" y="44"/>
-	</widget>
-	<widget field="topPIDFactor" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="11" y="11"/>
+		<location x="13" y="6"/>
 	</widget>
 	<widget field="deadBand" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="1112" y="5"/>
@@ -47,9 +44,6 @@
 		<width>41</width>
 		<height>39</height>
 	</static-widget>
-	<widget field="tiltThreshold" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="1092" y="36"/>
-	</widget>
 	<widget field="rotationCorner" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="1370" y="43"/>
 	</widget>
@@ -63,6 +57,7 @@
 	<hidden field="leftTrim"/>
 	<hidden field="pidError"/>
 	<hidden field="leftDriveSpeed"/>
+	<hidden field="topPIDFactor"/>
 	<hidden field="rightTrim"/>
 	<hidden field="encoders"/>
 	<hidden field="vision"/>
@@ -71,6 +66,7 @@
 	<hidden field="accelY"/>
 	<hidden field="accelX"/>
 	<hidden field="prePrepSpeed"/>
+	<hidden field="tiltThreshold"/>
 	<hidden field="prePrepping"/>
 	<hidden field="rightDriveSpeed"/>
 </xml>

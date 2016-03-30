@@ -6,16 +6,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class PrepBottomShooter extends Command {
 	
-	double speed;
-	
-	public PrepBottomShooter(double speed) {
-		this.speed = speed;
+	public PrepBottomShooter() {
 		requires(Robot.bottomShooter);
 	}
 
 	@Override
 	protected void initialize() {
-		Robot.bottomShooter.setSpeed(speed);
+		Robot.bottomShooter.shoot();
 	}
 
 	@Override
