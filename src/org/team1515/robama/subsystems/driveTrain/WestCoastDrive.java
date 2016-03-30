@@ -87,7 +87,7 @@ public abstract class WestCoastDrive extends Subsystem {
 
 	public void setXY(double xValue, double yValue) {
 //		double reverseFactor = isReversed ? -1 : 1;
-		//yValue *= reverseFactor;
+//		yValue *= reverseFactor;
 		double x = Math.abs(xValue);
 		double y = Math.abs(yValue);
 		double a = Config.getDouble("rotationSide");
@@ -105,8 +105,6 @@ public abstract class WestCoastDrive extends Subsystem {
     		right = temp;
     	}
     	setSpeed(left, right);
-    	SmartDashboard.putNumber("leftDriveSpeed", left);
-    	SmartDashboard.putNumber("rightDriveSpeed", right);
 	}
 	
 	public void joystickDrive() {

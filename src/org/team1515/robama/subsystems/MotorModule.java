@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 
 public class MotorModule implements PIDOutput {
 	
-    protected CANTalon[] talons;
+    private CANTalon[] talons;
     
     public MotorModule(int[] motorPorts) {
     	

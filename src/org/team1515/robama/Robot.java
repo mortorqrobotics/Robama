@@ -49,7 +49,6 @@ public class Robot extends IterativeRobot {
 
     public void robotInit() {
 		oi = new OI();
-        // instantiate the command used for the autonomous period
 		
 //		vision = new PigeonVision();
 //		SmartDashboard.putData("vision", new ActionCommand(() -> {
@@ -129,7 +128,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putNumber("topEncoder", Math.floor(topShooter.getEncoder()));
         
-        if(System.currentTimeMillis() - teleopStartTime >= TELEOP_LENGTH * 1000) {
+        if(System.currentTimeMillis() - teleopStartTime >= (TELEOP_LENGTH - 5) * 1000) {
         	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 1);
         	stick2.setRumble(Joystick.RumbleType.kRightRumble, 1);
         }
