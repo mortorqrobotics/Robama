@@ -1,5 +1,6 @@
 package org.team1515.robama.subsystems;
 
+import org.team1515.robama.Config;
 import org.team1515.robama.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -10,29 +11,31 @@ public class Wedge extends Subsystem {
 //	DigitalInput highLimitSwitch; // false when down
 //	DigitalInput lowLimitSwitch; // true when up
 	
-	final double SPEED_UP = 0.3;
-	final double SPEED_DOWN = 0.3;
-	
 	public Wedge() {
 		motor = new MotorModule(RobotMap.WEDGE_MOTORS);
 //		highLimitSwitch = new DigitalInput(RobotMap.WEDGE_HIGH_LIMIT_SWITCH);
 //		lowLimitSwitch = new DigitalInput(RobotMap.WEDGE_LOW_LIMIT_SWITCH);
+		Config.setDefault("wedgePower", 0.5);
 	}
 	
 	public void moveDown() {
 //		if(!lowLimitSwitch.get()) {
-			motor.setSpeed(-SPEED_DOWN);
+			motor.setSpeed(-Config.getDouble("wedgePower"));
 //		}
 	}
 	
 	public void moveUp() {
 //		if(highLimitSwitch.get()) {
-			motor.setSpeed(SPEED_UP);
+			motor.setSpeed(Config.getDouble("wedgePower"));
 //		}
 	}
 	
 	public void stop() {
 		motor.stop();
+	}
+	
+	public void increasePower(double amount) {
+		Config.setDouble("wedgePower", Config.getDouble("wedgePower") + amount);
 	}
 
 	protected void initDefaultCommand() {

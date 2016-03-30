@@ -19,6 +19,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
+	private static final double SHOOT_INCREMENT = 1;
+	private static final double WEDGE_INCREMENT = 0.1;
+	
 	private Button
 		reverseDriveTrain,
 		shoot,
@@ -32,7 +35,9 @@ public class OI {
 		align,
 		center,
 		leftRotate,
-		rightRotate;
+		rightRotate,
+		increaseWedge,
+		decreaseWedge;
 	
 	public OI() {
 		
@@ -59,12 +64,12 @@ public class OI {
 		
 		increasePower = new POVButton(Robot.stick2, 0); // up
 		increasePower.whenPressed(new ActionCommand(() -> {
-			Robot.topShooter.increaseShootPower(1);
+			Robot.topShooter.increaseShootPower(SHOOT_INCREMENT);
 		}));
 		
 		decreasePower = new POVButton(Robot.stick2, 180); // down
 		decreasePower.whenPressed(new ActionCommand(() -> {
-			Robot.topShooter.increaseShootPower(-1);
+			Robot.topShooter.increaseShootPower(-SHOOT_INCREMENT);
 		}));
 		
 		align = new JoystickButton(Robot.stick1, RobotMap.BUTTON_ALIGN);
@@ -80,6 +85,16 @@ public class OI {
 		
 		rightRotate = new JoystickButton(Robot.stick1, RobotMap.BUTTON_RIGHT_ROTATE);
 		rightRotate.whileHeld(new ButtonRotate(1, -1));
+		
+		increaseWedge = new POVButton(Robot.stick2, 90);
+		increaseWedge.whenPressed(new ActionCommand(() -> {
+			Robot.wedge.increasePower(WEDGE_INCREMENT);
+		}));
+		
+		decreaseWedge = new POVButton(Robot.stick2, 270);
+		decreaseWedge.whenPressed(new ActionCommand(() -> {
+			Robot.wedge.increasePower(-WEDGE_INCREMENT);
+		}));
 		
 	}
 }
