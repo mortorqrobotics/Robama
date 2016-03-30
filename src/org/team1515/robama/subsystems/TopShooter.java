@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class TopShooter extends Subsystem {
 	
-	private MotorModule motor;
+	private MotorModule motor; // positive in, negative out
 	private RatePID ratePID;
 	
 	private static final double PID_FACTOR = 30000;
@@ -21,20 +21,12 @@ public class TopShooter extends Subsystem {
 		Config.setDefault("shootPower", 14);
 	}
 
-	public void setSpeed(double speed) {
+	private void setSpeed(double speed) {
 		ratePID.setSetpoint(-speed);
-	}
-	
-	public double getSetpoint() {
-		return -ratePID.getSetpoint();
 	}
 	
 	public void stop() {
 		ratePID.disable();
-	}
-
-	public void setMotor(double speed) {
-		motor.setSpeed(-speed);
 	}
 	
 	public double getEncoder() {

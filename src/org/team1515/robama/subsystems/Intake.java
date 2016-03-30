@@ -6,19 +6,24 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Intake extends Subsystem {
 	
-	private MotorModule intakeMotor;
+	private MotorModule motor; // positive out, negative in
+	
 	private final double SPEED = 1;
 	
 	public Intake() {
-		intakeMotor = new MotorModule(RobotMap.INTAKE_MOTORS);
+		motor = new MotorModule(RobotMap.INTAKE_MOTORS);
+	}
+	
+	private void setMotor(double speed) {
+		motor.setSpeed(speed);
 	}
 	
 	public void intake() {
-		intakeMotor.setSpeed(-SPEED);
+		setMotor(-SPEED);
 	}
 	
 	public void purge(double speed) {
-		intakeMotor.setSpeed(speed);
+		setMotor(speed);
 	}
 	
 	public void purge() {
@@ -26,7 +31,7 @@ public class Intake extends Subsystem {
 	}
 	
 	public void stop() {
-		intakeMotor.setSpeed(0);
+		setMotor(0);
 	}
 	
 	protected void initDefaultCommand() {

@@ -35,6 +35,7 @@ public class RobotMap {
 	public static final int BUTTON_PURGE = 6; // RB
 //	public static final int BUTTON_TIMED_PURGE = 7; // SELECT
 
+	// Drive Buttons
 	public static final int BUTTON_ALIGN = 2;
 	public static final int BUTTON_LEFT_ROTATE = 10;
 	public static final int BUTTON_RIGHT_ROTATE = 14;
@@ -66,7 +67,7 @@ public class RobotMap {
 	public static final int[] INTAKE_MOTORS = {7};
 	
 	// Ramp
-	public static final Pair<Integer> RAMP_SOLENOID = new Pair<>(0, 1);
+	public static final Pair<Integer> RAMP_SOLENOID = new Pair<Integer>(0, 1);
 	public static final int COMPRESSOR = 11;
 	
 	// Wedge

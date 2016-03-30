@@ -1,12 +1,13 @@
 package org.team1515.robama.commands;
 
-import org.team1515.robama.Config;
 import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class TimedPurge extends Command {
+	
+	private static final double TIME = 0.1; // milliseconds
 
 	public TimedPurge() {
 		requires(Robot.intake);
@@ -18,7 +19,7 @@ public class TimedPurge extends Command {
 		double speed = 8 / DriverStation.getInstance().getBatteryVoltage();
 		Robot.intake.purge(speed);		
 		Robot.bottomShooter.purge(speed);
-		setTimeout(Config.getDouble("purgeTime") / 1000.0); // TODO: what is the default?
+		setTimeout(TIME);
 	}
 
 	@Override
