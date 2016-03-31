@@ -40,6 +40,8 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     
+    Command streamCommand;
+    
     Config config;
 	
 	private long teleopStartTime;
@@ -58,8 +60,8 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putData("copyImages", new ActionCommand(() -> {
 //        	rpi.sendCopyRequest();
 //        }));
-        
-        new Stream().start();
+		
+		streamCommand = new Stream();
         
         // AUTONOMOUS
 //        autonomousCommand = new DriveForwardAuto();
@@ -92,6 +94,8 @@ public class Robot extends IterativeRobot {
         if(driveTrain.isReversed()) {
         	driveTrain.reverse();
         }
+        
+        streamCommand.start();
         
         teleopStartTime = System.currentTimeMillis();
     	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 0);

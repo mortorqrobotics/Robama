@@ -24,6 +24,9 @@ public class Stream extends Command {
 	Image frame;
 	Map<Integer, List<Integer>> lines;
 	
+	static final int WIDTH = 640;
+	static final int HEIGHT = 480;
+	
 	static final int TICK_HEIGHT = 2;
 	static final int TICK_PERIOD = 6;
 	
@@ -51,16 +54,16 @@ public class Stream extends Command {
 	@Override
 	protected void execute() {
 		long now = System.currentTimeMillis();
-		if (now - lastUpdate >= DELAY) {System.out.println("A");
+		if (now - lastUpdate >= DELAY) {
 			lastUpdate += DELAY;
             NIVision.IMAQdxGrab(session, frame, 1);
-            ImageInfo info = NIVision.imaqGetImageInfo(frame);
-//            int width = info.xRes;
-//            int height = info.yRes;
             
-            NIVision.Rect rect = new NIVision.Rect(0, 0, info.xRes, info.yRes);
+            NIVision.Rect rect = new NIVision.Rect(0, 0, WIDTH, HEIGHT);
             NIVision.imaqScale(frame, frame, SCALE, SCALE, ScalingMode.SCALE_SMALLER, rect);
             
+//            int width = WIDTH / SCALE;
+//            int height = HEIGHT / SCALE;
+//            
 //            for (Integer x : lines.keySet()) {
 //            	for (int i = 0; i < height / TICK_PERIOD; i++) {
 //            		int y = i * TICK_PERIOD;
