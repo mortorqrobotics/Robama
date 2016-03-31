@@ -1,6 +1,8 @@
 package org.team1515.robama;
 
 import org.team1515.robama.commands.DriveForwardAuto;
+import org.team1515.robama.commands.LowbarAuto;
+import org.team1515.robama.commands.PortcullisAuto;
 import org.team1515.robama.subsystems.BottomShooter;
 import org.team1515.robama.subsystems.BoulderRamp;
 import org.team1515.robama.subsystems.Intake;
@@ -16,6 +18,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
@@ -39,6 +42,7 @@ public class Robot extends IterativeRobot {
 //	public static final SimpleVision vision = new SimpleVision();
 
     Command autonomousCommand;
+	SendableChooser chooser;
     
     Command streamCommand;
     
@@ -65,7 +69,11 @@ public class Robot extends IterativeRobot {
         
         // AUTONOMOUS
 //        autonomousCommand = new DriveForwardAuto();
-        autonomousCommand = new DriveForwardAuto();
+		chooser = new SendableChooser();
+		chooser.addDefault("DriveForward", new DriveForwardAuto(2));
+		chooser.addObject("Lowbar", new LowbarAuto());
+		chooser.addObject("Portcullis", new PortcullisAuto());
+		SmartDashboard.putData("Autonomous", chooser);
 
 		Config.init();
     }
@@ -76,6 +84,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
+    	autonomousCommand = (Command) chooser.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
         
         driveTrain.resetEncoders();

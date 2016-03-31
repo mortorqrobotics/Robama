@@ -1,17 +1,26 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="topEncoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="311" y="54"/>
+	</widget>
+	<widget field="wedgePower" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="311" y="27"/>
+	</widget>
+	<widget field="tiltThreshold" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="311" y="0"/>
+	</widget>
 	<widget field="aligning" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
 		<location x="996" y="439"/>
 		<width>194</width>
 		<height>139</height>
 	</widget>
 	<widget field="rampTilted" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
-		<location x="94" y="7"/>
+		<location x="75" y="7"/>
 		<width>216</width>
 		<height>107</height>
 	</widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.WebcamViewerExtension">
-		<location x="1365" y="107"/>
+		<location x="1333" y="90"/>
 		<width>535</width>
 		<height>528</height>
 	</static-widget>
@@ -50,21 +59,4 @@
 </dashboard>
 <live-window>
 </live-window>
-	<hidden field="driveForward"/>
-	<hidden field="purgeTime"/>
-	<hidden field="leftTrim"/>
-	<hidden field="pidError"/>
-	<hidden field="leftDriveSpeed"/>
-	<hidden field="topPIDFactor"/>
-	<hidden field="rightTrim"/>
-	<hidden field="encoders"/>
-	<hidden field="vision"/>
-	<hidden field="updateTopPIDFactor"/>
-	<hidden field="accelZ"/>
-	<hidden field="accelY"/>
-	<hidden field="accelX"/>
-	<hidden field="prePrepSpeed"/>
-	<hidden field="tiltThreshold"/>
-	<hidden field="prePrepping"/>
-	<hidden field="rightDriveSpeed"/>
 </xml>

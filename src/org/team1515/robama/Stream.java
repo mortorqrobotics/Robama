@@ -1,17 +1,13 @@
 package org.team1515.robama;
 
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.ni.vision.NIVision;
-import com.ni.vision.NIVision.DrawMode;
 import com.ni.vision.NIVision.Image;
-import com.ni.vision.NIVision.ImageInfo;
 import com.ni.vision.NIVision.ScalingMode;
-import com.ni.vision.NIVision.ShapeMode;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -36,47 +32,59 @@ public class Stream extends Command {
 	long lastUpdate;
 	
 	public Stream() {
-        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-        session = NIVision.IMAQdxOpenCamera("cam0",
-        		NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        NIVision.IMAQdxConfigureGrab(session);
-        
-        lines = new HashMap<Integer, List<Integer>>();
-        lines.put(10, Arrays.asList(255, 0, 0));
+		try {
+	        frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+	        session = NIVision.IMAQdxOpenCamera("cam0",
+	        		NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+	        NIVision.IMAQdxConfigureGrab(session);
+	        
+	        lines = new HashMap<Integer, List<Integer>>();
+	        lines.put(10, Arrays.asList(255, 0, 0));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	@Override
 	protected void initialize() {
-        NIVision.IMAQdxStartAcquisition(session);
-        lastUpdate = System.currentTimeMillis();
+		try {
+	        NIVision.IMAQdxStartAcquisition(session);
+	        lastUpdate = System.currentTimeMillis();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	@Override
 	protected void execute() {
-		long now = System.currentTimeMillis();
-		if (now - lastUpdate >= DELAY) {
-			lastUpdate += DELAY;
-            NIVision.IMAQdxGrab(session, frame, 1);
-            
-            NIVision.Rect rect = new NIVision.Rect(0, 0, WIDTH, HEIGHT);
-            NIVision.imaqScale(frame, frame, SCALE, SCALE, ScalingMode.SCALE_SMALLER, rect);
-            
-//            int width = WIDTH / SCALE;
-//            int height = HEIGHT / SCALE;
-//            
-//            for (Integer x : lines.keySet()) {
-//            	for (int i = 0; i < height / TICK_PERIOD; i++) {
-//            		int y = i * TICK_PERIOD;
-//            		NIVision.Rect rect1 = new NIVision.Rect(x, y, x + 1, y + TICK_HEIGHT);
-//            		NIVision.Rect rect2 = new NIVision.Rect(width - x - 1, y, width - x, y + TICK_HEIGHT);
-//            		NIVision.imaqDrawShapeOnImage(frame, frame, rect1,
-//            				DrawMode.DRAW_VALUE, ShapeMode.SHAPE_RECT, getColor(lines.get(x)));
-//            		NIVision.imaqDrawShapeOnImage(frame, frame, rect2,
-//            				DrawMode.DRAW_VALUE, ShapeMode.SHAPE_RECT, getColor(lines.get(x)));
-//            	}
-//            }
-            
-            CameraServer.getInstance().setImage(frame);
+		try {
+			long now = System.currentTimeMillis();
+			if (now - lastUpdate >= DELAY) {
+				lastUpdate += DELAY;
+	            NIVision.IMAQdxGrab(session, frame, 1);
+	            
+	            NIVision.Rect rect = new NIVision.Rect(0, 0, WIDTH, HEIGHT);
+	            NIVision.imaqScale(frame, frame, SCALE, SCALE, ScalingMode.SCALE_SMALLER, rect);
+	            
+	//            int width = WIDTH / SCALE;
+	//            int height = HEIGHT / SCALE;
+	//            
+	//            for (Integer x : lines.keySet()) {
+	//            	for (int i = 0; i < height / TICK_PERIOD; i++) {
+	//            		int y = i * TICK_PERIOD;
+	//            		NIVision.Rect rect1 = new NIVision.Rect(x, y, x + 1, y + TICK_HEIGHT);
+	//            		NIVision.Rect rect2 = new NIVision.Rect(width - x - 1, y, width - x, y + TICK_HEIGHT);
+	//            		NIVision.imaqDrawShapeOnImage(frame, frame, rect1,
+	//            				DrawMode.DRAW_VALUE, ShapeMode.SHAPE_RECT, getColor(lines.get(x)));
+	//            		NIVision.imaqDrawShapeOnImage(frame, frame, rect2,
+	//            				DrawMode.DRAW_VALUE, ShapeMode.SHAPE_RECT, getColor(lines.get(x)));
+	//            	}
+	//            }
+	            
+	            CameraServer.getInstance().setImage(frame);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
 
@@ -87,7 +95,11 @@ public class Stream extends Command {
 
 	@Override
 	protected void end() {
-        NIVision.IMAQdxStopAcquisition(session);
+		try {
+			NIVision.IMAQdxStopAcquisition(session);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	@Override
@@ -95,8 +107,8 @@ public class Stream extends Command {
 		end();
 	}
 	
-	private int getColor(List<Integer> nums) {
-		return nums.get(0) * 256 * 256 + nums.get(1) * 256 + nums.get(2);
-	}
+//	private int getColor(List<Integer> nums) {
+//		return nums.get(0) * 256 * 256 + nums.get(1) * 256 + nums.get(2);
+//	}
 
 }

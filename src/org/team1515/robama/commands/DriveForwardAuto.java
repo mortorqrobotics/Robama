@@ -6,15 +6,21 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveForwardAuto extends Command {
 	
+	double speed;
 	private static final double SPEED = 1;
 	
-	public DriveForwardAuto() {
+	public DriveForwardAuto(double speed) {
 		requires(Robot.driveTrain);
-		setTimeout(2);
+		this.speed = speed;
+	}
+	
+	public DriveForwardAuto(double speed, double time) {
+		this(speed);
+		setTimeout(time);
 	}
 
 	protected void initialize() {
-		Robot.driveTrain.setSpeed(SPEED, SPEED);
+		Robot.driveTrain.setSpeed(speed, speed);
 	}
 
 	@Override
