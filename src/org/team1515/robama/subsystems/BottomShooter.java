@@ -29,7 +29,7 @@ public class BottomShooter extends Subsystem {
 	
 	public void shoot() {
 //		setSpeed(1);
-		setMotor(0);
+		setMotor(1);
 	}
 	
 	public void purge(double speed) {

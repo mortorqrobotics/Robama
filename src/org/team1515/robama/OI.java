@@ -80,11 +80,11 @@ public class OI {
 		center = new JoystickButton(Robot.stick1, RobotMap.BUTTON_CENTER);
 		center.whenPressed(new Center());
 		
-		leftRotate = new JoystickButton(Robot.stick1, RobotMap.BUTTON_LEFT_ROTATE);
-		leftRotate.whileHeld(new ButtonRotate(-1, 1));
-		
-		rightRotate = new JoystickButton(Robot.stick1, RobotMap.BUTTON_RIGHT_ROTATE);
-		rightRotate.whileHeld(new ButtonRotate(1, -1));
+//		leftRotate = new JoystickButton(Robot.stick1, RobotMap.BUTTON_LEFT_ROTATE);
+//		leftRotate.whileHeld(new ButtonRotate(-1, 1));
+//		
+//		rightRotate = new JoystickButton(Robot.stick1, RobotMap.BUTTON_RIGHT_ROTATE);
+//		rightRotate.whileHeld(new ButtonRotate(1, -1));
 		
 		increaseWedge = new POVButton(Robot.stick2, 90);
 		increaseWedge.whenPressed(new ActionCommand(() -> {

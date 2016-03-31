@@ -10,22 +10,23 @@ public class DecentDrive extends WestCoastDrive {
 	public DecentDrive(Joystick joystick) {
 		super(joystick);
 		Config.setDefault("deadBand", 0.15);
-		Config.setDefault("tiltThreshold", 0.2);
+//		Config.setDefault("tiltThreshold", 0.2);
 	}
 
 	protected JoystickValues getJoystickXY() {
 		double deadBand = Config.getDouble("deadBand");
 		double throttle = (1 - joystick.getRawAxis(RobotMap.THROTTLE_AXIS)) / 2;
-		double tilt = applyDeadband(joystick.getRawAxis(RobotMap.TILT_AXIS), 0.3); // TODO: magic number
+//		double tilt = applyDeadband(joystick.getRawAxis(RobotMap.TILT_AXIS), 0.3); // TODO: magic number
 		double twist = applyDeadband(joystick.getRawAxis(RobotMap.TWIST_AXIS), deadBand);
 		double y = -applyDeadband(joystick.getRawAxis(RobotMap.Y_AXIS), deadBand);
-		double x = tilt;
-		if(Math.signum(tilt) + Math.signum(twist) != 0) {
-			x = twist;
-			if(Math.abs(y) > Config.getDouble("tiltThreshold") && Math.abs(tilt) > Math.abs(twist)) {
-				x = tilt;
-			}
-		}
+		double x = twist;
+//		double x = tilt;
+//		if(Math.signum(tilt) + Math.signum(twist) != 0) {
+//			x = twist;
+//			if(Math.abs(y) > Config.getDouble("tiltThreshold") && Math.abs(tilt) > Math.abs(twist)) {
+//				x = tilt;
+//			}
+//		}
 		return new JoystickValues(x, y, throttle);
 	}
 	

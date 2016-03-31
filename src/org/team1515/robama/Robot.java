@@ -95,7 +95,9 @@ public class Robot extends IterativeRobot {
         	driveTrain.reverse();
         }
         
-        streamCommand.start();
+        if (streamCommand != null) {
+        	streamCommand.start();
+        }
         
         teleopStartTime = System.currentTimeMillis();
     	stick2.setRumble(Joystick.RumbleType.kLeftRumble, 0);
