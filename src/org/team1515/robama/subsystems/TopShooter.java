@@ -18,7 +18,7 @@ public class TopShooter extends Subsystem {
 		motor = new MotorModule(RobotMap.TOP_SHOOTER_MOTORS);
 		ratePID = new RatePID(motor, new InternalEncoder(motor, true), 0.00001, 0, 0.00008, PID_FACTOR);
 		
-		Config.setDefault("shootPower", 14);
+		Config.setDefault("shootPower", 24);
 	}
 
 	private void setSpeed(double speed) {

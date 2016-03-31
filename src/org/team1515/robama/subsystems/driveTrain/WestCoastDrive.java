@@ -7,7 +7,6 @@ import org.team1515.robama.subsystems.MotorModule;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public abstract class WestCoastDrive extends Subsystem {
 	

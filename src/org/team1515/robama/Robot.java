@@ -1,8 +1,6 @@
 package org.team1515.robama;
 
-import org.team1515.robama.commands.ActionCommand;
 import org.team1515.robama.commands.DriveForwardAuto;
-import org.team1515.robama.commands.align.PiConnection;
 import org.team1515.robama.subsystems.BottomShooter;
 import org.team1515.robama.subsystems.BoulderRamp;
 import org.team1515.robama.subsystems.Intake;
@@ -37,7 +35,7 @@ public class Robot extends IterativeRobot {
 //	PigeonVision vision;
 	
 	public static final Gyro gyro = new ADXRS450_Gyro();
-	public static final PiConnection rpi = new PiConnection();
+//	public static final PiConnection rpi = new PiConnection();
 //	public static final SimpleVision vision = new SimpleVision();
 
     Command autonomousCommand;
@@ -57,11 +55,11 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putBoolean("rampTilted", false);
         
-        SmartDashboard.putData("copyImages", new ActionCommand(() -> {
-        	rpi.sendCopyRequest();
-        }));
+//        SmartDashboard.putData("copyImages", new ActionCommand(() -> {
+//        	rpi.sendCopyRequest();
+//        }));
         
-        Scheduler.getInstance().add(new Stream());
+        new Stream().start();
         
         // AUTONOMOUS
 //        autonomousCommand = new DriveForwardAuto();
@@ -110,7 +108,7 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putData("gyroAngle", (ADXRS450_Gyro) gyro);
         
-        rpi.update();
+//        rpi.update();
         
 //        System.out.println(driveTrain.getLeftEncoder() + "\t" + driveTrain.getRightEncoder());
 

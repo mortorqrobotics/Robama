@@ -32,7 +32,7 @@ public class OI {
 		wedgeUp,
 		increasePower,
 		decreasePower,
-		align,
+//		align,
 		center,
 		leftRotate,
 		rightRotate,
@@ -72,10 +72,10 @@ public class OI {
 			Robot.topShooter.increaseShootPower(-SHOOT_INCREMENT);
 		}));
 		
-		align = new JoystickButton(Robot.stick1, RobotMap.BUTTON_ALIGN);
-		align.whenPressed(new ActionCommand(() -> {
-			Robot.rpi.sendAngleRequest();
-		}));
+//		align = new JoystickButton(Robot.stick1, RobotMap.BUTTON_ALIGN);
+//		align.whenPressed(new ActionCommand(() -> {
+//			Robot.rpi.sendAngleRequest();
+//		}));
 		
 		center = new JoystickButton(Robot.stick1, RobotMap.BUTTON_CENTER);
 		center.whenPressed(new Center());
