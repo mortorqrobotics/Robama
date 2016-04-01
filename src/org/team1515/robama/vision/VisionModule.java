@@ -1,8 +1,5 @@
 package org.team1515.robama.vision;
 
-import org.opencv.core.Mat;
-import org.opencv.videoio.VideoCapture;
-
 public abstract class VisionModule {
 	
 //	// Load opencv library once
@@ -11,7 +8,7 @@ public abstract class VisionModule {
 //	}
 //	
 //	VideoCapture camera;
-//	
+//	s
 //	public VisionModule(int index) {
 //		camera = new VideoCapture(index);
 //	}

@@ -107,7 +107,6 @@ public abstract class WestCoastDrive extends Subsystem {
     		right = temp;
     	}
     	setSpeed(left, right);
-    	setSpeed(y + x, y - x);
 	}
 	
 	public void joystickDrive() {
