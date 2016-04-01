@@ -1,5 +1,6 @@
 package org.team1515.robama;
 
+import org.team1515.robama.commands.CDFAuto;
 import org.team1515.robama.commands.DriveForwardAuto;
 import org.team1515.robama.commands.LowbarAuto;
 import org.team1515.robama.commands.PortcullisAuto;
@@ -73,6 +74,7 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("DriveForward", new DriveForwardAuto(2));
 		chooser.addObject("Lowbar", new LowbarAuto());
 		chooser.addObject("Portcullis", new PortcullisAuto());
+		chooser.addObject("CDF", new CDFAuto());
 		SmartDashboard.putData("Autonomous", chooser);
 
 		Config.init();
