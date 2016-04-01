@@ -66,7 +66,7 @@ public class Robot extends IterativeRobot {
 //        	rpi.sendCopyRequest();
 //        }));
 		
-		streamCommand = new Stream();
+//		streamCommand = new Stream();
         
         // AUTONOMOUS
 //        autonomousCommand = new DriveForwardAuto();
