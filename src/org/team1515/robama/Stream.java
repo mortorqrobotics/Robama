@@ -63,23 +63,23 @@ public class Stream extends Command {
 				lastUpdate += DELAY;
 	            NIVision.IMAQdxGrab(session, frame, 1);
 	            
-	            NIVision.Rect rect = new NIVision.Rect(0, 0, WIDTH, HEIGHT);
+	            NIVision.Rect rect = new NIVision.Rect(0, 0, HEIGHT, WIDTH);
 	            NIVision.imaqScale(frame, frame, SCALE, SCALE, ScalingMode.SCALE_SMALLER, rect);
 	            
-	//            int width = WIDTH / SCALE;
-	//            int height = HEIGHT / SCALE;
-	//            
-	//            for (Integer x : lines.keySet()) {
-	//            	for (int i = 0; i < height / TICK_PERIOD; i++) {
-	//            		int y = i * TICK_PERIOD;
-	//            		NIVision.Rect rect1 = new NIVision.Rect(x, y, x + 1, y + TICK_HEIGHT);
-	//            		NIVision.Rect rect2 = new NIVision.Rect(width - x - 1, y, width - x, y + TICK_HEIGHT);
-	//            		NIVision.imaqDrawShapeOnImage(frame, frame, rect1,
-	//            				DrawMode.DRAW_VALUE, ShapeMode.SHAPE_RECT, getColor(lines.get(x)));
-	//            		NIVision.imaqDrawShapeOnImage(frame, frame, rect2,
-	//            				DrawMode.DRAW_VALUE, ShapeMode.SHAPE_RECT, getColor(lines.get(x)));
-	//            	}
-	//            }
+//	            int width = WIDTH / SCALE;
+//	            int height = HEIGHT / SCALE;
+//	            
+//	            for (Integer x : lines.keySet()) {
+//	            	for (int i = 0; i < height / TICK_PERIOD; i++) {
+//	            		int y = i * TICK_PERIOD;
+//	            		NIVision.Rect rect1 = new NIVision.Rect(y, x, TICK_HEIGHT, 1);
+//	            		NIVision.Rect rect2 = new NIVision.Rect(y, width - x - 1, TICK_HEIGHT, 1);
+//	            		NIVision.imaqDrawShapeOnImage(frame, frame, rect1,
+//	            				DrawMode.DRAW_VALUE, ShapeMode.SHAPE_RECT, getColor(lines.get(x)));
+//	            		NIVision.imaqDrawShapeOnImage(frame, frame, rect2,
+//	            				DrawMode.DRAW_VALUE, ShapeMode.SHAPE_RECT, getColor(lines.get(x)));
+//	            	}
+//	            }
 	            
 	            CameraServer.getInstance().setImage(frame);
 			}
