@@ -14,7 +14,7 @@ public class CDFAuto extends CommandGroup {
 		addSequential(new Delay(), 1);
 		addSequential(new WedgeDown(), 0.5);
 		addSequential(new Delay(), 1);
-		addSequential(new DriveForwardAuto(0.75), 1);
+		addSequential(new DriveForwardAuto(0.75), 1.5);
 	}
 
 }
