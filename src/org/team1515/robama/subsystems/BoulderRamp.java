@@ -51,12 +51,6 @@ public class BoulderRamp extends Subsystem {
 		return isTilted;
 	}
 	
-	public void stop() {
-//		solenoid.set(DoubleSolenoid.Value.kOff);
-		solenoid1.set(false);
-		solenoid2.set(false);
-	}
-	
 	protected void initDefaultCommand() {
 		
 	}
