@@ -35,6 +35,9 @@ public abstract class WestCoastDrive extends Subsystem {
 
 		Config.setDefault("rotationCorner", 0.25);
 		Config.setDefault("rotationSide", 1.0);
+		
+		Config.setDefault("leftTrim", 1);
+		Config.setDefault("rightTrim", 1);
 	}
 	
 	public MotorModule getLeftMotors() {
@@ -45,8 +48,8 @@ public abstract class WestCoastDrive extends Subsystem {
 	}
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
-		leftMotors.setSpeed(leftSpeed);
-		rightMotors.setSpeed(-rightSpeed);
+		leftMotors.setSpeed(leftSpeed * Config.getDouble("leftTrim"));
+		rightMotors.setSpeed(-rightSpeed * Config.getDouble("rightTrim"));
 //		leftRatePID.setSetpoint(leftSpeed * factor);
 //		rightRatePID.setSetpoint(-rightSpeed * factor);
 	}

@@ -1,5 +1,14 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="rightTrim" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1095" y="36"/>
+	</widget>
+	<widget field="leftTrim" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1105" y="9"/>
+	</widget>
+	<widget field="Autonomous" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="816" y="359"/>
+	</widget>
 	<widget field="topEncoder" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="311" y="54"/>
 	</widget>
@@ -46,7 +55,7 @@
 		<height>243</height>
 	</widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
-		<location x="1074" y="17"/>
+		<location x="897" y="11"/>
 		<width>41</width>
 		<height>39</height>
 	</static-widget>

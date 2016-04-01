@@ -17,7 +17,7 @@ public class BoulderRamp extends Subsystem {
 //		compressor.setClosedLoopControl(true);
 		solenoid1 = new Solenoid(RobotMap.COMPRESSOR, RobotMap.RAMP_SOLENOID.first);
 		solenoid2 = new Solenoid(RobotMap.COMPRESSOR, RobotMap.RAMP_SOLENOID.last);
-		setTilted(false);
+		isTilted = false;
 	}
 	
 	public void tilt() {
@@ -44,7 +44,7 @@ public class BoulderRamp extends Subsystem {
 	
 	private void setTilted(boolean tilted) {
 		isTilted = tilted;
-//		SmartDashboard.putBoolean("rampTilted", isTilted);
+		SmartDashboard.putBoolean("rampTilted", isTilted);
 	}
 	
 	public boolean isTilted() {
