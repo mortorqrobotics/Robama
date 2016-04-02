@@ -1,7 +1,6 @@
 package org.team1515.robama;
 
 import org.team1515.robama.commands.ActionCommand;
-import org.team1515.robama.commands.ButtonRotate;
 import org.team1515.robama.commands.Center;
 import org.team1515.robama.commands.IntakeForward;
 import org.team1515.robama.commands.PurgeIntake;
@@ -13,6 +12,7 @@ import org.team1515.robama.commands.shoot.AutoShoot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue.
@@ -34,18 +34,24 @@ public class OI {
 		decreasePower,
 //		align,
 		center,
-		leftRotate,
-		rightRotate,
-		increaseWedge,
-		decreaseWedge;
+//		leftRotate,
+//		rightRotate,
+//		increaseWedge,
+//		decreaseWedge,
+		stopShooter;
 	
 	public OI() {
 		
 		reverseDriveTrain = new JoystickButton(Robot.stick1, RobotMap.BUTTON_REVERSE_DRIVE);
 		reverseDriveTrain.whenPressed(new ReverseDrive());
 		
+		Command autoShoot = new AutoShoot();
 		shoot = new AxisButton(Robot.stick2, RobotMap.AXIS_SHOOT, 0.5, 0.5);
-		shoot.whenPressed(new AutoShoot());
+		shoot.whenPressed(new ActionCommand(() -> {
+			if (!Robot.stick2.getRawButton(RobotMap.BUTTON_INTAKE)) {
+				autoShoot.start();
+			}
+		}));
 		
 		intake = new JoystickButton(Robot.stick2, RobotMap.BUTTON_INTAKE);
 		intake.whileHeld(new IntakeForward());
@@ -86,15 +92,22 @@ public class OI {
 //		rightRotate = new JoystickButton(Robot.stick1, RobotMap.BUTTON_RIGHT_ROTATE);
 //		rightRotate.whileHeld(new ButtonRotate(1, -1));
 		
-		increaseWedge = new POVButton(Robot.stick2, 90);
-		increaseWedge.whenPressed(new ActionCommand(() -> {
-			Robot.wedge.increasePower(WEDGE_INCREMENT);
-		}));
+//		increaseWedge = new POVButton(Robot.stick2, 90);
+//		increaseWedge.whenPressed(new ActionCommand(() -> {
+//			Robot.wedge.increasePower(WEDGE_INCREMENT);
+//		}));
+//		
+//		decreaseWedge = new POVButton(Robot.stick2, 270);
+//		decreaseWedge.whenPressed(new ActionCommand(() -> {
+//			Robot.wedge.increasePower(-WEDGE_INCREMENT);
+//		}));
 		
-		decreaseWedge = new POVButton(Robot.stick2, 270);
-		decreaseWedge.whenPressed(new ActionCommand(() -> {
-			Robot.wedge.increasePower(-WEDGE_INCREMENT);
-		}));
+		stopShooter = new JoystickButton(Robot.stick2, RobotMap.BUTTON_STOP_SHOOTER);
+		stopShooter.whenPressed(new ActionCommand(() -> {
+			Robot.topShooter.stop();
+			Robot.bottomShooter.stop();
+			Robot.intake.stop();
+		}, Robot.topShooter, Robot.bottomShooter, Robot.intake));
 		
 	}
 }

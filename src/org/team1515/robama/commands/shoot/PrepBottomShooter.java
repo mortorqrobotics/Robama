@@ -32,7 +32,8 @@ public class PrepBottomShooter extends Command {
 
 	@Override
 	protected void interrupted() {
-		end();
+//		end();
+		Robot.bottomShooter.stop();
 	}
 
 }

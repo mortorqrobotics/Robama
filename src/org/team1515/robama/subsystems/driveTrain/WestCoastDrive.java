@@ -48,8 +48,10 @@ public abstract class WestCoastDrive extends Subsystem {
 	}
 
 	public void setSpeed(double leftSpeed, double rightSpeed) {
-		leftMotors.setSpeed(leftSpeed * Config.getDouble("leftTrim"));
-		rightMotors.setSpeed(-rightSpeed * Config.getDouble("rightTrim"));
+//		leftMotors.setSpeed(leftSpeed * Config.getDouble("leftTrim"));
+//		rightMotors.setSpeed(-rightSpeed * Config.getDouble("rightTrim"));
+		leftMotors.setSpeed(leftSpeed);
+		rightMotors.setSpeed(-rightSpeed);
 //		leftRatePID.setSetpoint(leftSpeed * factor);
 //		rightRatePID.setSetpoint(-rightSpeed * factor);
 	}
@@ -92,8 +94,10 @@ public abstract class WestCoastDrive extends Subsystem {
 //		yValue *= reverseFactor;
 		double x = Math.abs(xValue);
 		double y = Math.abs(yValue);
-		double a = Config.getDouble("rotationSide");
-		double b = Config.getDouble("rotationCorner");
+//		double a = Config.getDouble("rotationSide");
+//		double b = Config.getDouble("rotationCorner");
+		double a = 1.0;
+		double b = 0.25;
     	double left = a * x + y * (1 - a * x);
     	double right = y * (1 + (a + b - 1) * x) - a * x;
     	if (yValue < 0) {

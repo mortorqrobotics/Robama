@@ -14,7 +14,8 @@ public class DecentDrive extends WestCoastDrive {
 	}
 
 	protected JoystickValues getJoystickXY() {
-		double deadBand = Config.getDouble("deadBand");
+//		double deadBand = Config.getDouble("deadBand");
+		double deadBand = 0.15;
 		double throttle = (1 - joystick.getRawAxis(RobotMap.THROTTLE_AXIS)) / 2;
 //		double tilt = applyDeadband(joystick.getRawAxis(RobotMap.TILT_AXIS), 0.3); // TODO: magic number
 		double twist = applyDeadband(joystick.getRawAxis(RobotMap.TWIST_AXIS), deadBand);
