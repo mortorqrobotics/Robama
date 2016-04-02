@@ -7,8 +7,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CDFAuto extends CommandGroup {
 	
+	private static final double DRIVE_TIME = 0.6; // 74 inches to back of robot
+	
 	public CDFAuto() {
-		addSequential(new DriveForwardAuto(0.5), 0.6); // 74 inches to back of robot
+		addSequential(new DriveForwardAuto(0.5), DRIVE_TIME);
 		addSequential(new Delay(), 1);
 		addSequential(new WedgeDown(), 0.5);
 		addSequential(new Delay(), 1);
