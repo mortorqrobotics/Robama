@@ -1,4 +1,4 @@
-package org.team1515.robama.commands;
+package org.team1515.robama.commands.movement;
 
 import org.team1515.robama.Robot;
 

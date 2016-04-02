@@ -1,9 +1,9 @@
 package org.team1515.robama;
 
-import org.team1515.robama.commands.CDFAuto;
-import org.team1515.robama.commands.DriveForwardAuto;
-import org.team1515.robama.commands.LowbarAuto;
-import org.team1515.robama.commands.PortcullisAuto;
+import org.team1515.robama.commands.auto.CDFAuto;
+import org.team1515.robama.commands.auto.DriveForwardAuto;
+import org.team1515.robama.commands.auto.LowbarAuto;
+import org.team1515.robama.commands.auto.PortcullisAuto;
 import org.team1515.robama.subsystems.BottomShooter;
 import org.team1515.robama.subsystems.BoulderRamp;
 import org.team1515.robama.subsystems.Intake;

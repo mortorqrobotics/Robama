@@ -1,4 +1,4 @@
-package org.team1515.robama.commands;
+package org.team1515.robama.commands.auto;
 
 import org.team1515.robama.Robot;
 
@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveForwardAuto extends Command {
 	
 	double speed;
-	private static final double SPEED = 1;
 	
 	public DriveForwardAuto(double speed) {
 		requires(Robot.driveTrain);

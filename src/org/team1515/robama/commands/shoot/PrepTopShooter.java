@@ -1,23 +1,23 @@
-package org.team1515.robama.commands;
+package org.team1515.robama.commands.shoot;
 
 import org.team1515.robama.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PrepBottomShooter extends Command {
+public class PrepTopShooter extends Command {
 	
-	public PrepBottomShooter() {
-		requires(Robot.bottomShooter);
+	public PrepTopShooter() {
+		requires(Robot.topShooter);
 	}
-
+	
 	@Override
 	protected void initialize() {
-		Robot.bottomShooter.shoot();
+		Robot.topShooter.shoot();
 	}
 
 	@Override
 	protected void execute() {
-		
+
 	}
 
 	@Override

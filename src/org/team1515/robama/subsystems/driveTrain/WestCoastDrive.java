@@ -96,17 +96,18 @@ public abstract class WestCoastDrive extends Subsystem {
 		double b = Config.getDouble("rotationCorner");
     	double left = a * x + y * (1 - a * x);
     	double right = y * (1 + (a + b - 1) * x) - a * x;
-    	if(yValue < 0) {
+    	if (yValue < 0) {
     		left *= -1;
     		right *= -1;
     		xValue *= -1;
     	}
-    	if(xValue < 0) {
+    	if (xValue < 0) {
     		double temp = left;
     		left = right;
     		right = temp;
     	}
     	setSpeed(left, right);
+    	setSpeed(y + x, y - x);
 	}
 	
 	public void joystickDrive() {

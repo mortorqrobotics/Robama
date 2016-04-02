@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Wedge extends Subsystem {
 	
-	MotorModule motor;
+	MotorModule motor; // positive up, negative down
 //	DigitalInput highLimitSwitch; // false when down
 //	DigitalInput lowLimitSwitch; // true when up
 	
@@ -18,15 +18,19 @@ public class Wedge extends Subsystem {
 		Config.setDefault("wedgePower", 0.5);
 	}
 	
+	private void setMotor(double speed) {
+		motor.setSpeed(speed);
+	}
+	
 	public void moveDown() {
 //		if(!lowLimitSwitch.get()) {
-			motor.setSpeed(-Config.getDouble("wedgePower"));
+			setMotor(-Config.getDouble("wedgePower"));
 //		}
 	}
 	
 	public void moveUp() {
 //		if(highLimitSwitch.get()) {
-			motor.setSpeed(Config.getDouble("wedgePower"));
+			setMotor(Config.getDouble("wedgePower"));
 //		}
 	}
 	

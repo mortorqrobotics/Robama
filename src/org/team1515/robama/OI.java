@@ -1,7 +1,6 @@
 package org.team1515.robama;
 
 import org.team1515.robama.commands.ActionCommand;
-import org.team1515.robama.commands.AutoShoot;
 import org.team1515.robama.commands.ButtonRotate;
 import org.team1515.robama.commands.Center;
 import org.team1515.robama.commands.IntakeForward;
@@ -10,6 +9,7 @@ import org.team1515.robama.commands.ReverseDrive;
 import org.team1515.robama.commands.ToggleRamp;
 import org.team1515.robama.commands.WedgeDown;
 import org.team1515.robama.commands.WedgeUp;
+import org.team1515.robama.commands.shoot.AutoShoot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;

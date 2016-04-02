@@ -1,4 +1,7 @@
-package org.team1515.robama.commands;
+package org.team1515.robama.commands.auto;
+
+import org.team1515.robama.commands.Delay;
+import org.team1515.robama.commands.WedgeDown;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

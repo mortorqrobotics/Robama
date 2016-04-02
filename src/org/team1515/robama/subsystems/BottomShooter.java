@@ -24,7 +24,7 @@ public class BottomShooter extends Subsystem {
 	
 	public void stop() {
 //		ratePID.disable(); // sets speed to 0
-		setMotor(0);
+		motor.stop();
 	}
 	
 	public void shoot() {
