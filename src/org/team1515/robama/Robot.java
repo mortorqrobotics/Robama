@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
@@ -43,7 +42,7 @@ public class Robot extends IterativeRobot {
 //	public static final SimpleVision vision = new SimpleVision();
 
     Command autonomousCommand;
-	SendableChooser chooser;
+//	SendableChooser chooser;
     
     Command streamCommand;
     
@@ -69,13 +68,18 @@ public class Robot extends IterativeRobot {
 //		streamCommand = new Stream();
         
         // AUTONOMOUS
-//        autonomousCommand = new DriveForwardAuto();
-		chooser = new SendableChooser();
-		chooser.addDefault("DriveForward", new DriveForwardAuto(2));
-		chooser.addObject("Lowbar", new LowbarAuto());
-		chooser.addObject("Portcullis", new PortcullisAuto());
-		chooser.addObject("CDF", new CDFAuto());
-		SmartDashboard.putData("Autonomous", chooser);
+		
+//        autonomousCommand = new DriveForwardAuto(2);
+//        autonomousCommand = new LowbarAuto();
+        autonomousCommand = new PortcullisAuto();
+//        autonomousCommand = new CDFAuto();
+		
+//		chooser = new SendableChooser();
+//		chooser.addDefault("DriveForward", new DriveForwardAuto(2));
+//		chooser.addObject("Lowbar", new LowbarAuto());
+//		chooser.addObject("Portcullis", new PortcullisAuto());
+//		chooser.addObject("CDF", new CDFAuto());
+//		SmartDashboard.putData("Autonomous", chooser);
 
 		Config.init();
     }
@@ -86,7 +90,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-    	autonomousCommand = (Command) chooser.getSelected();
+//    	autonomousCommand = (Command) chooser.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
         
         driveTrain.resetEncoders();
