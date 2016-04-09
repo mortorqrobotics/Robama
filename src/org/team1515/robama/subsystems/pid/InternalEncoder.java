@@ -21,12 +21,16 @@ public class InternalEncoder implements PIDInput {
 	}
 
 	public double pidGet() {
-		int reverseFactor = reversed ? -1 : 1;
-		if(pidSourceType.equals(PIDSourceType.kRate)) {
-			return talon.getEncVelocity() * reverseFactor;
-		}
-		else {
-			return talon.getEncPosition() * reverseFactor;
+		try {
+			int reverseFactor = reversed ? -1 : 1;
+			if(pidSourceType.equals(PIDSourceType.kRate)) {
+				return talon.getEncVelocity() * reverseFactor;
+			}
+			else {
+				return talon.getEncPosition() * reverseFactor;
+			}
+		} catch (Exception ex) {
+			return 0;
 		}
 	}
 
