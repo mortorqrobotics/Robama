@@ -16,9 +16,9 @@ public class MotorModule implements PIDOutput {
     	}
     }
     
-    public void setSpeed(double speed){
+    public void setSpeed(double speed) {
 		speed = Math.max(-1, Math.min(1, speed));
-        for(CANTalon talon : talons) {
+        for (CANTalon talon : talons) {
            	talon.set(speed);
         }
     }

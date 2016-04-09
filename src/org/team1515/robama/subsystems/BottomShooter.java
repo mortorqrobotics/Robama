@@ -7,11 +7,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class BottomShooter extends Subsystem {
 	
 	private MotorModule motor; // positive in, negative out
-//	private RatePID ratePID;
+//	private InternalEncoder encoder;
+//	private PIDController ratePID;
 		
 	public BottomShooter() {
 		motor = new MotorModule(RobotMap.BOTTOM_SHOOTER_MOTORS);
-//		ratePID = new RatePID(motor, new InternalEncoder(motor), 0.000003, 0, 0.00001, 30000);
+//		encoder = new InternalEncoder(motor);
+//		pid = new PIDController(0.000003, 0, 0.00001, 30000, encoder, motor);
 	}
 	
 //	private void setSpeed(double speed) {
@@ -23,7 +25,7 @@ public class BottomShooter extends Subsystem {
 	}
 	
 	public void stop() {
-//		ratePID.disable(); // sets speed to 0
+//		pid.disable(); // sets speed to 0
 		motor.stop();
 	}
 	
@@ -41,7 +43,7 @@ public class BottomShooter extends Subsystem {
 	}
 	
 //	public double getEncoder() {
-//		return ratePID.getInput();
+//		return encoder.get();
 //	}
 	
 	protected void initDefaultCommand() {

@@ -3,9 +3,10 @@ package org.team1515.robama.subsystems.pid;
 import org.team1515.robama.subsystems.MotorModule;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
-public class InternalEncoder implements PIDInput {
+public class InternalEncoder implements PIDSource {
 	
 	CANTalon talon;
 	PIDSourceType pidSourceType;
@@ -30,6 +31,8 @@ public class InternalEncoder implements PIDInput {
 				return talon.getEncPosition() * reverseFactor;
 			}
 		} catch (Exception ex) {
+			// TODO: actually deal with the exception
+			ex.printStackTrace();
 			return 0;
 		}
 	}

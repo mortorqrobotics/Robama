@@ -6,16 +6,16 @@ import org.team1515.robama.commands.JoystickDrive;
 import org.team1515.robama.subsystems.MotorModule;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public abstract class WestCoastDrive extends Subsystem {
 	
 	protected MotorModule leftMotors;
 //	private ExternalEncoder leftEncoder;
-//	private RatePID leftRatePID;
 	protected MotorModule rightMotors;
 //	private ExternalEncoder rightEncoder;
-//	private RatePID rightRatePID;
+//	private PIDController rightPID;
 	protected Joystick joystick;
 	
 	protected boolean isReversed;
@@ -24,10 +24,12 @@ public abstract class WestCoastDrive extends Subsystem {
 	public WestCoastDrive(Joystick joystick) {
 		leftMotors = new MotorModule(RobotMap.LEFT_DRIVE_MOTORS);
 //		leftEncoder = new ExternalEncoder(RobotMap.LEFT_DRIVE_ENCODER);
-//		leftRatePID = new RatePID(leftMotors, leftEncoder, 0.0006, 0, 0, 550);
+//		leftEncoder.setPIDSourceType(PIDSourceType.kRate);
+//		leftPID = new PIDController(0.0006, 0, 0, leftEncoder, leftMotors); // factor 550
 		rightMotors = new MotorModule(RobotMap.RIGHT_DRIVE_MOTORS);
-//		rightEncoder = new ExternalEncoder(RobotMap.RIGHT_DRIVE_ENCODER);
-//		rightRatePID = new RatePID(rightMotors, rightEncoder, 0.0006, 0, 0, 550);
+//		rightEncoder = new ExternalEncoder(RobotMap.RIGHT_DRIVE_ENCODER);v
+//		rightEncoder.setPIDSourceType(PIDSourceType.kRate);
+//		rightPID = new PIDController(0.0006, 0, 0, rightMotors, rightEncoder); // factor 550
 		
 		isReversed = false; // switch to reverse motors
 		
@@ -52,8 +54,8 @@ public abstract class WestCoastDrive extends Subsystem {
 //		rightMotors.setSpeed(-rightSpeed * Config.getDouble("rightTrim"));
 		leftMotors.setSpeed(leftSpeed);
 		rightMotors.setSpeed(-rightSpeed);
-//		leftRatePID.setSetpoint(leftSpeed * factor);
-//		rightRatePID.setSetpoint(-rightSpeed * factor);
+//		leftPID.setSetpoint(leftSpeed * factor);
+//		rightPID.setSetpoint(-rightSpeed * factor);
 	}
 	
 	private boolean setSpeed(int ticks, double leftSpeed, double rightSpeed) {
